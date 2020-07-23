@@ -1,0 +1,190 @@
+
+
+<app-declare [payId]="payId"></app-declare>
+
+<!-- <div [innerHTML]="newsDetailData"></div> -->
+
+<app-header></app-header>
+<!-- <app-navrouting></app-navrouting> -->
+<!-- <p>account works!</p> -->
+<div class="row">
+    <div class="col-wide opc col-sm-2 col-md-2 col-xs-2 ml50">
+        <div style="width: 80%">
+            <button class="blackbtn" routerLink="/user/account" i18n>{{'account.account' | translate}}</button>
+            <button class="leftactive"  routerLinkActive="leftactive" i18n>{{'account.orderform' | translate}}</button>
+            <button class="blackbtn" routerLink="/user/updatepwd"i18n>{{'account.reset' | translate}}</button>
+        </div>
+
+    </div>
+    <!-- <app-side-tab></app-side-tab> -->
+    <br class="clearBoth">
+
+    <div class="col-wide opc col-sm-8 col-md-8 col-xs-8 rightbox">
+
+        <h1 i18n>{{'account.more' | translate}}</h1>
+        <hr>
+        <p i18n>{{'account.orderno' | translate}}： {{orderslist.id}}</p>
+        <p i18n>{{'account.ordertime' | translate}}： {{orderslist.createdAt | date}}</p>
+        <p i18n>{{'account.dealstime' | translate}}： {{orderslist.updatedAt | date}}</p>
+
+        <br> <br>
+        <h1 i18n>{{'account.table1' | translate}}</h1>
+        <form name="quickcheckout" method="post">
+            <ol class="col-narrow "  action="https://kiplepay.com/wcgatewayinit.php">
+                <!-- 引用组件****商品信息-->
+                <app-commodity-info [Orderslist]="Orderslist"  ></app-commodity-info>
+
+            </ol>
+        </form>
+
+        <br><br>
+        <h1 i18n>{{'account.SA' | translate}}</h1>
+        <hr>
+        <table width="100%" id="shopping-cart-table" class=" cart-table "  *ngFor="let myaddr of addrDate">
+            <tr class="address a-center text-left">
+                <th i18n>{{'account.lastName' | translate}}: &nbsp; {{myaddr.lastName}}</th>
+            </tr>
+            <tr class="address a-center text-left">
+                <th i18n>{{'account.firstName' | translate}}: &nbsp; {{myaddr.firstName}}</th>
+            </tr>
+            <tr class="address a-center text-left">
+                <th i18n>{{'account.streetAddress' | translate}}: &nbsp;  {{myaddr.streetAddress}}</th>
+            </tr>
+            <tr class="address a-center text-left">
+                <th i18n>{{'account.city' | translate}}: &nbsp;{{myaddr.state}}</th>
+            </tr>
+            <tr class="address a-center text-left">
+                <th i18n>{{'account.postCode' | translate}}: &nbsp; {{myaddr.postCode}}</th>
+            </tr>
+            <tr class="address a-center text-left">
+                <th i18n>{{'account.country' | translate}}: &nbsp; {{myaddr.country}}</th>
+            </tr>
+            <tr class="address a-center text-left">
+                <th i18n>{{'account.mobile' | translate}}: &nbsp; {{myaddr.phone}}</th>
+            </tr>
+        </table>
+        
+
+        <br><br>
+        <h1 i18n>{{'orderDetail.payway' | translate}}</h1>
+    
+        <table width="100%" id="shopping-cart-table" class="table data-table cart-table" >
+            <tr class="first a-left">
+                <th rowspan="1" width="50%" i18n>{{'orderDetail.unpaid' | translate}}</th>
+                <th rowspan="1" width="50%" >
+                   <div>
+                       <img src="../../../assets/images/icons/pay1.png" alt="">
+                       <img src="../../../assets/images/icons/pay2.png" alt="">
+                       <img src="../../../assets/images/icons/pay3.png" alt="">
+                    </div>
+                    <div>
+                        <img src="../../../assets/images/icons/pay4.png" alt="">
+                        <img src="../../../assets/images/icons/pay5.png" alt="">
+                        <img src="../../../assets/images/icons/pay6.png" alt="">
+                     </div>
+                     <div class="mt-5">
+                        <input [checked]="selected" (click)="select()" type="radio" name="shipping" checked="true" id="ship-table-table" class="radio">
+                        <label for="ship-table-table" class="checkboxLabel" i18n> {{'readagree.r1' | translate}} <a>{{'readagree.AV' | translate}} </a> {{'readagree.r2' | translate}}  <a>{{'readagree.COU' | translate}} </a> {{'readagree.r3' | translate}} </label>
+                      </div>
+                      <!-- <button class="blackbtn" i18n>{{'orderDetail.spbutton' | translate}}</button> -->
+                      <button type="submit" class="buttonRow forward ">
+                        <span class="cssButton button_back " (click)="openclause()"  i18n >{{'orderDetail.spbutton' | translate}}</span>
+                      </button>
+                       <!-- <div class="text-right">
+                      <input for="ship-table-table" (click)="select()" [checked]="selected" id="select"  type="radio" name="shipping"  class="radio">
+                      <label for="ship-table-table" class="checkboxLabel" i18n>{{"readagree.r1" | translate}} <a (click)="openwindow()">{{"readagree.AV" | translate}}</a> {{"readagree.r2" | translate}}<a (click)="openwindow()">{{"readagree.COU" | translate}}</a> {{"readagree.r3" | translate}}</label>
+                      <br class="clearBoth">
+                    </div> -->
+                </th>
+            </tr>
+        </table>
+ 
+
+
+        <br><br>
+        <h1 i18n> {{'orderDetail.mailway' | translate}} </h1>
+        <table width="100%" id="shopping-cart-table" class="table data-table cart-table">
+            <tr class="first a-left">
+                <!-- 付款状态 -->
+                <!-- <th rowspan="1" width="20%" i18n> {{'orderDetail.express' | translate}}</th>
+
+                <th rowspan="1" width="40%" i18n> {{'orderDetail.waybill' | translate}}：2020052215168981111</th>
+                <th rowspan="1" width="40%" i18n> {{'orderDetail.logistics' | translate}}：LIN0202005221516898000</th> -->
+            </tr>
+        </table>
+       
+
+    <!-- 付款状态： 退款退货 -->
+        <!-- <br><br>
+        <h1 i18n> {{'account.logistics' | translate}}</h1>
+        <table width="100%" id="shopping-cart-table" class="table data-table cart-table">
+            <tr class="first a-left">
+                <th rowspan="1" width="85%">
+                    <p i18n>{{'orderDetail.consignor' | translate}}：xxx(商城负责人)</p>
+                    <p i18n>{{'orderDetail.address' | translate}}： xxxxxxxxx州/xxxxx省，xxx市/xxx区 xxxxxxxxxxxxxxx街道，12楼，412号</p>
+                </th>
+                <th rowspan="1" width="15%" class="a-right"> <img src="../../../assets/images/icons/commercial.png"
+                        alt="" i18n>{{'orderDetail.service' | translate}}</th>
+            </tr>
+        </table>
+
+        <app-logistics-details></app-logistics-details>
+
+
+        <br><br>
+        <h1 i18n>{{'account.return' | translate}}</h1>
+        <table width="100%" id="shopping-cart-table" class="table cart-table">
+            <tr class="first a-left">
+                <th rowspan="1" width="35%">
+                    <p i18n>{{'account.refundNo' | translate}}：120540248454890145277</p>
+                    <p i18n>{{'account.commodity' | translate}}：已收货</p>
+                    <p i18n>{{'account.reason' | translate}}：订单拍错/拍重</p>
+                </th>
+                <th rowspan="1" width="35%">
+                    <p i18n>{{'account.application' | translate}}：2020-05-12 13:04:29</p>
+                    <p i18n>{{'account.refundAmount' | translate}}：$462.00</p>
+                </th>
+                <th rowspan="1" width="30%">
+                    <p i18n>{{'account.numberpro' | translate}}: 1</p>
+                </th>
+            </tr>
+        </table>
+
+
+        <table width="100%" id="shopping-cart-table" class="">
+            <p i18n>{{'account.certificate' | translate}}：</p>
+            <tr>
+                <th class="tr-img-box">
+                    <img src="../../../assets/images/1_178x155.png" alt="">
+                    <img src="../../../assets/images/1_178x155.png" alt="">
+                    <img src="../../../assets/images/1_178x155.png" alt="">
+                    <img src="../../../assets/images/1_178x155.png" alt="">
+                </th>
+            </tr>
+        </table> -->
+       
+        <!-- //退货退款的 审核状态 -->
+        <app-audit></app-audit>
+
+
+    <!-- 付款状态： 退款退货 -->
+
+
+
+
+
+        <br><br>
+        <!-- <h1 i18n>{{'account.returnLog' | translate}} </h1> -->
+        <hr>
+        <!-- 已签收——————状态 -->
+        <!-- <app-logistics-details></app-logistics-details> -->
+
+    </div>
+
+    <br class="clearBoth">
+</div>
+<br class="clearBoth">
+
+<app-page [Orderslist]="Orderslist" (evemitPage)="getPages($event)"></app-page>
+
+<app-footer></app-footer>

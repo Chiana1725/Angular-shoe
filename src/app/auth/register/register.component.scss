@@ -1,0 +1,27 @@
+.contentBox{
+    width: 80%;
+    margin: auto;
+}
+
+label {
+    width: 10em;
+    font-weight: normal;
+    font-family: "Geogrotesque-SmBd", sans-serif;
+    display: inline-block;
+    margin-bottom: 5px;
+    max-width: 100%;
+}
+input{
+    width: 50%;
+    padding: 8px 4px;
+    margin-top: 2px;
+    border: 1px solid #ccc;
+}
+
+select{
+    width: 50%;
+    padding: 8px 4px;
+    margin-top: 2px;
+    border: 1px solid #ccc;
+}
+

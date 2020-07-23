@@ -1,0 +1,63 @@
+<form name="quickcheckout" method="post">
+  <ol class="col-narrow ">
+    <li id="opc-order_review" class="section active table-bordered ">
+      <div class="step-title ">
+        <span class="icon" i18n>
+          {{'account.auditStatus' | translate}}：审核通过
+        </span>
+        <span i18n>
+          {{'account.countdown' | translate}}：6天 13:04:29
+        </span>
+      </div>
+
+      <table width="100%" id="shopping-cart-table" class="table  cart-table">
+        <tr width="100%">
+          <th class="colorRed mt-3 ml-3">注意：请按原发货地址退回货品，请将退货商品包装好，且商品不影响二次销售；请勿发平邮或到付件，商品寄出后，需及时该订
+            单中及时填写物流信息，以免退款超时关闭
+          </th>
+        </tr>
+        <!-- 审核通过1 -->
+        <tr width="100%" *ngIf>
+          <th> 
+            <div class="f-left d-block col-md-5" i18n>{{'account.logCompany' | translate}}: 顺丰快递</div>
+            <div class="f-left d-block col-md-5" i18n>{{'account.returnOrderNo' | translate}}: XJNH4821452014233222333</div>
+          </th>
+        </tr>
+        <!-- 审核通过2 -->
+        <tr width="100%">  
+          <th class="form-group">
+            <div class="float-left col-md-5">
+              <label class="inputLabel float-left w-100" i18n>{{'account.logCompany' | translate}}：</label>
+              <input class="float-left " type="text" #name size="25" class="form-control" />
+            </div>
+            <div class="float-left ml-5 col-md-5">
+              <label class="inputLabel float-left w-100" i18n>{{'account.returnOrderNo' | translate}}：</label>
+              <input class="float-left " type="text" #name size="25" class="form-control" />
+            </div>
+            <button type="submit" class="buttonRow forward">
+              <span class="cssButton button_back " i18n>{{'account.button' | translate}}</span>
+            </button>
+          </th>
+          <!-- 审核通过2 -->
+          <tr width="100%">  
+            <th class="form-group">
+              <div class="float-left col-md-5">
+                <label class="inputLabel float-left w-100" i18n>{{'account.reasonsForRejection' | translate}}：</label>
+                <input class="float-left " type="text" #name size="25" class="form-control" />
+              </div>
+            </th>
+                  
+        </tr>
+
+        <tr>
+
+        </tr>
+        <!-- 审核未通过 -->
+        <!-- <tr>
+                拒绝理由：
+                <input name="" value="货品已人为损坏，不满足退货要求" class="auditinput">
+            </tr> -->
+      </table>
+    </li>
+  </ol>
+</form>

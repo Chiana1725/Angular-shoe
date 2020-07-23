@@ -1,0 +1,42 @@
+<div *ngIf="com.isShowDeclare">
+  <div class="tanchuanbj">
+    <div class="tanchuanBox">
+      <h1 class="tanchuanBT">Commodity terms and Disclaimer</h1>
+      <div class="overflow">
+        <h4>Tip: you are shopping on online overseas websites </h4>
+        <ul>
+          <li>Your cross-border consumption behavior is in line with the electricity business law and relevant
+            international conventions.</li>
+          <li>The overseas purchase shop includes tens of millions of products, all of which are on sale on Vanice's
+            overseas website, and there is no need to transfer or purchase on behalf of others.</li>
+          <li>When relevant conditions are met (sole stain / wear is not supported), consumers can apply for "seven days
+            no reason to return and exchange goods".</li>
+          <li>The estimated delivery time is only for reference. The actual delivery is affected by force majeure
+            factors such as customs clearance or weather. You can track the package in "my order" to check the delivery
+            status. If you have any questions, please contact customer service.</li>
+          <li>At present, overseas purchased goods do not support night delivery, scheduled delivery, self delivery and
+            other services.</li>
+          <li>If the total amount of qualified goods is lower than the freight free standard due to the cancellation or
+            return of goods due to the customer's reason, 5 yuan or 10 yuan delivery fee.</li>
+          <li>Vanice will not ask for your bank card number, verification code and other information for any reason.If
+            any lawless person pretends to be Vanice's overseas purchasing customer service and asks for your bank
+            account number and other information, please contact Vanice's overseas purchasing customer service or call
+            the police in time, please be vigilant.</li>
+          <li>The commodities purchased by consumers are only for personal use, and the purchase behavior must follow
+            the principle of self use and reasonable quantity, and shall not be converted to other commercial purposes,
+            and shall not be re sold.</li>
+          <li>Vanice will not be responsible for any delay in delivery due to customer's change of the recipient's name
+            or address and failure to complete this additional service in a timely manner.</li>
+          <li>Vanice will not be responsible for any delay or damage caused by natural disaster, political factors,
+            labor tide, nuclear explosion or war.</li>
+          <li>Vanice reserves the right of final interpretation.</li>
+          <li class="sp">Click to Pay and agree service Agreement:</li>
+        </ul>
+      </div>
+      <!-- <button type="submit" class="tanchuanButton " (click)="activeModal.close('Close click')"  >Agree and pay</button> -->
+      <button type="submit" class="tanchuanButton " (click)="agree()">Agree and pay</button>
+      <button type="submit" class="tanchuanButton " (click)="disagree()">Cancel</button>
+      <!-- <button type="submit" class="tanchuanButton " (click)="activeModal.close('Close click')"  >Cancel</button> -->
+    </div>
+  </div>
+</div>

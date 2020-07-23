@@ -1,0 +1,33 @@
+h1{
+    font-size:150px;
+}
+
+img{
+    width:100px;
+    margin-bottom: 20px;
+}
+
+.error-page{
+ display: inline-block;
+ vertical-align: middle;
+}
+
+.container:before{
+    content:'';
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+p{
+    font-size:20px;
+    color:red;
+    margin-bottom: 20px;
+}
+
+button{
+    padding:10px 100px;
+    background-color: #000;
+    color:white;
+}
+

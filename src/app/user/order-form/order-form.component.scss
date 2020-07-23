@@ -1,0 +1,105 @@
+.col-narrow li{
+    color: black;
+}
+.leftactive{
+    background-color: black;
+    color: white;
+    font-size: 14px;
+    width: 160px;
+    height: 45px;
+    margin-top: 20px;
+    float: left;
+}
+.ordertitle {
+    margin-top: 15px;
+    height: 40px;
+    font-size: 14px;
+}
+.vLine {
+    border-left: solid 2px rgb(224, 224, 224);
+    height: 20px;
+    vertical-align: middle;
+    display: inline-block;
+}
+.tLink{
+    border-left: solid 1px rgb(224, 224, 224);
+    height: 150px;
+    vertical-align: middle;
+    display: inline-block;
+}
+.boder-none{
+    border: none;
+}
+.ordertitle li {
+    float: left;
+    margin-left: 10px;
+}
+.ordertitle .redLine{
+    cursor: pointer;
+}
+.ordertitle .redLine:hover{
+    color: red;
+    border-bottom: red solid 2px ;
+
+}
+.active{
+    color: red;
+    border-bottom: red solid 2px ;
+   
+}
+
+.boder-link{
+    // border: 1px solid #ececec;
+
+  }
+.icon{
+    // margin-left: 10px;
+    width:25%;
+}
+.icon_right{
+    margin-left: 30px;
+    width: 200px;
+}
+
+.first div{
+    float: left;
+}
+.first {
+    // display: flex;
+    text-align: center;
+    align-items: center; /*定义body的元素垂直居中*/
+    justify-content: center;
+}
+.first th{
+    border: none;
+}
+.shopinf_img{
+    // float: left;
+}
+.shopinf_message{
+    // float: right;
+    text-align: left;
+    margin: 10% 10px;
+    align-items: center;
+}
+
+.border-bottom-line{
+    // border-bottom: 1px solid #ececec;
+}
+
+
+
+
+
+.change{
+    border: none;
+    width: 25px;
+    text-align: center;
+    cursor: pointer;
+    background-color: #F3F3F3;
+}
+.butjian{
+    border: none;
+    background-color: #F3F3F3;
+    cursor: pointer;
+}

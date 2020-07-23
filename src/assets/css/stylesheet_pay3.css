@@ -1,0 +1,194 @@
+/**********************************************************************PaymentMethod***************************************************************************/
+div.tab {
+    background: #fff;
+    background-clip: padding-box;
+    border: 1px #d9d9d9 solid;
+    border-radius: 5px;
+    color: #545454;
+}
+  div.tab .button {
+    background-color: inherit;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+    text-align: left;
+    margin: 0!important;
+    color: #545454;
+}
+.tablinks > input {
+	width: 100%;
+    position: absolute;
+    opacity: 0;
+    left: 0;
+    height: 100%;
+    top: 0;
+}
+div.tab .button.paypal-m {border-top: 1px solid #d9d9d9;}
+div.tab .button:hover {
+    cursor: pointer;
+}
+
+div.tab .button.active {
+    
+}
+
+.tabcontent {
+    display: none;
+    padding: 20px 12px;
+    border-top: 1px solid #d9d9d9;
+    background-color: #fafafa;
+}
+.input-radio {
+    width: 15px;
+    height: 15px;
+    box-shadow: 0 0 0 0 #1990c6 inset;
+    transition: all 0.2s ease-in-out;
+    position: relative;
+    cursor: pointer;
+    vertical-align: -4px;
+    border: 1px solid;
+    border-radius: 50%;
+    margin: 0 5px 0px 0!important;
+    float: none!important;
+    top: -2px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-font-smoothing: inherit;
+    display: inline-block;
+}
+.active .input-radio {
+    border: none;
+    box-shadow: 0 0 0 10px #1990c6 inset;
+}
+.blank-slate {
+    padding: 1.5em;
+    text-align: center;
+}
+.input-radio:after,.input-radio after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: scale(0.2);
+    transform: scale(0.2);
+    -webkit-transition: all 0.2s ease-in-out 0.1s;
+    transition: all 0.2s ease-in-out 0.1s;
+    opacity: 0;
+}
+.input-radio:after,.input-radio after {
+    width: 4px;
+    height: 4px;
+    margin-left: -2px;
+    margin-top: -2px;
+    background-color: #fff;
+    border-radius: 50%;
+  -moz-border-radius: 50%; 
+-webkit-border-radius: 50%; 
+}
+.active .input-radio:after,.active .input-radio after {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+}
+.icon--offsite {
+    width: 163px;
+    height: 81px;
+    background-image: url(../images/offsite.svg);
+  display: inline-block;
+}
+ .radio__label__accessory {
+    display: table-cell;
+   text-align: right;
+    padding-left: 0.75em;
+    white-space: nowrap;
+   float: right;
+}
+.payment-icon {
+    border-radius: 0.21429em;
+    background-size: cover;
+    background-repeat: no-repeat;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    width: 2.5em;
+    height: 1.5em;
+    cursor: default;
+    margin: -0.14286em 0 -0.42857em;
+    display: inline-block;
+}
+.blank-slate__icon {
+    margin-bottom: 1em;
+}
+.payment-icon--visa {
+    background-image: url(../images/visa-.svg),none;
+}
+.payment-icon--master {
+    background-image: url(../images/master-.svg),none;
+}
+.payment-icon--american-express {
+    background-image: url(../images/american_express-.svg),none;
+}
+.payment-icon--discover {
+    background-image: url(../images/discover-.svg),none;
+}
+.visually-hidden {
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    clip: rect(0 0 0 0);
+    width: 2px;
+    height: 2px;
+    margin: -2px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+}
+.neworder-ccinfo label {
+    display:none;
+}
+.ccinfo input,.ccinfo select {
+    width:100%;
+    box-sizing: border-box;
+    padding: 10px 5px!important;
+    border-radius: 5px;
+    border:1px solid #c5c4c4;
+    margin: 0 0 5px!important;
+}
+.ccinfo select {
+    width:40%;	
+}
+#neworder-cc-expires-month,#neworder-cc-expires-year {
+   width:49%;
+}
+	
+div#paypal_payment span img {
+    max-width: 80px;
+    width: auto;
+    height: auto;
+}
+
+#paypal_payment .input-radio {
+    top: -10px;
+}
+.ccinfo label {
+	display: none;
+}
+.tab p.important {
+    padding: 3px 18px!important;
+    border-bottom: 1px solid #ccc;
+    color: #ff0000;
+}
+.tablinks span {
+    text-transform: capitalize;
+    color: #545454;
+}
+#mycheckout-card_cvv {
+    float: left;
+}
+/**********************************************************************PaymentMethod***************************************************************************/

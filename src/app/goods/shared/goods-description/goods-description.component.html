@@ -1,0 +1,56 @@
+<div class="subNavBox">
+  <div class="subNav currentDt" (click)="toggle0()"  *ngIf="isShown" i18n>{{'detail.description' | translate}}</div>
+  <ng-container *ngIf="show0">
+  <div class="navContent "  style="display: block;" @myInsertRemoveTrigger >
+    <p>{{currenGoods.detail}}&nbsp;</p>
+    <ul class="attributes">
+      <li><strong i18n>{{'detail.sex' | translate}}:&nbsp;</strong>Kids</li>
+      <li><strong i18n>{{'detail.brand' | translate}}:&nbsp;</strong>29&nbsp;x 20 x 13&nbsp;cm</li>
+      <li><strong i18n>{{'detail.style' | translate}}:&nbsp;</strong>220 g</li>
+      <li><strong i18n>{{'detail.topmateria' | translate}}:&nbsp;</strong>7 L</li>
+      <li><strong i18n>{{'detail.outsolematerial' | translate}}:&nbsp;</strong>Vinylon-F</li>
+      <li><strong i18n>{{'detail.grossweight' | translate}}:&nbsp;</strong>124% Vinylal</li>
+      <li><strong i18n>{{'detail.applicablescenario' | translate}}:&nbsp;</strong>Everyday Outdoor</li>
+    </ul><br class="clearBoth" />
+  </div>
+</ng-container>
+
+
+  <div class="subNav " (click)="toggle1()" *ngIf="isShown" i18n>{{'detail.SAR' | translate}}</div>
+  <ng-container *ngIf="show1">
+  <div class="navContent " style="display: block;" @myInsertRemoveTrigger >
+    <h3 class="h2" i18n>{{'detail.standard' | translate}}</h3>
+    <ul class="shipping_info">
+      <li i18n>{{'detail.standarddetails' | translate}}</li>
+      <!-- <li>You can expect your order to arrive within <i>10 – 20&nbsp;</i>business days.</li>
+      <li>Buy 2 Bags Get 5% OFF, More Than 3 Bags Get 10% OFF!</li> -->
+    </ul>
+    <h3 class="h2" i18n>{{'detail.emergency' | translate}}</h3>
+    <ul class="shipping_info">
+      <li i18n>{{'detail.emergencydetails' | translate}}</li>
+    </ul>
+  </div>
+</ng-container>
+
+
+
+  <div class="subNav currentDt" (click)="toggle2()" *ngIf="isShown" i18n>{{'detail.SP' | translate}} </div>
+  <ng-container *ngIf="show2">
+  <div class="navContent " style="display: block;" @myInsertRemoveTrigger >
+    <h2 class="h2">PalPal and Credit Cards</h2>
+    <p><img alt="" src="../../../../assets/images/f5a9bf6c5492942a3e8f9791e093f6ec.jpg" title=""></p>
+    <ul class="shipping_info">
+      <li>Visa</li>
+      <li>MasterCard</li>
+      <li>PayPal</li>
+      <li><span style="font-family: Arial, Helvetica, sans-serif; font-size: 12px;">All transactions are secured. Our
+          website is provided with an SSL encryption system to protect personal and payment data. We do not sell or ship
+          any items ordered through the Site directly to anyone we know to be under the age of 18. We will not collect
+          and personally identifiable information (e.g. name, address, telephone number and e-mail address), also
+          referred to herein as "personal information", about you unless you provide it to us voluntarily.</span></li>
+    </ul>
+  </div>
+</ng-container>
+
+
+</div>

@@ -1,0 +1,59 @@
+<app-header></app-header>
+<!-- <app-navrouting></app-navrouting> -->
+
+<div class="contentBox">
+  <h1 id="createAcctDefaultHeading">My Account Information</h1>
+
+  <form [formGroup]='registerForm' (ngSubmit)="register()" id="accountEditDefault">
+    <fieldset>
+      <h4 id="createAcctDefaultLoginLink"><strong class="note">NOTE:</strong> If you already have an account with us,
+        please login at the <a routerLink="/auth/login">login page</a>.</h4>
+
+      <legend>Your Personal Details</legend>
+      <div class="alert forward">* Required information</div>
+
+      <br class="clearBoth" />
+
+      <div *ngFor="let f of fields">
+        <div *ngIf="f.group">
+          <legend>{{f.key}}</legend>
+          <div *ngFor="let ff of f.value">
+            <app-dynamic-form [f]="ff" [form]="registerForm" [isEdit]="true"></app-dynamic-form>
+          </div>
+        </div>
+
+        <div *ngIf="!f.group">
+          <app-dynamic-form [f]="f" [isEdit]="true" [form]="registerForm"></app-dynamic-form>
+        </div>
+
+      </div>
+    </fieldset>
+
+
+    <button type="submit" class="buttonRow forward" [disabled]='registerForm.invalid' >
+      <span class="cssButton button_back ">Submit the Information</span>
+    </button>
+    
+    <!-- 错误验证 -->
+    <div class="buttons-set">
+      <div class="text-danger err"> 
+        <div *ngIf="registerForm.get('email')?.hasError('email')">Email is error </div>
+        <div *ngIf="registerForm.get('pwd2')?.hasError('equal') ">Confirm Password should be equal with Password</div>
+        <div *ngIf="registerForm.get('pwd')?.hasError('minlength') ">Password length is at least 8</div>
+        <div *ngIf="registerForm.get('pwd2')?.hasError('minlength') ">Confirm password length is at least 8</div>
+        <div 
+        *ngIf="!registerForm.get('email')?.hasError('email') 
+            && !registerForm.get('pwd2')?.hasError('equal') 
+            && !registerForm.get('pwd')?.hasError('minlength')
+            && !registerForm.get('pwd2')?.hasError('minlength')
+            && registerForm.invalid">All fields need filled</div>
+      </div>
+      <!-- 服务端错误提示 -->
+      <div class="text-danger err" *ngIf="error">{{error}}</div>
+    </div>
+  
+  </form>
+
+
+</div>
+<app-footer></app-footer>

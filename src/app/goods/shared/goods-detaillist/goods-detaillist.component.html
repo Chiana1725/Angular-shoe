@@ -1,0 +1,23 @@
+<!-- 可删除组件 -->
+<ul class="row clearfix">
+<li class="col-md-2 col-sm-3 col-xs-6 last" *ngFor="let shoeslists of shoeslist; let key = index">
+    <div class="product clearfix libox">
+          <div class="item" >
+                <a [routerLink]="[ '/goods/detail',key  ]">
+                      <img src= {{shoeslists.img}} 
+                            alt="Fjallraven Kanken Large Backpack Warm Yellow"
+                            title=" Fjallraven Kanken Large Backpack Warm Yellow " width="348" height="400"
+                            class="img-responsive" />
+                </a>
+          </div>
+          <h2 class="name">
+                <a [routerLink]="[ '/goods/detail',key  ]">{{ shoeslists.name}}</a></h2>
+          <div class="price-box">
+                <span class="normalprice">价格:{{ shoeslists.normalprice}} </span><span
+                      class="productSpecialPrice">今日价格:{{ shoeslists.price}} </span><span
+                      class="productPriceDiscount"><br />节省:&nbsp;{{ shoeslists.discount}}
+                </span>
+          </div>
+    </div>
+</li>
+</ul>

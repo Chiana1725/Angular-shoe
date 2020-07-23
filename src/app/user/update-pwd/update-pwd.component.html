@@ -1,0 +1,37 @@
+<app-header></app-header>
+
+<div class="row">
+    <!-- <div class="col-wide opc col-sm-2 col-md-2 col-xs-2 ml50 rightbox">
+        <div style="width: 80%">
+            <button class="blackbtn" routerLink="/user/account" i18n>{{'account.account' | translate}}</button>
+            <button class="blackbtn" routerLink="/user/orderform" i18n>{{'account.orderform' | translate}}</button>
+            <button class="blackbtn" routerLink="/user/updatepwd" routerLinkActive="leftactive" i18n>{{'account.reset' | translate}}</button>
+        </div>
+    </div> -->
+    <app-side-tab></app-side-tab>
+    <br class="clearBoth">
+
+    <div class="col-wide opc col-sm-8 col-md-8 col-xs-8 rightbox">
+
+        <h1 i18n>{{'account.changePassword' | translate}}</h1>
+        <hr>
+        <div class="alert forward" i18n>{{'account.reqinfor' | translate}}</div>
+
+        <form [formGroup]="resetForm" (ngSubmit)="reset()">
+
+            <div *ngFor="let f of fields">
+                <app-dynamic-form [f]="f" [form]="resetForm" [isEdit]="true"></app-dynamic-form>
+            </div>
+
+            <button type="submit" class="buttonRow forward" [disabled]="resetForm.invalid">
+                <span class="cssButton button_back" i18n>{{'account.button' | translate}}</span>
+            </button>
+            
+        </form>
+    </div>
+
+    <br class="clearBoth">
+</div>
+<br class="clearBoth">
+
+<app-footer></app-footer>

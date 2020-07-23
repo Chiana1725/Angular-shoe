@@ -1,0 +1,26 @@
+<div class="add-to-cart">
+    <!-- size start-->
+    <div id="productAttributes">
+        <table id="attrib-grid-table" width="100%" cellspacing="1" cellpadding="0" border="0" align="center">
+            <tbody>
+                <dt><span class="other-products-title" i18n>{{'detail.number' | translate}}: </span></dt>
+                <tr>
+                    <td class="attrib-grid-cell">
+                        <div class="qty-changer">
+                            <div class="qty_act reduce_qty text-none"><a target="_parent" (click)="minus()">-</a></div>
+                            <input type="text" name="products_id[69]" value="{{num}}" class="input-text qtyInput" size="4"
+                            disabled="disabled"  maxlength="12" />
+                            <div class="qty_act add_qty text-none"><a  target="_parent" (click)="add()">+</a></div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <!-- size end-->
+    <!-- add to button start-->
+    <button title="Add to Cart" class="button btn-incart" type="submit"  (click)="addCart()"><span i18n>{{'detail.addCart' | translate}}</span></button>
+    <!--eof Add to Cart Box-->
+</div>
+                                                                                                                          

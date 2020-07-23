@@ -1,0 +1,100 @@
+
+
+<app-header></app-header>
+<!-- <app-navrouting></app-navrouting> -->
+<div class="main-container" *ngFor="let item of lists,let i = index">
+  <div class="container">
+    <div class="product-view">
+      <div class="in-product-detail">
+        <div class="row product-essential">
+          <div class="col-md-7 col-xs-12 product-img-box">
+            <div class="block_home_slider">
+              <div id="home_slider" class="flexslider">
+                <ul class="slides">
+                  <!-- <img src="{{detail.image}}" -->
+                  <!-- 图片详情介绍组件 -->
+                  <app-goods-display ></app-goods-display>
+                  <!-- <app-goods-display [detail]="detailData.image"></app-goods-display> -->
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-5 col-xs-12 product-shop-box">
+            <div class="cont-box">
+              <form name="cart_quantity" method="post" enctype="multipart/form-data">
+
+                <!-- 商品购买信息组件 -->
+                <app-goods-buy-info [currenGoods]="currenGoods" ></app-goods-buy-info>
+
+                <!-- 颜色 -->
+                <div class="product-colors" id="product-color-wrapper">
+                  <dl>
+                      <dt><span class="other-products-title" i18n>{{'detail.color' | translate}}: </span></dt>
+                      <dd>
+                          <div class="input-box">
+                              <ul class='color-list'>
+                                  <!-- <li *ngFor="let item of lists,let i = index"> -->
+                                    <li >
+                                      <a class='cphand' >
+                                          <img routerLinkActive="active" (click) ="switchGood(i)" [src]="getImgPath(item.images)" alt="{{item.subject}}" title="{{item.subject}}" width="43" height="50" />
+                                        </a>
+                                      <!-- <div>{{currenGoods.id}}</div> -->
+                                  </li>
+                              </ul>
+                          </div>
+                      </dd>
+                  </dl>
+                </div>
+                <!-- 尺码 -->
+                <div class="product-colors" id="product-color-wrapper">
+                  <dl>
+                      <dt><span class="other-products-title" i18n>{{'detail.size' | translate}}: </span></dt>
+                      <dd>
+                          <div class="input-box">
+                              <ul class='color-list  '>
+                                  <li *ngFor="let item of size ; let i=index"  >
+                                    <!-- <a class='sizebox cphand' (click)="getSize(i)" routerLinkActive="active">{{item}}</a> -->
+                                      <input readonly="readonly"  class='sizebox cphand' (click)="getSize(i)" routerLinkActive="active" value="{{item}}">
+                                  </li>
+                              </ul>
+                          </div>
+                      </dd>
+                  </dl>
+              </div>
+
+
+                <!-- 商品支付信息组件 -->        
+                <app-goods-pay [currenGoods]="currenGoods" ></app-goods-pay>
+
+
+                <!-- 商品描述组件 -->
+                <app-goods-description [currenGoods]="currenGoods"></app-goods-description>
+
+              </form>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+
+      <div id="alsoPurchased" class="centerBoxWrapper">
+        <section class="product-list">
+          <div class="head-section">
+            <h2 class="centerBoxHeading" i18n>{{'ymal' | translate}}</h2>
+          </div>
+          <ul class=" row">
+            <!-- You May Also Like 列表组件  -->
+            <app-goods-detaillist></app-goods-detaillist>
+
+          </ul>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>
+
+<!-- <ng-container *ngIf="show">
+  <div  class="masking"></div>
+</ng-container> -->
