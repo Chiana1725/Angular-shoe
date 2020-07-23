@@ -1,0 +1,107 @@
+<app-header></app-header>
+<!-- <app-navrouting></app-navrouting> -->
+
+<app-promt></app-promt>
+
+<div class="contentBox">
+  <div id="loginReturning">
+    <div class="Login_left_box_1">
+      <h1 id="loginDefaultHeading"></h1>
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <div >
+          <!-- <app-dynamic-form [f]="f" [form]="loginForm"></app-dynamic-form> -->
+
+          
+          <div  class="from-group">
+                <!-- <fieldset class="form-group"  *ngSwitchCase='1'>
+                    <label class="inputLabel float-left w-100" [for]="f.key">Email Address
+                        <span style="color: red;" class="font-12 alert" *ngIf="isEdit">*</span>
+                    </label>
+                    <select class="float-left" [formControlName]="f.name" [id]="f.key" (change)="selected($event)">
+                        <option *ngFor="let f of f.value; indexlet i=" [value]="f" [selected]="i===f.selected||0">{{f}}</option>
+                    </select>
+                    <br class="clearBoth" /> 
+                </fieldset> -->
+                <div>
+                  <label class="inputLabel float-left w-100" i18n>{{'login.emailAddr' | translate}}
+                      <span style="color:red" class="font-12 alert" >*</span>
+                  </label>
+                  <input class="float-left " type="text"  size="25" class="form-control" [formControl]="user" matInput [email]/>   
+                  <br class="clearBoth" />  
+                </div>
+
+                <div >
+                  <label class="inputLabel float-left w-100" i18n>{{'login.password' | translate}}
+                      <span style="color:red" class="font-12 alert" >*</span>
+                  </label>
+                  <input class="float-left " type="text"  size="25" class="form-control" [formControl]="pwd" matInput [type]="hidePwd ? 'password' : 'text'"/>   
+                  <br class="clearBoth" />  
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <div class="buttons-set ">
+          <div class="text-danger err" *ngIf="loginForm.invalid && loginForm.dirty">
+            <div *ngIf="loginForm.controls.user.invalid">请填写用户名</div>
+            <div *ngIf="loginForm.controls.user.valid && loginForm.controls.pwd.invalid">请填写密码</div>
+          </div>
+          <!-- <a class="f-left" routerLink="/user/updatepwd">Forgot
+            your password?</a> -->
+          <div class="forward" style="float: right;"><input [disabled]="loginForm.invalid" class="cssButton button_login.png" type="submit"  value="Sign In" /></div>
+        </div>
+      </form>
+
+      <h1 id="loginDefaultHeading">Create a new account</h1>
+      <div>By creating an account with our store, you will be able to move through the checkout process faster,
+        store multiple shipping addresses, view and track your orders in your account and more.</div>
+      <div class="buttons-set">
+
+
+        <a class="forward" style="float: right;" routerLink="/auth/register" >
+          <input class="cssButton button_create_account.png" (mouseover)="toggle()" (mouseout)="toggle()" 
+            [ngClass]="out?'cssButton button_create_account.png':'cssButtonHover button_create_account.png button_create_account.pngHover'"
+            type="submit" value="Sign Up" />
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- <div class="contentBox">
+  <div id="loginReturning">
+    <div class="Login_left_box_1">
+      <h1 id="loginDefaultHeading">{{authdata.login}}</h1>
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <div *ngFor="let f of fields">
+          <app-dynamic-form [f]="f" [form]="loginForm"></app-dynamic-form>
+        </div>
+        <div class="buttons-set ">
+          <div class="text-danger err" *ngIf="loginForm.invalid && loginForm.dirty">
+            <div *ngIf="loginForm.controls.user.invalid">请填写用户名</div>
+            <div *ngIf="loginForm.controls.user.valid && loginForm.controls.pwd.invalid">请填写密码</div>
+          </div>
+          <a class="f-left" routerLink="/auth/reset">Forgot
+            your password?</a>
+          <div class="forward" style="float: right;"><input [disabled]="loginForm.invalid" class="cssButton button_login.png" type="submit"
+              value="Sign In" /></div>
+        </div>
+      </form>
+      <h1 id="loginDefaultHeading">Create a new account</h1>
+      <div>By creating an account with our store, you will be able to move through the checkout process faster,
+        store multiple shipping addresses, view and track your orders in your account and more.</div>
+      <div class="buttons-set">
+        <a class="forward" style="float: right;" routerLink="/auth/register">
+          <input class="cssButton button_create_account.png" (mouseover)="toggle()" (mouseout)="toggle()" 
+            [ngClass]="out?'cssButton button_create_account.png':'cssButtonHover button_create_account.png button_create_account.pngHover'"
+            type="submit" value="Sign Up" />
+        </a>
+      </div>
+    </div>
+  </div>
+</div> -->
+<app-footer></app-footer>

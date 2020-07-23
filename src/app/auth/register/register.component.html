@@ -1,0 +1,57 @@
+<app-header></app-header>
+<!-- <app-navrouting></app-navrouting> -->
+
+<div class="contentBox">
+  <h1 id="createAcctDefaultHeading">My Account Information</h1>
+
+  <form [formGroup]='registerForm' (ngSubmit)="register()" id="accountEditDefault">
+      <fieldset>
+      <h4 id="createAcctDefaultLoginLink"><strong class="note">NOTE:</strong> If you already have an account with us,
+        please login at the <a routerLink="/auth/login">login page</a>.</h4>
+
+      <legend>Your Personal Details</legend>
+      <div class="alert forward">* Required information</div>
+    
+      <br class="clearBoth" />
+    
+    <div *ngFor="let f of fields">
+      <div *ngIf="f.group">
+          <legend>{{f.key}}</legend>
+        <div *ngFor="let ff of f.value">
+            <app-dynamic-form [f]="ff" [form]="registerForm" [isEdit]="true"></app-dynamic-form>
+        </div>
+      </div>
+
+      <div *ngIf="!f.group">
+          <app-dynamic-form [f]="f" [isEdit]="true" [form]="registerForm" ></app-dynamic-form>
+      </div>
+ 
+    </div>
+  </fieldset>
+
+  <button type="submit" class="buttonRow forward" [disabled]="registerForm.invalid">
+    <span class="cssButton button_back ">Submit the Information</span>
+  </button>
+
+  <!-- what: 下面代码的作用 -->
+  <div class="buttons-set">
+      <div class="text-danger err" *ngIf="registerForm.invalid && registerForm.dirty">
+          <div *ngIf="registerForm.controls.firstName.invalid && registerForm.controls.firstname.dirty">First Name is needed</div>
+          <div *ngIf="registerForm.controls.lastName.valid && registerForm.controls.lastname.dirty ">Last Name is needed</div>
+          <div *ngIf="registerForm.controls.addr.invalid&& registerForm.controls.addr.dirty">Street Address is needed</div>
+          <div *ngIf="registerForm.controls.city.valid && registerForm.controls.city.dirty">City is needed</div>
+          <div *ngIf="registerForm.controls.country.invalid&& registerForm.controls.country.dirty">Country is needed</div>
+          <div *ngIf="registerForm.controls.state.valid&& registerForm.controls.state.dirty ">State/Province is needed</div>
+          <div *ngIf="registerForm.controls.postcode.invalid&& registerForm.controls.postcode.dirty">Post/Zip Code is needed</div>
+          <div *ngIf="registerForm.controls.email.valid&& registerForm.controls.email.dirty">Email Address is wrong</div>
+          <div *ngIf="registerForm.controls.pwd.invalid&& registerForm.controls.pwd.dirty">Password at least 8 .</div>
+          <div *ngIf="registerForm.controls.pwd2.valid&& registerForm.controls.pwd2.dirty || registerForm.controls.pwd.value !== registerForm.controls.pwd2.value">Confirm Password should be equal width Password </div>
+
+        </div>
+  </div>
+  
+  </form>  
+
+
+</div>
+<app-footer></app-footer>

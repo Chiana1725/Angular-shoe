@@ -1,0 +1,9 @@
+<div class="col-wide opc col-sm-2 col-md-2 col-xs-2 ml50" >
+    <div style="width: 80%">
+      <button class="blackbtn" routerLink="/user/account" routerLinkActive [routerLinkActive]="['active']" i18n>{{'account.account' | translate}}</button>
+      <button class="blackbtn" routerLink="/user/orderform" [routerLinkActive]="['active']" (click)="openOrder()" i18n>{{'account.orderform' | translate}}</button>
+      <button class="blackbtn" routerLink="/user/updatepwd" [routerLinkActive]="['active']" i18n>{{'account.reset' | translate}}</button>
+    </div>
+</div>
+
+

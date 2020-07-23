@@ -1,0 +1,27 @@
+<div [ngSwitch]="f.type" class="from-group" [formGroup]="form">
+<!-- select -->
+    <!-- //lccm5.26  改：删除<fieldset>中的[formGroup]="form" -->
+    <fieldset class="form-group"  *ngSwitchCase='1'>
+        <label class="inputLabel float-left w-100" [for]="f.key">{{f.key}}
+            <span style="color: red;" class="font-12 alert" *ngIf="isEdit">*</span>
+        </label>
+        <select class="float-left" [formControlName]="f.name" [id]="f.key" (change)="selected($event)">
+            <option *ngFor="let f of f.value; let i=index" [value]="f" [selected]="i===f.selected||0">{{f}}</option>
+        </select>
+        <br class="clearBoth" /> 
+    </fieldset>
+  <!-- input -->
+  <div *ngSwitchDefault>
+    <label class="inputLabel float-left w-100" [for]="f.key">{{f.key[com.langIndex]}}
+        <span style="color:red" class="font-12 alert" *ngIf="isEdit">*</span>
+    </label>
+    <input  class="float-left form-control"  (keyup)="search($event.target.value)" type="text" #name [formControlName]="f.name" [value]="(f.value||'')" [id]="f.key"  size="25" 
+    placeholder="{{msg}}"
+      
+    />   
+    <br class="clearBoth" />  
+  </div>
+
+</div>
+
+<!-- placeholder="{{msg}}" -->

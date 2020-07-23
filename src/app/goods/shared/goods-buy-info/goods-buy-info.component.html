@@ -1,0 +1,40 @@
+<h1  class="productGeneral head" i18n>{{ currenGoods.productName}}</h1>
+<h2 id="productPrices" class="productGeneral pricr-box clearfix"><span class="normalprice" i18n>{{'detail.price' | translate}}:{{ currenGoods.price}}</span>
+    <span class="productSpecialPrice"  i18n>{{'detail.specialPrice' | translate}}:{{ currenGoods.price-currenGoods.price*currenGoods.discount*0.01 | number:"0.1-2"}}</span><span class="productPriceDiscount" i18n><br />{{'detail.save' | translate}}:&nbsp;{{ currenGoods.discount}}</span>
+</h2>
+
+<!-- colorproducts 循环图片-->
+<!-- <div class="product-colors" id="product-color-wrapper">
+    <dl>
+        <dt><span class="other-products-title" i18n>{{'detail.color' | translate}}: </span></dt>
+        <dd>
+            <div class="input-box">
+                <ul class='color-list'>
+                    <li *ngFor="let color of details.colors">
+                        <a class='cphand'>
+                            <img src={{color.color}} alt="Fjallraven Kanken Mini Backpack Air Blue" title=" Fjallraven Kanken Mini Backpack Air Blue " width="43" height="50" />
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </dd>
+    </dl>
+</div> -->
+<!-- colorproducts -->
+
+<!-- 尺码 -->
+<!-- <div class="product-colors" id="product-color-wrapper">
+    <dl>
+        <dt><span class="other-products-title" i18n>{{'detail.size' | translate}}: </span></dt>
+        <dd>
+            <div class="input-box">
+                <ul class='color-list  '>
+                    <li *ngFor="let size of details">
+                        <a class='sizebox cphand' >{{size.size}}</a>
+                    </li>
+                </ul>
+            </div>
+        </dd>
+    </dl>
+</div> -->
+<!-- 尺码 -->

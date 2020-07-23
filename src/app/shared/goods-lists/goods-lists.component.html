@@ -1,0 +1,20 @@
+<ul class="row clearfix" >      
+<li class="col-md-2 col-sm-4 col-xs-6  " *ngFor="let shoeslists of detail.products"  >
+      <div class="product clearfix container libox">
+            <div class="item">
+                  <a [routerLink]="[ '/goods/detail', shoeslists.id]" > 
+                        <!-- <img [src]= "func(path)"  -->
+                        <img [src]="images||'assets/images/2_178x155.png'" alt="" title=" " width="348" height="400" class="img-responsive" />
+                  </a>
+            </div>
+            <h2 class="name"><a  [routerLink]="[ '/goods/detail', shoeslists.id]">{{ shoeslists.name}}</a></h2>
+            <div class="price-box">
+                  <span class="normalprice f10px" i18n>{{'goods.price' | translate}}:{{ shoeslists.price}} </span>
+                  <span class="productSpecialPrice f16px" i18n>{{'goods.disprice' | translate}}:{{ shoeslists.price-shoeslists.price*shoeslists.discount*0.01 | number:"0.1-2"}} </span>
+                  <span class="productPriceDiscount"><br/> {{'goods.discount' | translate}}:&nbsp;{{ shoeslists.discount}}%</span>
+            </div>
+      </div>
+</li>
+</ul>
+<img src="asset/images/1593159833932314700.png" alt="">
+

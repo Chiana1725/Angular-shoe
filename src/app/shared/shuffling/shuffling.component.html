@@ -1,0 +1,15 @@
+<div class="header-banner  ">
+    <ul [@carousel]='state' class="banner-block1 owl-carousel owl-theme owl-loaded" id="J_owl">
+      <li class='imgP item' [ngClass]="{'activeLi': img.state===true}" *ngFor='let img of images,let i =index;'
+    (mouseleave)='start()' (touchstart)="getStartX($event)"
+        (touchend)="getEndX(i)" (touchmove)="getMoveX($event)">
+        <img [src]="url+img.name" *ngIf='img.state'>
+      </li>
+    </ul>
+
+    <div class='dot' fxLayout="row" fxLayoutAlign="center end" fxLayoutGap="15px">
+      <div class='circle' [class.active]='img.state' *ngFor='let img of images' (mouseenter)="clickDot(img.id)"
+        (mouseleave)='blurDot()'>
+      </div>
+    </div>
+</div>

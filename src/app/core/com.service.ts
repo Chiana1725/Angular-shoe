@@ -1,0 +1,191 @@
+import { ErrHandleService } from './services/err-handle.service';
+import { OrderService } from './services/order.service';
+import { group } from '@angular/animations';
+import { Injectable } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
+import { map, catchError, retry } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { Router, Params } from '@angular/router';
+import { rejects } from 'assert';
+
+
+import { lists } from './../shared/lists';
+@Injectable({
+  providedIn: 'root'
+})
+export class ComService {
+
+  public shoeslist = lists;//静态数据 提供于商品跳转
+  public domain: string = 'http://192.168.2.154:6031/';
+
+  //同意支付弹窗控制
+  isShowDeclare: boolean = false;
+  purcharsID: any;
+
+  constructor(
+    private router: Router,
+    private http: HttpClient,
+    private errServ: ErrHandleService,
+  ) { }
+
+
+  popup: { title?: string, content: string, image?: string, confirm?: Function, hideCancel?: boolean } = null;
+  langIndex = 1;
+  // public langIndex;
+  public lang;
+  changeTo() {
+    this.langIndex = 'EN' === window.localStorage['lang'] ? 1 : 0;
+    window.localStorage['lang'] = this.lang = ['EN'][this.langIndex];
+  }
+
+  createFormGroup(fields: any) {
+    let group: any = {};
+    fields.forEach(f => {
+      if (f.group) {
+        this.createFormGroup(f.value);
+      } else {
+        group[f.name] = new FormControl(f.value || '', f.valifators)
+      }
+    });
+    return new FormGroup(group);
+  }
+
+  doHttpRes(res: any) {
+    // console.log('doHttp', res.body);
+
+    let code = res.code;
+    let data = res.msg;
+    // let result = result;
+    if (code === 200) {
+      // console.log(data);
+      data = res.data;
+      // this.router.navigate(['/auth/login']);
+    } else {
+      // console.log(data);
+      // this.popup = {title:'提示401',content:res.data};
+      this.router.navigate(['/auth/login'])
+      //弹出框的提示
+    }
+    return data;
+  }
+
+
+
+  // httpGet(url:string){
+  //  return  this.http.get(url,{observe:'body'})
+  //   .pipe(
+  //     catchError(this.handleError<any>(null)),
+  //     map((res:any)=>{
+  //       return this.doHttpRes(res);
+  //     })
+  //   )
+  // }
+
+
+  // httpGet(url: string, mock: any = null, params?: any,): Observable<HttpResponse<any>> {
+  //   const option = {};
+  //   if (params) {
+  //     option['params'] = params;
+  //   }
+
+  //   return this.http.get<any>(url, option).pipe(
+  //     catchError(this.errServ.handleError('httpGet', null, mock)),
+  //     retry(3),
+  //     /*  map((res:any)=>{
+  //        return this.doHttpRes(res);
+  //      }) */
+
+  //   );
+  // }
+
+  httpGet<T>(
+    url: string,
+    params?: HttpParams | { [param: string]: string | string[]; },
+    observe: 'body' | 'response' = 'body',
+    responseType: 'json' | 'text' = 'json'
+  ): Observable<T> | Observable<HttpResponse<T>> | Observable<string> | Observable<HttpResponse<string>> | any {
+    if (observe === 'body' && responseType === 'json') {
+      return this.http.get<T>(url, { params, observe, responseType});
+    }
+    
+    if (observe === 'body' && responseType === 'text') {
+      return this.http.get(url, { params, observe, responseType}) as Observable<string>;
+    }
+
+    if (observe === 'response' && responseType === 'json') {
+      return this.http.get<T>(url, { params, observe, responseType});
+    }
+
+    if (observe === 'response' && responseType === 'text') {
+      return this.http.get(url, { params, observe, responseType});
+    }
+
+    return null;
+  }
+
+  // httpGet(url: string, params?: any){
+  //   const option = {};
+
+  //   if (params) {
+  //     option['params'] = params;
+  //   }
+
+  //   return this.http.get<any>(url,option).pipe(
+  //     retry(3),
+  //     catchError(this.handleError)
+  //   )
+  // }
+
+  httpPost(url: string, data: any) {
+    return this.http.post(url, data, { observe: 'response' })
+      .pipe(
+        catchError(this.handleError<any>(null)),
+        map((res: any) => {
+          return this.doHttpRes(res);
+        })
+      )
+  }
+
+  // httpPostWithParams(url:string,data:any, params: HttpParams){
+  //   this.http.post(url,data,{observe:'response', params: params}) 
+  //   .pipe(
+  //     catchError(this.handleError<any>(null)),
+  //     map((res:any)=>{
+  //       return this.doHttpRes(res);
+  //     })
+  //   )
+  //   .subscribe((res)=>{
+  //     console.log('res',res);
+  //   })
+  // }
+
+  private handleError<T>(result?: T) {
+    return (error: any): Observable<T> => {
+      let res = error.error;
+      res.data = result || null;
+      return of(res as T);
+    };
+  }
+
+
+
+  //state状态码
+  httpReq(method: string, uri: string, res: any, mockRes: any, successFn: any, data?: any, failFn?: any) {
+    this.http[method](uri, data).pipe(catchError(this.handleError(uri,))).subscribe((res: any) => {
+      // this.Response(res, successFn, failFn);
+    })
+  }
+
+  //商品跳转详情
+  get(api) {
+    return new Promise((resolve, rejects) => {
+      this.http.get(this.domain + api).subscribe((response) => {
+        resolve(response);
+      })
+    })
+  }
+
+
+
+}

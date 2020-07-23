@@ -1,0 +1,16 @@
+<!-- 成功/失败提示 -->
+<div class="pop-box" *ngIf="com.popup" id="popupbox">
+    <div class="buy-success radius-5 pos-center bg-white d-flex flex-column justify-content-center align-items-center text-center">
+  
+     
+        <!-- 标题 -->
+        <h1 class="font-weight-bold w-100">{{com.popup?.title}}</h1>
+        <!-- 内容 (click)="com.popup?.confirm()"[ngClass]="{'border-r':popServ.set.isShowCancel}"(click)="com.popup?.confirm()" -->
+        <p class="text-danger d-flex justify-content-center align-items-center w-100" >{{com.popup?.content}}</p>
+     
+      <div class="d-flex flex-auto justify-content-between w-100" >
+           <button class="my-btn bg-base w-75 m-auto flex-grow-1" (click)="close()" >确定</button>
+           <button class="my-btn bg-base w-75 m-auto flex-grow-1" *ngIf="com.popup?.hideCancel" >取消</button>
+      </div>
+    </div>
+  </div>

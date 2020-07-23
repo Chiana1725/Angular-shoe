@@ -1,0 +1,82 @@
+.slick-slider {
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+    user-select: none;
+    touch-action: pan-y;
+}
+.slick-prev, .slick-next {
+    color: #ccc;
+    position: absolute;
+    top: 43%;
+    display: inline-block;
+    font-size: 0;
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    transform: translateY(-50%);
+    border: 0;
+    background: rgba(255,255,255,0);
+    z-index: 999;
+}
+.slick-prev {
+    left: 0;
+}
+.slick-next {
+    right: 0;
+}
+.slick-prev:after {
+    content: '\e69a';
+    font-family: 'iconfont';
+    font-size: 60px;
+}
+.slick-next:before {
+    content: '\e69b';
+    font-family: 'iconfont';
+    font-size: 60px
+}
+.slick-list.draggable {
+    overflow: hidden;
+}
+.slick-list {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+.slick-slider .slick-list {
+    transform: translate3d(0, 0, 0);
+}
+.slick-track {
+    position: relative;
+    top: 0;
+    left: 0;
+    display: block;
+}
+.slick-initialized .slick-slide {
+    display: block;
+}
+.slick-slide {
+    display: none;
+    float: left;
+    height: 100%;
+    min-height: 1px;
+    text-align: center;
+}
+.slick-slide .product-image {
+    display: block;
+    margin: 0 0 10px;
+    text-align: center;
+}
+.slick-slide .product-image .img-responsive {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    margin: 0 auto;
+}
+.slick-dots {
+    display: none!important;
+}

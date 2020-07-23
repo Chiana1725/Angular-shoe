@@ -1,0 +1,48 @@
+
+    <!-- 原本的样子 -->
+    <!-- <div class="hidden-xs" style="width: 100%; margin: auto;">
+        <div class="toolbar">
+            <div class="pager hidden-xs">
+                <p class="amount">Items <strong>1</strong> to <strong>12</strong> of <strong>21</strong> total</p>
+                <div class="pages"><strong>Page:</strong>
+                    <ol>
+                        <li><a  title="First" [routerLink]="['../']" *ngIf="page!==1"> << </a></li>
+                        <li><a  title=" Previous Page " *ngIf="page!==1" [routerLink]="['../',page -1]" > < </a></li>
+                        <li class="current">1</li>
+                        <li><a  title=" Page 2 ">2</a></li>
+                 
+                        <li><a  title=" Page" [routerLink]="['../',p]" *ngFor="let p of pages" routerLinkActive="current">{{p}}</a></li>
+
+                        <li><a  title=" Next Page "  [routerLink]="['../',page +1]" > > </a></li>
+                        <li><a  title="Last" *ngIf="last!=page" [routerLink]="['../',last]" > >> </a></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+
+    <div class="hidden-xs" style="width: 100%; margin: auto;">
+        <div class="toolbar">
+            <div class="pager hidden-xs">
+                <p class="amount">Items <strong>{{(curPage-1)*5+1}}</strong> to <strong>{{curPage*5}}</strong> of <strong></strong>{{tableList?.length}} total</p>
+                <div class="pages"><strong>Page:</strong>
+                    <ol>
+                        <button class="butjian" type="button" [disabled]="!preShow" (click)="showPrePage()"> << </button>
+                        <a class="change" type="text" *ngFor="let item of pages" [routerLink]="['../',item]">{{item}}</a>
+                       <!--  <button class="change" type="text" (click)="setPage(page=1)">{{curPage+1}}</button>
+                        <button class="change" type="text" >{{curPage+2}}</button> -->
+                        <!-- <input class="change" type="text" (change)="onChangePage($event.target.value)" placeholder="{{curPage}}" value="{{curPage}}">
+                        <input class="change" type="text" (change)="onChangePage($event.target.value)" placeholder="{{curPage+1}}" value="{{curPage+1}}">
+                        <input class="change" type="text" (change)="onChangePage($event.target.value)" placeholder="{{curPage+2}}" value="{{curPage+2}}"> -->
+                        <!-- <span> / {{pageNo}} 页</span> -->
+                        <button class="butjian" type="button" [disabled]="!nextShow" (click)="showNextPage()">  >> </button>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+

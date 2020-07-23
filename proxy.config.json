@@ -1,0 +1,10 @@
+{"/api/": {
+    "target": "http://192.168.2.154:6031/",
+    "changeOrigin": true,
+    "secure": false,
+    "pathRewrite": {
+      "/api/": "http://192.168.2.154:6031/api/"
+    }
+  }
+ 
+}

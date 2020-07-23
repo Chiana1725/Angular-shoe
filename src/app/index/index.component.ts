@@ -1,0 +1,42 @@
+import { ComService } from 'src/app/core/com.service';
+import { Observable } from 'rxjs';
+import { ShopService } from './../core/services/shop.service';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+@Component({
+  selector: 'app-index',
+  templateUrl: './index.component.html',
+  styleUrls: ['./index.component.scss']
+})
+export class IndexComponent implements OnInit {
+
+
+  products;
+
+  constructor(
+    private shopService: ShopService,
+    public router: Router,
+    private com: ComService,
+    public route: ActivatedRoute
+  ) { }
+
+  ngOnInit(): void {
+    this.shopService.GetLastProductlistInfo().subscribe(
+      (data) => this.products = data
+    );
+
+    this.getHotData();
+
+  }
+
+
+  //请求热门数据
+  getHotData() {
+    this.com.httpGet('/api/product/all-products', { len: "10" }).subscribe(res => {
+
+      this.products = res;
+    })
+  }
+
+
+}

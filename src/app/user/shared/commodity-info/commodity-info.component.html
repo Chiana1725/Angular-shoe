@@ -1,0 +1,63 @@
+<li id="opc-order_review" class="section active ">
+    <table width="100%" id="shopping-cart-table" class="table data-table cart-table " >
+
+
+        <tr class="first a-center text-left">
+            <th with="15%"> 
+                <p i18n>{{'account.itemNo' | translate}}</p>
+            </th>
+            <th  width="35%" >
+                <p i18n>{{'account.details' | translate}}</p>
+            </th>
+            <th  width="15%">
+                <p i18n>{{'account.unitPrice' | translate}}</p>
+            </th>
+            <th  width="15%">
+                <p i18n>{{'account.quantily' | translate}}</p>
+            </th>
+            <th  width="20%">
+                <p i18n>{{'account.subtotal' | translate}}</p>     
+            </th>
+          </tr> 
+          
+          <!-- 循环商品 -->
+          <tr class="first a-center text-left" *ngFor = "let Orderslist of Orderslist">
+            <th with="15%">
+                <p>{{Orderslist.id}}</p>
+            </th>
+            <th  width="35%" >
+                <img class="f-left" src="../../../assets/images/1_50x43.png" alt="">
+                <div class="f-left" style="width: 70%;"><p>{{Orderslist.name}}</p><p i18n>{{'account.table6' | translate}}：{{Orderslist.size}}</p><p i18n>{{'account.color' | translate}}：{{Orderslist.subject}}</p></div>
+            </th>
+            <th  width="15%">
+                <p>{{Orderslist.price}}</p>
+            </th>
+            <th  width="15%">
+                <p>{{Orderslist.count}}</p>
+            </th>
+            <th  width="20%">
+                <p class="colorRed">{{Orderslist.price*Orderslist.count}}</p>
+            </th>
+          </tr> 
+
+
+          <tr class="first a-center text-left">
+            <th with="15%">
+            </th>
+            <th  width="35%" >
+               
+            </th>
+            <th  width="15%">
+            </th>
+            <th  width="15%">
+            </th>
+            <th  width="20%">
+                <p i18n>{{'account.freight' | translate}}： <span class="littlenormalprice tablespan">$11.0</span>{{'account.total' | translate}}</p>
+                <p i18n>{{'account.discount' | translate}}：0</p>
+                <p i18n>{{'account.total' | translate}}：<span class="colorRed">$462.0</span></p>
+            </th>
+          </tr> 
+
+
+    </table>
+  </li>

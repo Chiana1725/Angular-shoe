@@ -1,0 +1,61 @@
+<app-header></app-header>
+<!-- <app-navrouting></app-navrouting> -->
+<!-- <p>account works!</p> -->
+<div class="row">
+    <!-- <div class="col-wide opc col-sm-2 col-md-2 col-xs-2 ml50">
+        <div style="width: 80%">
+            <button class="blackbtn" routerLink="/user/account" routerLinkActive="leftactive" i18n>{{'account.account' | translate}}</button>
+            <button class="blackbtn" routerLink="/user/orderform/-1" i18n>{{'account.orderform' | translate}}</button>
+            <button class="blackbtn" routerLink="/user/updatepwd" i18n>{{'account.reset' | translate}}</button>
+        </div>
+    </div> -->
+    <app-side-tab></app-side-tab>
+    <br class="clearBoth">
+
+    <div class="col-wide opc col-sm-8 col-md-8 col-xs-8 rightbox">
+
+        <h1 i18n>{{'account.MAI' | translate}}</h1>
+        <hr>
+        <div class="alert forward" i18n>{{'account.reqinfor' | translate}}</div>
+
+        <!-- <form [formGroup]="accountForm" (ngSubmit)="account()">
+            <div  *ngFor="let f of must" >
+                <app-dynamic-form [f]="f"  [form]="accountForm" [isEdit]="true"></app-dynamic-form>
+            </div>
+        </form> -->
+        <!-- <form [formGroup]="accountForm" (ngSubmit)="account()">
+            <div  *ngFor="let f of must" >
+                <app-dynamic-form [msg]="Accountmsg" [f]="f"  [form]="accountForm" [isEdit]="true"></app-dynamic-form>
+            </div>
+        </form> -->
+
+        <br>
+        <h1 i18n>{{'account.SA' | translate}}</h1>
+        <hr>
+        <form [formGroup]="accountForm" (ngSubmit)="account()">
+            <div *ngFor="let f of fields">
+                <app-dynamic-form  [f]="f"  [form]="accountForm" [isEdit]="true"></app-dynamic-form>
+            </div>
+
+            <button type="submit" class="buttonRow forward" [disabled]="accountForm.invalid" >
+                <span class="cssButton button_back " i18n>{{'account.button' | translate}}</span>
+            </button>
+        </form>
+
+        <br>
+        <!-- <h1 i18n>{{'account.BCI' | translate}}</h1> -->
+        <hr>
+        
+        <!-- <form [formGroup]="accountForm" (ngSubmit)="account()">
+            <div *ngFor="let f of bankcard">
+                <app-dynamic-form [msg]="Bankcardmsg" [f]="f" [form]="accountForm" [isEdit]="true"></app-dynamic-form>
+            </div>
+        </form> -->
+        <!-- <br> -->
+        
+    </div>
+
+    <br class="clearBoth">
+</div>
+<br class="clearBoth">
+<app-footer></app-footer>

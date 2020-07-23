@@ -1,0 +1,118 @@
+<!-- <a routerLink="/news" [queryParams]="{ newsUrl : n.url }" >
+<div>{{n.title}}</div> -->
+
+
+<app-header></app-header>
+
+<app-page [Orderslist]="Orderslist" (evemitPage)="getPages($event)"></app-page>
+<!-- <app-navrouting *ngFor="let nav of navrouter" ></app-navrouting> -->
+<!-- <p>account works!</p> -->
+<div class="row">
+  <!-- <div class="col-wide opc col-sm-2 col-md-2 col-xs-2 ml50">
+    <div style="width: 80%">
+      <button class="blackbtn" routerLink="/user/account" i18n>{{'account.account' | translate}}</button>
+      <button class="blackbtn" routerLink="/user/orderform/-1" routerLinkActive="leftactive" (click)="openOrder()"
+        i18n>{{'account.orderform' | translate}}</button>
+      <button class="blackbtn" routerLink="/user/updatepwd" i18n>{{'account.reset' | translate}}</button>
+    </div>
+
+  </div> -->
+  <app-side-tab></app-side-tab>
+  <br class="clearBoth">
+
+  <div class="col-wide opc col-sm-8 col-md-8 col-xs-8 rightbox">
+
+    <h1 i18n>{{'account.myorder' | translate}}</h1>
+    <hr>
+
+    
+
+
+    <ul class="ordertitle" >
+      <li class="redLine" [routerLink]="['/user/orderform/-1']"  [routerLinkActive]="['active']"  i18n>{{'account.allorders' | translate}}</li>
+      <li class="vLine"></li>
+      <li class="redLine" [routerLink]="['/user/orderform/0']" [routerLinkActive]="['active']"  i18n>{{'account.tobepaid' | translate}}</li>
+      <li class="vLine"></li>
+      <li class="redLine" [routerLink]="['/user/orderform/1']"  [routerLinkActive]="['active']"  i18n>{{'account.tobedelivered' | translate}}</li>
+      <li class="vLine"></li>
+      <li class="redLine" [routerLink]="['/user/orderform/2']"  [routerLinkActive]="['active']"  i18n>{{'account.tobereceived' | translate}}</li>
+      <li class="vLine"></li>
+      <li class="redLine" [routerLink]="['/user/orderform/3']"  [routerLinkActive]="['active']"  i18n>{{'account.refunded' | translate}}</li>
+    </ul>
+
+    <table width="100%" id="shopping-cart-table" class="table table-bordered data-table cart-table">
+      <tr class="first a-center">
+        <th rowspan="1" width="44%" i18n>{{'account.table1' | translate}}</th>
+        <th rowspan="1" width="13%" i18n>{{'account.table2' | translate}}</th>
+        <th rowspan="1" width="13%" i18n>{{'account.table3' | translate}}</th>
+        <th rowspan="1" width="13%" i18n>{{'account.table4' | translate}}</th>
+        <th rowspan="1" width="17%" i18n>{{'account.table5' | translate}}</th>
+      </tr>
+    </table>
+
+
+   <!-- <div  *ngif="shoesoders?.data?.length" > -->
+    <!-- 商品循环 -->
+    <!-- <h1>Expression</h1>
+    <div>{{stategoods | json}}</div> -->
+
+
+
+    <form name="quickcheckout" method="post" *ngFor="let shoesoders of myorderInfo.orders;let i=index"  >
+      <!-- <ol class="col-narrow " *ngIf="showhave" >/ -->
+        <ol class="col-narrow "  >
+        <li id="opc-order_review" class="section active ">
+          <div class="step-title ">    
+            <span class="icon"  i18n>
+              {{'account.orderno' | translate}} {{shoesoders.id}}
+            </span>
+            <span class="icon" i18n>
+              {{'account.ordertime' | translate}} {{shoesoders.createdAt | date}}
+            </span>
+            <span class="icon"  i18n>
+              {{'account.dealstime' | translate}} {{shoesoders.updatedAt | date}}
+            </span>
+            <span [routerLink]="['/user/orderdetail',shoesoders.id]" class="icon_right cphand" i18n>{{'account.more' | translate}} >></span>
+          </div>
+    
+          <table width="100%" class=" cart-table table-bordered">
+              <tr *ngFor="let shoesgood of shoesoders.goods;let i=index" class=" first">
+                  <td width="44%" ><div class="shopinf_img"><img src="{{shoesgood.image}}" alt=""></div>
+                    <div class="shopinf_message">
+                      <p>{{shoesgood.name}}</p>
+                      <p i18n>{{'detail.size' | translate}}：{{shoesgood.size}}</p>
+                      <p i18n>{{'detail.color' | translate}}：{{shoesgood.subject}}</p>
+                    </div></td>
+                  <td width="13%">{{shoesgood.price}}</td>
+                  <td width="13%">{{shoesgood.count}}</td>
+                  <td width="13%">{{shoesgood.price}}</td>
+                  <td width="17%" [attr.rowspan]="shoesoders.goods.length" *ngIf="i===0">
+                      <p>未付款</p>
+                      <!-- <p>等待发货</p>
+                      <p>申请退款</p> -->
+                  </td>
+              </tr>            
+          </table>     
+        </li>
+      </ol>
+    </form>
+
+    <div *ngIf="shownone">亲，您还没有下单呢！</div>
+
+   <!-- </div> -->
+
+   
+
+
+  </div>
+
+  <br class="clearBoth">
+</div>
+<br class="clearBoth">
+
+<app-page [total]="myorderInfo.total"></app-page>
+<!-- <app-pagenate ></app-pagenate> -->
+
+
+
+<app-footer ></app-footer>

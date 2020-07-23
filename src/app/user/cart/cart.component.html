@@ -1,0 +1,239 @@
+<app-header></app-header>
+<!-- <app-navrouting></app-navrouting> -->
+
+<div class="main-container">
+  <div class="container">
+
+    <div class="shopping_cart">
+      <div class="">
+        <h1 id="cartDefaultHeading" class="text-center" i18n>{{"cart.yourcart" | translate}}</h1>
+        <form name="cart_quantity" method="post" id="shopping-cart-table-Computer" class="mt-5">
+          <table width="100%" id="shopping-cart-table" class="table table-bordered data-table cart-table">
+            <!-- 购物车表头 -->
+            <thead class="hidden-xs">
+              <tr class="first">
+                <th rowspan="1" width="10%">&nbsp;</th>
+                <th rowspan="1" width="45%"><span class="nobr" i18n>{{"account.table1" | translate}}</span></th>
+                <th rowspan="1" class="a-center" width="10%" i18n>{{"account.table6" | translate}}</th>
+                <th rowspan="1" class="a-center" width="10%" i18n>{{"account.table3" | translate}}</th>
+                <th rowspan="1" class="a-center" width="20%" i18n>{{"account.table4" | translate}}</th>
+                <th rowspan="1" width="5%">&nbsp;</th>
+              </tr>
+            </thead> 
+
+
+
+            <!-- 购物车列表 -->
+            <tbody *ngIf="isShown">     
+
+              <tr class="rowEven" *ngFor="let goods of cartlist;let i =index">
+                <td class="td-product-image">
+    
+                  <a class="product-image" target="_parent"><img 
+                      src="{{goods.image}}"
+                      alt=""  title=""
+                      width="87" height="100"></a>
+                </td>
+                <td>
+                  <a target="_parent">{{ goods.name}}{{goods.subject}}</a>
+                  <dl class="item-options">
+                    <dd>
+                    </dd>
+                  </dl>
+                  <span class="cart-price"><span class="price text-center" >{{goods.price | currency}} </span></span>
+                </td>
+                <td>
+                  <p class="a-center">{{goods.size}}</p>
+                </td>
+                <td id="tdQty" class="a-right">
+                  <span class="shoppingcart_qty_product">
+                    <input type="text" name="cart_quantity" (input)="countChange($event,i)" value="{{goods.count}}" size="4"><br></span>
+                  <!-- <span class="shoppingcart_update_product">
+                    <input  class="cssButton button_update_cart.gif.png"  (click)="changecount()"
+                      onmouseover="this.className='cssButtonHover button_update_cart.gif.png button_update_cart.gif.pngHover'"
+                      onmouseout="this.className='cssButton button_update_cart.gif.png'" type="submit"
+                      value="刷 新"><input type="hidden" name="products_id[]" value="41"><input type="hidden"
+                      name="size[]"><input type="hidden" name="name[]"><input type="hidden" name="number[]">
+                  </span> -->
+                </td>
+                <td class="a-right"><span class="cart-price"><p class="price a-center">{{goods.price}} </p></span></td>
+                <td class="cartRemoveItemDisplay">
+                  <a target="_parent" (click)="delGoods(i)"><img src="assets/images/icons/delete.png"></a>
+                  <div>{{goods.price*goods.count | currency}}</div>
+                </td>
+              </tr>
+
+              <!-- 购物车结算 -->
+              <tr class="subtotal ">
+                <td colspan="5" class="a-right" i18n>{{"account.total" | translate}}:</td>
+                <td class="a-right"><span class="price" >{{total()| currency}}</span></td>
+              </tr>
+            </tbody>
+
+            
+          </table>
+        </form>
+       
+        <!-- <div class="clear"></div> -->
+
+        <!-- 地址 -->
+        <div id="checkout-steps" class="">
+          <div id="quickcheckoutcontent">
+
+            <form name="quickcheckout" method="post" id="quickcheckout">
+              <ol class="col-wide opc col-sm-7 col-md-7 col-xs-12">
+                <li id="opc-billing" class="section active">
+                  <fieldset class="Login_left_box col3-set">
+                    <div class="step-title"><span class="icon"><i class="iconfont"></i></span>
+                      <h2 i18n>{{"cart.shippingAddress" | translate}}</h2>
+                    </div>
+                    <div id="checkout-step-billing" class="step"  >
+                      <input type="hidden" name="action" value="process">
+
+          
+
+                      <fieldset id="billingField" >
+                        <div class="">
+                          <label class="inputLabel" for="firstname" id="zh-Hans" i18n>{{"cart.firstName" | translate}}:<span class=""  #firstName>{{myaddr.firstName}}</span></label>
+                        </div>
+
+                        <div class="">
+                          <label class="inputLabel" for="lastname" i18n>{{"cart.lastName" | translate}}:<span class=""  #lastName>{{myaddr.lastName}}</span></label>
+                        </div>
+
+                        <div class="">
+                          <label class="inputLabel" for="phone" i18n>{{"cart.phone" | translate}}:<span
+                              class="" #phone>{{myaddr.phone}}</span></label>
+                        </div>
+
+                        <div class="">
+                          <label class="inputLabel" for="street-address" i18n>{{"cart.streetAddress" | translate}}:<span
+                              class="" #streetAddress>{{myaddr.streetAddress}}</span></label>
+                        </div>
+
+                        <div class="">
+                          <label class="inputLabel" for="city" i18n>{{"cart.city" | translate}}:<span
+                              class="" #city>{{myaddr.city}}</span></label>
+                        </div>
+
+                        <div class="">
+                          <label class="inputLabel" for="postcode" i18n >{{"cart.postCode" | translate}}:<span class="" #cpostCode>{{myaddr.postCode}}</span></label>
+                        </div>
+
+                        <div class=" ">
+                          <label class="inputLabel" for="country" i18n >{{"cart.country" | translate}}:<span class="" #country>{{myaddr.country}}</span></label>
+                          <br class="clearBoth">
+                        </div>
+                        <br class="clearBoth">
+                        <button class="blackbtn"  [routerLink]="['/user/account']" i18n >{{"cart.cabutton" | translate}}</button>
+                      </fieldset>
+                    </div>
+                  </fieldset>
+                </li>
+              </ol>
+
+
+
+              <ol class="col-narrow opc col-sm-5 col-md-5 col-xs-12">
+
+           
+                <li class="section active">
+                  <fieldset class="checkout" id="checkoutShippingMethods">
+                    <div class="step-title"><span class="icon"><img src="../../../assets/images/icons/shipping.png" alt=""></span>
+                      <h2 i18n>{{"cart.freight" | translate}}</h2>
+                    </div>
+                    <div id="checkout-step-shipping_method" class="step">
+                        <!-- <input type="radio" name="shipping" value="table_table" checked="checked" id="ship-table-table"> -->
+                        <label for="ship-table-table" class="checkboxLabel"></label>
+                        $11.99<input type="hidden" name="shipping" value="table_table"> <br class="clearBoth">
+                    </div>
+                  </fieldset>
+                </li>
+
+                <li class="section active ">
+                  <fieldset id="checkoutPayment" class="checkout">
+                    <div class="step-title">
+                      <span class="icon">
+                        <img src="../../../assets/images/icons/creditcard.png" alt="">
+                      </span>
+                      <h2 i18n>{{"cart.payway" | translate}}</h2>
+                    </div>
+                    <div class="tab">
+                      <img src="../../../assets/images/icons/pay1.png" alt="">
+                      <img src="../../../assets/images/icons/pay2.png" alt="">
+                      <img src="../../../assets/images/icons/pay3.png" alt="">
+                      <img src="../../../assets/images/icons/pay4.png" alt="">
+                      <img src="../../../assets/images/icons/pay5.png" alt="">
+                      <img src="../../../assets/images/icons/pay6.png" alt="">
+                    </div>
+                  </fieldset>
+                </li>
+
+              </ol>
+            </form>
+            <div class="clear"></div>
+
+
+
+
+            <form name="quickcheckout" method="post" >
+              <ol class="col-narrow opc col-sm-12 col-md-12 col-xs-12">
+                <li id="opc-order_review" class="section active ">
+                  <div class="step-title ">
+                    <span class="icon">
+                      <img src="../../../assets/images/icons/monetization.png" alt="">
+                    </span>
+                    <h2 i18n>{{"cart.orderreview" | translate}}</h2>
+                  </div>
+                  <fieldset class="Login_left_box col3-set">
+                    <div id="orderTotals" class="boder-link">
+
+                      <div id="otsubtotal">
+                          <!-- 小计 -->
+                        <div class="totalBox larger forward">{{total()| currency}}</div>
+                        <div class="lineTitle larger forward" i18n>{{"cart.total" | translate}}:</div>
+                      </div>
+                      <br class="clearBoth">
+                      <div id="otshipping">
+                          <!-- 运费 -->
+                        <div class="totalBox larger forward">$11.99</div>
+                        <div class="lineTitle larger forward" i18n>{{"cart.freight" | translate}}:</div>
+                      </div>       
+                      <br class="clearBoth">
+                      <div id="otshipping">
+                          <!-- 总计 -->
+                        <div class="totalBox larger forward">$44.98</div>
+                        <div class="lineTitle larger forward" i18n>{{"cart.subtotal" | translate}}:</div>
+                      </div>
+                      <br class="clearBoth">
+
+                    </div>
+
+                    <!-- <div class="text-right">
+                      <input for="ship-table-table" (click)="select()" [checked]="selected" id="select"  type="radio" name="shipping"  class="radio">
+                      <label for="ship-table-table" class="checkboxLabel" i18n>{{"readagree.r1" | translate}} <a (click)="openwindow()">{{"readagree.AV" | translate}}</a> {{"readagree.r2" | translate}}<a (click)="openwindow()">{{"readagree.COU" | translate}}</a> {{"readagree.r3" | translate}}</label>
+                      <br class="clearBoth">
+                    </div> -->
+                  </fieldset>
+
+                </li>
+              </ol>
+
+            </form>
+
+
+            <button type="submit" class="buttonRow forward ">
+              <span class="cssButton button_back " (click)="openclause()"  i18n>{{"orderDetail.spbutton" | translate}}</span>
+            </button>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<app-footer></app-footer>

@@ -1,0 +1,67 @@
+<header id="siteHeader" >
+    <div class="header__notify"><a onclick=""></a></div>
+
+
+    <div class="header__top-bar clearfix">
+
+        <div class="top-bar__item top-bar__currency">
+            <!-- <div class="btn-group">
+                <button class="btn btn-link dropdown-toggle"><span class="hidden-sm hidden-md"
+                        (click)="toggle()" i18n>{{'header.currency' | translate}}</span></button>
+                <ng-container *ngIf="show">
+                    <ul class="dropdown-menu" style="display: block;">
+                        <li><a href="" i18n>{{'header.usd' | translate}}</a></li>
+                        <li><a href="" i18n>{{'header.eur' | translate}}</a></li>
+                        <li><a href="" i18n>{{'header.sgd' | translate}}</a></li>
+                        <li><a href="" i18n>{{'header.aud' | translate}}</a></li>
+                    </ul>
+                </ng-container>
+            </div> -->
+
+        </div> 
+     
+        <div class="top-bar__item top-bar__message" i18n>{{'header.title' | translate}}</div>
+        <div class="top-bar__item top-bar__account">
+            <ul>
+                <li><a class="cart-count bold_clone cphand"  (click)="com.changeTo()"><span> {{ languageBtn}} </span></a></li>
+                <li style="display:none;"><a id="wishlist-total"><i class="icon-heart"></i>
+                     <span class="hidden-xs hidden-sm hidden-md"></span></a>
+                </li>&nbsp;
+                <li><a class="cphand" (click)="openAccount()"  title="My Account"><i class="icon-user"></i> <span>{{ userInfo.name}}</span> </a></li>&nbsp;
+                <li>
+                    <div class="cart-summary "><a  class="cart-count bold_clone" (click)="openCart()">
+                        <i class="icon-shopping-cart cphand"></i>&nbsp;
+                        <span> 
+                            {{cartNumlen}} 
+                        </span>
+                    </a>
+                    </div>
+                </li>&nbsp;
+                <li>
+                    <a (click)="logout()" class="cart-count bold_clone cphand">
+                        <img src="../../../assets/images/icons/logout.png" style="width: 15px;height: 15px;">
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="header__main clearfix">
+        <div class="header__main-logo" >
+            <div class="logo"><a [routerLink]="['/index']"><img class="img-responsive" src="assets/images/logo.png"></a></div>
+        </div>
+        <div class="header__main-nav">
+            <nav>
+                <ul >        
+                    <li *ngFor = "let band of banddata" class="main-nav__item"><a [routerLink]="['/goods/list',band.id]"  ><span>{{band.id}}</span></a></li>
+                </ul>
+            </nav>
+        </div>
+  
+    </div>
+
+
+
+
+</header>
