@@ -1,17 +1,16 @@
-import { Subject } from 'rxjs';
-import { products } from './lists';
-import { group } from '@angular/animations';
-import {  Validators, AbstractControl, ValidatorFn } from '@angular/forms';
-import { EqualValidatorService } from '../core/services/equal-validator.service';
-import { Input } from '@angular/core';
-import { Controller } from 'swiper/js/swiper.esm';
 
+import {  Validators, ValidatorFn } from '@angular/forms';
+import { EqualValidatorService } from '../core/services/equal-validator.service';
+
+
+export const MALL_NAME ='VANICE';
 export interface ErrorMsgResponse { msg: string; }
 export interface BackendApiResponse<T> {//返回数据格式
     code: number;
     msg: string;
     data: T;
   }
+
 
 //auth
 export const LoginURL = '/api/auth/login';

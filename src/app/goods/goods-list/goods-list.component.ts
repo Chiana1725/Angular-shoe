@@ -30,16 +30,18 @@ export class GoodsListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
+   
     let api = '/api/product/all-products';
     this.route.paramMap.subscribe((p:any)=>{     
         let brandId = p.get('brandId');
+        //面包屑导航
+        this.com.navArr=[{name:brandId + 'List',url:'/goods/list/'+brandId}];
         this.com.httpGet(api, {brandId}).subscribe(res=>{
           this.goodsList = res;
           console.log('goods',this.goodsList);
         })
-    
     })
+    
 
   }
 

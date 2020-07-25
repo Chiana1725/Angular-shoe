@@ -13,11 +13,13 @@ import { PageComponent } from './page/page.component';
 // import { TranslateComponent } from './translate/translate.component';
 import { SearchComponent } from './search/search.component';
 //i18n
-import {  HttpClient, } from '@angular/common/http';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import { HttpClient, } from '@angular/common/http';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { DeclareComponent } from './declare/declare.component';
 import { PagenateComponent } from './pagenate/pagenate.component';
+import { BannerComponent } from './banner/banner.component';
+import { BreadNavComponent } from './bread-nav/bread-nav.component';
 
 
 
@@ -28,11 +30,25 @@ export function createTranslateHttpLoader(http: HttpClient) {
 
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, GoodsListsComponent, DynamicFormComponent, NavroutingComponent, ShufflingComponent, PromtComponent, PageComponent, SearchComponent, DeclareComponent, PagenateComponent],
+  declarations: [
+    HeaderComponent,
+    FooterComponent,
+    GoodsListsComponent,
+    DynamicFormComponent,
+    NavroutingComponent,
+    ShufflingComponent,
+    PromtComponent,
+    PageComponent,
+    SearchComponent,
+    DeclareComponent,
+    PagenateComponent,
+    BannerComponent,
+    BreadNavComponent
+  ],
   imports: [
     CommonModule, RouterModule, ReactiveFormsModule, FormsModule,
-     //---i18n在这里配置
-     TranslateModule.forRoot({
+    //---i18n在这里配置
+    TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
         useFactory: (createTranslateHttpLoader),
@@ -40,6 +56,20 @@ export function createTranslateHttpLoader(http: HttpClient) {
       }
     })
   ],
-  exports:[HeaderComponent, FooterComponent, GoodsListsComponent, DynamicFormComponent, NavroutingComponent, ShufflingComponent, PromtComponent, PageComponent, SearchComponent, DeclareComponent, PagenateComponent],
+  exports: [
+    HeaderComponent, 
+    FooterComponent, 
+    GoodsListsComponent, 
+    DynamicFormComponent, 
+    NavroutingComponent, 
+    ShufflingComponent, 
+    PromtComponent, 
+    PageComponent, 
+    SearchComponent, 
+    DeclareComponent, 
+    PagenateComponent,
+    BannerComponent,
+    BreadNavComponent
+  ],
 })
 export class SharedModule { }

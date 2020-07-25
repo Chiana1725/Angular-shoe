@@ -71,6 +71,10 @@ body, input, textarea, select option {
     font-family: Open Sans, sans-serif;
 }
 /* Tools */
+.std {
+    font-size: 14px;
+    font-family: Open Sans, sans-serif;
+}
 .hidden {border:0!important; display:block!important; font-size:0!important; height:0!important; line-height:0!important; margin:0!important; overflow:hidden!important; padding:0!important; width:0!important;}
 .nobr {white-space:nowrap!important;}
 .wrap {white-space:normal!important;}
@@ -104,7 +108,7 @@ i.iconfont {vertical-align: middle;}
 /* Layout ================================================================================ */
 .wrapper {background:#ededed;}
 .page {background:#fff; margin:0 auto; padding:0; text-align:left;}
-.main-container {margin: 0 auto;}
+.main-container {margin: 0 auto;font-size: 14px;}
 .main {margin:0; padding:15px 0;}
 /* ======================================================================================= */
 
