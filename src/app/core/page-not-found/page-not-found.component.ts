@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-page-not-found',
@@ -7,22 +8,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PageNotFoundComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private route :ActivatedRoute
+  ) { }
 
-  pageHeight: number;
-  pageWidth: number;
 
+  code :string | number;
+  msg :string;
   ngOnInit() {
-    this.pageHeight = window.innerHeight;
-    this.pageWidth = window.innerWidth;
-    // console.log({
-    //   DATA: this.pageHeight,
-    //   SDGS:  this.pageWidth
-    // })
-    window.onresize = (event) => {
-      this.pageHeight = window.innerHeight;
-      this.pageWidth = window.innerWidth;
-    };
+    document.documentElement.style.height="100%";
+    document.body.style.height="100%";
+
+   this.route.paramMap.subscribe(res=>{
+     this.code = res.get('code') || 404
+     this.msg = res.get('msg') || 'Page Not Found !'   
+     console.log('res',res);  
+   })
   }
 
+  goBack(){
+    window.history.go(-1);
+  }
 }

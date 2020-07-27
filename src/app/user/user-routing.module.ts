@@ -6,9 +6,10 @@ import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { CartComponent } from './cart/cart.component';
 import { UpdatePwdComponent } from './update-pwd/update-pwd.component';
 import { DeclareComponent } from './../shared/declare/declare.component';
+import { UserAccountResolveService } from '../core/resolves/user-account-resolve.service';
 
 const routes: Routes = [
-  { path:'account', component: AccountComponent },
+  { path:'account', component: AccountComponent,resolve:{myInfo:UserAccountResolveService} },
 
   // { path:'orderform', component:OrderFormComponent },
   { path:'orderform/detail/:id', component:OrderFormComponent },
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path:'updatepwd', component: UpdatePwdComponent },
   { path:'cart', component:CartComponent },
   { path:'declare', component:DeclareComponent },
+  {path:'',redirectTo:'account',pathMatch:'full'}
   
 ];
 

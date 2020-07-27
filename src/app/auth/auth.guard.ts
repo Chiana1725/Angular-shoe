@@ -12,6 +12,7 @@ export class AuthGuard implements CanActivate {
 
   canLoad(route: Route, segments: UrlSegment[]): Observable<boolean> {
     const url = `/${route.path}`;
+    // console.log('route')
     return this.checkLogin(url);
   }
 

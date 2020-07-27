@@ -52,64 +52,65 @@ export class AuthService {
 
 
   GuardCheckLogin(): Observable<boolean> {
-    if (this.isLoggedIn) { return of(true); }
+    if (this.isLoggedIn) {
+      console.log('return 1')
+      return of(true); }
     if (localStorage.getItem('auth_token') == null) {
+      console.log('return 0')
       { return of(false); }
     }
     // TODO 改为访问身份验证接口
     return this.GetLatestUserInfo().pipe(
       map((data) => {
         this.isLoggedIn = true;
+        console.log('getMyInfo true')
         return true;
       })
     );
   }
 
-  getAuthorizationToken():string{
+  getAuthorizationToken(): string {
     const token = localStorage.getItem('auth_token');
-    if (token == null){
+    if (token == null) {
       return "";
     }
     return token;
   }
 
-  login(req:LoginPostData):Observable<LoginResponse>{
-    return this.httpClient.post<any>(LoginURL, req, {observe:'response'})
-    .pipe(
-      map((resp) => {
-        if(resp.status !== 200){
-          throw new Error("login failed:" + (resp.body as ErrorMsgResponse).msg);
-        }
-        this.isLoggedIn = true;
-        this.SetUserInfo(resp.body ?? {} as UserInfo);
-        localStorage.setItem('auth_token', resp.headers.get('Authorization') ?? '');
-        return resp.body ?? {} as LoginResponse;
-      })
-    ) 
+  //这个可以不用，没有用到
+  login(req: LoginPostData): Observable<LoginResponse> {
+    return this.httpClient.post<any>(LoginURL, req, { observe: 'response' })
+      .pipe(
+        map((resp) => {
+          if (resp.status !== 200) {
+            throw new Error("login failed:" + (resp.body as ErrorMsgResponse).msg);
+          }
+          this.isLoggedIn = true;
+          this.SetUserInfo(resp.body ?? {} as UserInfo);
+          localStorage.setItem('auth_token', resp.headers.get('Authorization') ?? '');
+          return resp.body ?? {} as LoginResponse;
+        })
+      )
   }
 
-  public AuthComeback(elseFn) {
-   
-    if (this.redirectUrl) {
-      this.router.navigate([this.redirectUrl]);
-    }else{
-      if(elseFn){
-        elseFn();
-      }
-    }
+  public AuthComeback(callBack) {
+    // console.log('callBack', callBack, this.redirectUrl)
+    // this.router.navigate([callBack]);
+    this.redirectUrl?this.router.navigate([this.redirectUrl]):    
+    typeof(callBack)==='string'?this.router.navigate([callBack]):callBack();    
   }
 
-  setStorage(name: string, data:any, needSession:boolean = false){
-    window.localStorage.setItem (  "Authorization" , JSON.stringify(data));
+  setStorage(name: string, data: any, needSession: boolean = false) {
+    window.localStorage.setItem("Authorization", JSON.stringify(data));
   }
-  tokenHandle(){
-    if (this.isAuth){
+  tokenHandle() {
+    if (this.isAuth) {
       this.updateToken();
-    }else{
+    } else {
       clearInterval(this.tokenTimer);
     }
   }
-  updateToken(){
+  updateToken() {
     this.tokenTimer = setInterval(() => {
       this.comService.httpGet('/api/auth/verify-jwt').subscribe((res) => {
         const token = { Authorization: res.headers.get('Authorization') };
@@ -125,6 +126,7 @@ export class AuthService {
   SetUserInfo(uinfo:UserInfo): void{
     localStorage.setItem('personal_info', JSON.stringify(uinfo));
     this.userInfo = uinfo;
+    this.isLoggedIn = true;
   }
   GetUserInfo(): UserInfo {
     return this.userInfo;

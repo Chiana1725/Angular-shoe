@@ -4,7 +4,6 @@
 
 <app-header></app-header>
 
-<app-page [Orderslist]="Orderslist" (evemitPage)="getPages($event)"></app-page>
 <!-- <app-navrouting *ngFor="let nav of navrouter" ></app-navrouting> -->
 <!-- <p>account works!</p> -->
 <div class="row">
@@ -17,15 +16,17 @@
     </div>
 
   </div> -->
+
+
   <app-side-tab></app-side-tab>
   <br class="clearBoth">
-
+  
   <div class="col-wide opc col-sm-8 col-md-8 col-xs-8 rightbox">
-
+   
     <h1 i18n>{{'account.myorder' | translate}}</h1>
     <hr>
 
-    
+    <!-- <app-page [total]="myorderInfo.total"></app-page> -->
 
 
     <ul class="ordertitle" >

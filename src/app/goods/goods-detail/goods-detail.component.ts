@@ -65,7 +65,7 @@ export class GoodsDetailComponent implements OnInit {
        this.translateService.use(browserLang.match(/en/) ? browserLang : 'en');
        /* --- set i18n end -------i18n*/
 
-      let pid=this.route.snapshot.paramMap.get("pid");
+      let pid = this.route.snapshot.paramMap.get("pid");
 
       //模仿直接获取路由
       this.route.params.subscribe(
@@ -95,7 +95,7 @@ export class GoodsDetailComponent implements OnInit {
       //     },
       //   )
       // }
-      console.log("哈哈哈")
+      // console.log("哈哈哈"
 
       //未登录跳转登录
       var api = 'api/product/product-units?pid='+pid;

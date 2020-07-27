@@ -29,12 +29,13 @@
                 </li>&nbsp;
                 <li><a class="cphand" (click)="openAccount()"  title="My Account"><i class="icon-user"></i> <span>{{ userInfo.name}}</span> </a></li>&nbsp;
                 <li>
-                    <div class="cart-summary "><a  class="cart-count bold_clone" (click)="openCart()">
+                    <div class="cart-summary ">
+                      <a class="cart-count bold_clone" (click)="openCart()">
                         <i class="icon-shopping-cart cphand"></i>&nbsp;
-                        <span> 
-                            {{cartNumlen}} 
-                        </span>
-                    </a>
+                            <span> 
+                                {{cartNumlen}} 
+                            </span>
+                      </a>
                     </div>
                 </li>&nbsp;
                 <li>
@@ -54,7 +55,7 @@
         <div class="header__main-nav">
             <nav>
                 <ul >        
-                    <li *ngFor = "let band of banddata" class="main-nav__item"><a [routerLink]="['/goods/list',band.id]"  ><span>{{band.id}}</span></a></li>
+                    <li *ngFor = "let band of banddata" class="main-nav__item "><a [routerLink]="['/goods/list',band.id]"  ><span>{{band.id}}</span></a></li>
                 </ul>
             </nav>
         </div>

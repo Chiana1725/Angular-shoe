@@ -9,6 +9,7 @@ import { TranslateService } from '@ngx-translate/core';//---i18n
 import { lists, myAddr, orders, products } from './../../shared/lists';
 import { CartService } from './../../core/services/cart.service';
 import { ComService } from 'src/app/core/com.service';
+import { JsonPipe } from '@angular/common';
 // @Component({
 //   selector: 'ngbd-modal-content',
 //   template: `
@@ -71,8 +72,12 @@ export class CartComponent implements OnInit {
   productlist: any;
   number;
   sum;
+  allsum;
   selected = false;                       // 同意协议
   isShown: boolean;
+  isHide: boolean;
+  
+  freight;
 
   
 
@@ -112,6 +117,11 @@ export class CartComponent implements OnInit {
 
     if (this.cartlist == null) {
       this.isShown = false;
+      this.isHide = true;
+      
+    }else if (this.cartlist == 0){
+      this.isHide = true;
+      this.isShown = false;
     }
 
     /*-------地址-------*/
@@ -129,13 +139,28 @@ export class CartComponent implements OnInit {
     const browserLang = this.translateService.getBrowserLang();
     this.translateService.use(browserLang.match(/en/) ? browserLang : 'en');
   
-    
+    this. PostCalcshipfee();
 
   }
 
   PostCalcshipfee(){
 
- 
+    let  postfee = {
+      addr: this.myaddr.streetAddress,
+      city: this.myaddr.city,
+      country: this.myaddr.country,
+      goods: this.cartlist,
+      postCode: this.myaddr.postCode,
+      state: this.myaddr.state,
+    }
+    this.cartSer.postCalcshipfee(postfee).subscribe(
+      (res) => {
+        console.log(JSON.stringify(res) +"运费");
+        let Freight = JSON.stringify(res);
+        console.log(JSON.parse(Freight));
+        this.freight = JSON.parse(Freight);
+      }
+    )
 
   }
 
@@ -169,19 +194,22 @@ export class CartComponent implements OnInit {
   }
 
   openclause() {//提交付款
-    let  postfee = {
-      addr: this.myaddr.streetAddress,
-      city: this.myaddr.city,
-      country: this.myaddr.country,
-      goods: this.cartlist,
-      postCode: this.myaddr.postCode,
-      state: this.myaddr.state,
-    }
-    this.cartSer.postCalcshipfee(postfee).subscribe(
-      () => {
-        console.log("222222222222222222")
-      }
-    )
+    // let  postfee = {
+    //   addr: this.myaddr.streetAddress,
+    //   city: this.myaddr.city,
+    //   country: this.myaddr.country,
+    //   goods: this.cartlist,
+    //   postCode: this.myaddr.postCode,
+    //   state: this.myaddr.state,
+    // }
+    // this.cartSer.postCalcshipfee(postfee).subscribe(
+    //   (res) => {
+    //     console.log(JSON.stringify(res) +"运费");
+    //     let Freight = JSON.stringify(res);
+    //     console.log(JSON.parse(Freight));
+    //     this.freight = JSON.parse(Freight);
+    //   }
+    // )
     // if(this.selected){
 
     let fileInput = document.getElementById('select');
@@ -191,7 +219,7 @@ export class CartComponent implements OnInit {
 
     let post = {
       addr: this.myaddr.streetAddress,
-      amount: this.sum,//之后改
+      amount: this.allsum,//之后改
       city: this.myaddr.city,
       country: this.myaddr.country,
       coupons: "222222222",//优惠券
@@ -240,8 +268,12 @@ export class CartComponent implements OnInit {
       }
       return sum;
     }
-
   }
+  Alltotal(){
+   this.allsum = this.sum+this.freight.amount;
+   return this.allsum ; 
+  }
+
   changecount() {
     // console.log(this.cartlist[i].count);
   }

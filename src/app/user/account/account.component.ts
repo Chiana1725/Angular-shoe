@@ -90,6 +90,10 @@ export class AccountComponent implements OnInit {
     //   });
     // }, 2000);
 
+    let post = this.accountForm.value ;
+    post.addr = post.streetAddress;
+    delete post.streeAddress;
+    
     this.authService.Updateaddr(this.accountForm.value).subscribe(
       () => {
         console.log("222222222222222222")

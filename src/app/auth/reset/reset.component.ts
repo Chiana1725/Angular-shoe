@@ -26,7 +26,7 @@ export class ResetComponent implements OnInit {
   fields = RESET_FIELDS;
 
   ngOnInit(): void {
-    // console.log(this.resetForm);
+    console.log(this.resetForm);
 
      /* --- set i18n begin -------i18n*/
      this.translateService.addLangs(['en']);2

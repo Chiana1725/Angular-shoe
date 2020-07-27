@@ -45,26 +45,75 @@ export class ComService {
       if (f.group) {
         this.createFormGroup(f.value);
       } else {
-        group[f.name] = new FormControl(f.value || '', f.valifators)
+        group[f.name] = new FormControl(f.value || '', f.validators)
       }
     });
     return new FormGroup(group);
   }
 
+  doHttpState(res:any,url){
+    console.log('res OF ' ,url,res);
+    let state = res.status;
+    let data = res.body;
+    let ret :any =state;
+    let msg = data?.msg ??res.error?.msg;
+    switch(state){
+      //请求成功
+      case 200:
+        let code = data.code;
+        if(url==='/api/auth/login'){
+          //登录设置token
+          console.log('login')
+          localStorage.setItem('auth_token', res.headers.get('Authorization') ?? '');
+        }
+        if(code){
+          //返回的接口数据带code
+         
+          ret = data.data;
+          if(code===1){
+            ret = data.data;
+          }else{            
+            ret=res.msg;
+          }
+        }else{
+          //返回的接口数据不带code
+          ret = data;
+        }
+        break;
+      //请求接口地址找不到
+      case 400:
+        this.router.navigate(['404']);
+        break;
+      //请求接口授权失败
+      case 401:
+        ret = res.error.msg;
+        // this.router.navigate(['404',{code:state,msg:msg}])
+        break;
+      //请求服务器配置有问题
+      default:
+        this.router.navigate(['404',{code:state,msg}])
+        break;
+    }
+    // console.log('ret',ret);
+    return ret;
+  }
+
+  
   doHttpRes(res: any) {
-    // console.log('doHttp', res.body);
+    console.log('doHttp',res, res.body);
 
     let code = res.code;
     let data = res.msg;
     // let result = result;
     if (code === 200) {
-      // console.log(data);
-      data = res.data;
+      console.log(data);
+      data = res.body;
       // this.router.navigate(['/auth/login']);
     } else {
-      // console.log(data);
+      console.log(data);
+      alert('error code'+code);
       // this.popup = {title:'提示401',content:res.data};
-      this.router.navigate(['/auth/login'])
+      // this.router.navigate(['/auth/login'])
       //弹出框的提示
     }
     return data;
@@ -137,15 +186,18 @@ export class ComService {
   //   )
   // }
 
-  httpPost(url: string, data: any) {
+httpPost(url: string, data: any) {
     return this.http.post(url, data, { observe: 'response' })
       .pipe(
         catchError(this.handleError<any>(null)),
         map((res: any) => {
-          return this.doHttpRes(res);
+          // return this.doHttpRes(res);
+          // console.log('httpPost',res);
+          return this.doHttpState(res,url);
         })
       )
   }
+
 
   // httpPostWithParams(url:string,data:any, params: HttpParams){
   //   this.http.post(url,data,{observe:'response', params: params}) 
@@ -162,9 +214,11 @@ export class ComService {
 
   private handleError<T>(result?: T) {
     return (error: any): Observable<T> => {
-      let res = error.error;
-      res.data = result || null;
-      return of(res as T);
+      console.log('handleError',error)
+      // let res = error.error;
+      // res.data = result || null;
+
+      return of(error as T);
     };
   }
 

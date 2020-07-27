@@ -52,15 +52,20 @@ export class HeaderComponent implements OnInit {
     const browserLang = this.translateService.getBrowserLang();
     this.translateService.use(browserLang.match(/en/) ? browserLang : 'en');
 
-
-
-    this.com.httpGet('/api/product/all-product-brands').subscribe((res) => {
-      console.log(res);
-      this.bandlists = res;
-      this.banddata = this.bandlists.data;
-      console.log(this.banddata)
-      // this.bandlistId = this.banddata.id;
-    })
+    let brands = sessionStorage.getItem('brands');
+    if(brands){
+      this.banddata = JSON.parse(brands);
+    }else{
+      this.com.httpGet('/api/product/all-product-brands').subscribe((res) => {
+        console.log(res);
+        this.bandlists = res;
+        this.banddata = this.bandlists.data;
+        sessionStorage.setItem('brands',JSON.stringify(this.banddata));
+        // console.log(this.banddata)
+        // this.bandlistId = this.banddata.id;
+      })
+    }
+   
 
     const goodInfoText = window.localStorage.getItem('cart_lists');
     console.log(goodInfoText + "购物车数据");
@@ -68,8 +73,11 @@ export class HeaderComponent implements OnInit {
     console.log(this.productlist);
     console.log(JSON.parse(this.productlist));
     this.cartNum = JSON.parse(this.productlist);
-    console.log(this.cartNum.length + "购物车数据");
-    // this.cartNumlen = this.cartNum.length;
+    // console.log(this.cartNum.length + "购物车数据");
+    this.cartNumlen = this.cartNum.length;
+    if (this.cartNum.length == null){
+      this.cartNumlen = 0
+    }
 
   }
 

@@ -41,7 +41,7 @@ export class DynamicFormComponent implements OnInit {
   @Input() msg: any;
 
   ngOnInit(): void {   
-    console.log('form',this.form,this.msg)
+    // console.log('form',this.form,this.msg)
   }
   
 

@@ -8,7 +8,7 @@
       <div class="">
         <h1 id="cartDefaultHeading" class="text-center" i18n>{{"cart.yourcart" | translate}}</h1>
         <form name="cart_quantity" method="post" id="shopping-cart-table-Computer" class="mt-5">
-          <table width="100%" id="shopping-cart-table" class="table table-bordered data-table cart-table">
+          <table width="100%" id="shopping-cart-table" class="table table-bordered data-table cart-table" *ngIf="isShown">
             <!-- 购物车表头 -->
             <thead class="hidden-xs">
               <tr class="first">
@@ -24,15 +24,15 @@
 
 
             <!-- 购物车列表 -->
-            <tbody *ngIf="isShown">     
+          
 
+            <tbody  >     
+              <!-- *ngIf="!goodsList?.products?.length" --  *ngIf="isShown" -->
               <tr class="rowEven" *ngFor="let goods of cartlist;let i =index">
                 <td class="td-product-image">
-    
-                  <a class="product-image" target="_parent"><img 
-                      src="{{goods.image}}"
-                      alt=""  title=""
-                      width="87" height="100"></a>
+                  <a class="product-image" target="_parent">
+                    <img src="{{goods.image}}" alt=""  title="" width="87" height="100">
+                  </a>
                 </td>
                 <td>
                   <a target="_parent">{{ goods.name}}{{goods.subject}}</a>
@@ -72,6 +72,13 @@
 
             
           </table>
+
+
+          <table *ngIf="isHide">
+            您的购物车为空!
+          </table>
+
+
         </form>
        
         <!-- <div class="clear"></div> -->
@@ -145,7 +152,7 @@
                     <div id="checkout-step-shipping_method" class="step">
                         <!-- <input type="radio" name="shipping" value="table_table" checked="checked" id="ship-table-table"> -->
                         <label for="ship-table-table" class="checkboxLabel"></label>
-                        $11.99<input type="hidden" name="shipping" value="table_table"> <br class="clearBoth">
+                        {{ freight.amount | currency }}<input type="hidden" name="shipping" value="table_table"> <br class="clearBoth">
                     </div>
                   </fieldset>
                 </li>
@@ -196,13 +203,13 @@
                       <br class="clearBoth">
                       <div id="otshipping">
                           <!-- 运费 -->
-                        <div class="totalBox larger forward">$11.99</div>
+                        <div class="totalBox larger forward">{{ freight.amount | currency }}</div>
                         <div class="lineTitle larger forward" i18n>{{"cart.freight" | translate}}:</div>
                       </div>       
                       <br class="clearBoth">
                       <div id="otshipping">
                           <!-- 总计 -->
-                        <div class="totalBox larger forward">$44.98</div>
+                        <div class="totalBox larger forward">{{Alltotal()| currency}}</div>
                         <div class="lineTitle larger forward" i18n>{{"cart.subtotal" | translate}}:</div>
                       </div>
                       <br class="clearBoth">

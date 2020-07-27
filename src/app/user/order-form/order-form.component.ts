@@ -79,7 +79,6 @@ export class OrderFormComponent implements OnInit {
     // }
 
 
-
     this.myorderInfo = this.orderService.GetMyorderInfo();
     console.log(this.myorderInfo);
     this.shoesGoods = this.myorderInfo.orders;

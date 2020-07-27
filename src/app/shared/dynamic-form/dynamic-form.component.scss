@@ -3,4 +3,17 @@ select{
     padding: 8px 4px;
     margin-top: 2px;
     border: 1px solid #ccc;
+    appearance:none;
+　　-moz-appearance:none;
+　　-webkit-appearance:none;
+}
+
+select:focus{
+    border:1px solid #ccc;
+    outline:none;
+}
+
+option{
+    line-height: 2;
+    height: 40px;
 }

@@ -1,7 +1,10 @@
+import { EqualValidatorService } from './../core/services/equal-validator.service';
 import { Subject } from 'rxjs';
 import { products } from './lists';
 import { group } from '@angular/animations';
 import {  Validators, AbstractControl, ValidatorFn } from '@angular/forms';
+import { Input } from '@angular/core';
+import { Controller } from 'swiper/js/swiper.esm';
 
 export interface ErrorMsgResponse { msg: string; }
 export interface BackendApiResponse<T> {//返回数据格式
@@ -146,7 +149,8 @@ export interface FormFields{
     key: string[];
     value?: number|string | string[] | FormFields[];
     group?: boolean;
-    type?: InputType;
+    controllType?: controllType 
+    inputType?:InputType
     name: string;
     validators?: ValidatorFn[]
 }
@@ -175,88 +179,15 @@ export enum HttpReturnCode {
 }
 
 export enum InputType {
+    password = 'password',
+    number = 'number',
+    email='email'
+}
+
+export enum controllType{
     normal,
     select
 }
-
-
-
-export const LOGIN_FIELDS: FormFields[] = [
-    { key: ['电子邮件地址','Email Address'], name: 'user', validators:[Validators.required] },
-    { key: ['密码','Password'], name: 'pwd', validators:[Validators.required,Validators.minLength(8)] }
-]
-//值一致校验器
-export function isEqualValidator(val: any): ValidatorFn {
-    return (control: AbstractControl): {[key: string]: any} | null => { 
-        const isEqual = val === (control.value);
-        return isEqual ? {'equal': {value: control.value}} : null;
-    };
-}
-
-export const REGISTER_FIELDS: FormFields[] = [
-    { key: ['姓','First Name'],  name: 'firstName' ,validators:[Validators.required]},
-    { key: ['名','Last Name'],  name: 'lastName' ,validators:[Validators.required]},
-    { key: ['街道地址','Street Address'],  name: 'addr',validators:[Validators.required] },
-    { key: ['市','City'],  name: 'city' ,validators:[Validators.required]},
-    { key: ['国家','Country'],  name: 'country', validators:[Validators.required] },//type: InputType.select, value: ZONE,
-    { key: ['州/省','State/Province'],  name: 'state', validators:[Validators.required] },//type: InputType.select, value: STATE,
-    { key: ['邮政/邮编','Post/Zip Code'],  name: 'postCode',validators:[Validators.required] },
-    { key: ['手机号码','Mobile'],  name: 'phone',validators:[Validators.required] },
-    { key: ['电子邮件地址','Email Address'],  name: 'email',validators:[Validators.required,Validators.email] },
-    { key: ['密码','Password'],  name: 'pwd' ,validators:[Validators.required,Validators.minLength(8)]},
-    { key: ['确认密码','Confirm Password'],  name: 'pwd2',validators:[Validators.required,Validators.minLength(8)] },  
-]
-
-export const UPDATEPWD_FIELDS: FormFields[] = [
-    { key: ['用户邮箱','email'], name: 'email',validators:[Validators.required]},
-    { key: ['原密码','Original Password:'], name: 'origPwd',validators:[Validators.required]},
-    { key: ['新密码','New Password:'], name: 'newPwd',validators:[Validators.required]},
-] 
-
-export const RESET_FIELDS: FormFields[] = [
-    { key: ['当前密码','Current Password'], name: 'currentPassword',validators:[Validators.required]},
-    { key: ['新密码','New Password:'], name: 'newPassword',validators:[Validators.required]},
-    { key: ['确认密码','Confirm Password:'], name: 'affirmPassword',validators:[Validators.required]},
-] 
-
-export const ACCOUNT_FIELDS: FormFields[] = [
-    // { key: ['电子邮件地址','Email Address'],  name: 'email',validators:[Validators.required,Validators.email] }
-    
-    { key: ['名','Last Name'],  name: 'lastName' ,validators:[Validators.required]},
-    { key: ['姓','First Name'],  name: 'firstName' ,validators:[Validators.required]},
-    { key: ['手机','Phone'], name:'phone', validators:[Validators.required]},
-    { key: ['街道地址','Street Address'],  name: 'streetAddress',validators:[Validators.required] },
-    { key: ['新增街道地址','Newly Increased Street Address'],  name: 'addr',validators:[Validators.required] },
-    { key: ['市','City'],  name: 'city' ,validators:[Validators.required]},
-    { key: ['州/省','State/Province'],  name: 'state', validators:[Validators.required] },
-    { key: ['国家','Country'],  name: 'country', validators:[Validators.required] },
-    { key: ['邮政/邮编','Post/Zip Code'],  name: 'postCode',validators:[Validators.required] },
-    
-
-
-    { key:['地址标签','Tag'], name:'tag' , validators:[Validators.required]},
-    { key:['编号','Id'], name:'id', validators:[Validators.required] },
-    // { key: ['银行卡名称','Bankcard Name'], name:'bankcardName', validators:[Validators.required] },
-    // { key: ['银行卡号','Bankcard Numbers'], name:'bankcardNumbers', validators:[Validators.required] },
-    // { key: ['持卡人','Cardholder'], name:'cardholder', validators:[Validators.required] },
-]
-
-// export const ACCOUNT_FIELDS: FormFields[] = [
-//     { key: 'Email Address',  name: '2244895365@qq.com',validators:[Validators.required,Validators.email] },
-//     { key: 'Mobile', name:'mobile', validators:[Validators.required]},
-    
-//     { key: 'Last Name',  name: 'lastName' ,validators:[Validators.required]},
-//     { key: 'First Name',  name: 'firstName' ,validators:[Validators.required]},
-//     { key: 'Street Address',  name: 'addr',validators:[Validators.required] },
-//     { key: 'City',  name: 'city' ,validators:[Validators.required]},
-//     { key: 'State/Province',  name: 'state', validators:[Validators.required] },
-//     { key: 'Country',  name: 'country', validators:[Validators.required] },
-//     { key: 'Post/Zip Code',  name: 'postCode',validators:[Validators.required] },
-    
-//     { key: 'Bankcard Name', name:'bankcardName', validators:[Validators.required] },
-//     { key: 'Bankcard Numbers', name:'bankcardNumbers', validators:[Validators.required] },
-//     { key: 'Cardholder', name:'cardholder', validators:[Validators.required] },
-// ]
 
 export const account ={
     "email":"2244895365@qq.com",
@@ -573,3 +504,74 @@ export const STATE: string[] = [
     'Wisconsin',
     'Wyoming',
 ]
+export const LOGIN_FIELDS: FormFields[] = [
+    { key: ['电子邮件地址','Email Address'], name: 'user', validators:[Validators.required,Validators.email] },
+    { key: ['密码','Password'], name: 'pwd', inputType:InputType.password,validators:[Validators.required,Validators.minLength(8)] }
+]
+
+
+export const REGISTER_FIELDS: FormFields[] = [
+    { key: ['姓','First Name'],  name: 'firstName' ,validators:[Validators.required]},
+    { key: ['名','Last Name'],  name: 'lastName' ,validators:[Validators.required]},
+    { key: ['街道地址','Street Address'],  name: 'addr',validators:[Validators.required] },
+    { key: ['市','City'],  name: 'city' ,validators:[Validators.required]},
+    { key: ['国家','Country'],  name: 'country', validators:[Validators.required] },//controllType:controllType.select,value:ZONE,
+    { key: ['州/省','State/Province'],  name: 'state', validators:[Validators.required] },//controllType:controllType.select,value:STATE,
+    { key: ['邮政/邮编','Post/Zip Code'],  name: 'postCode',validators:[Validators.required] },
+    { key: ['手机号码','Mobile'],  name: 'phone',validators:[Validators.required] },
+    { key: ['电子邮件地址','Email Address'],  name: 'email',validators:[Validators.required,Validators.email] },
+    { key: ['密码','Password'],  name: 'pwd' ,inputType:InputType.password,validators:[Validators.required,Validators.minLength(8),EqualValidatorService.equalFor('pwd2')]},
+    { key: ['确认密码','Confirm Password'], inputType:InputType.password, name: 'pwd2',validators:[Validators.required,Validators.minLength(8),EqualValidatorService.equalTo('pwd')] },  
+]
+
+export const UPDATEPWD_FIELDS: FormFields[] = [
+    { key: ['用户邮箱','email'], name: 'email',validators:[Validators.required]},
+    { key: ['原密码','Original Password:'], inputType:InputType.password,name: 'origPwd',validators:[Validators.required]},
+    { key: ['新密码','New Password:'], inputType:InputType.password,name: 'newPwd',validators:[Validators.required]},
+] 
+
+export const RESET_FIELDS: FormFields[] = [
+    { key: ['当前密码','Current Password'], name: 'currentPassword',validators:[Validators.required]},
+    { key: ['新密码','New Password:'],inputType:InputType.password, name: 'newPassword',validators:[Validators.required]},
+    { key: ['确认密码','Confirm Password:'], inputType:InputType.password,name: 'affirmPassword',validators:[Validators.required]},
+] 
+
+export const ACCOUNT_FIELDS: FormFields[] = [
+    // { key: ['电子邮件地址','Email Address'],  name: 'email',validators:[Validators.required,Validators.email] }
+    
+    { key: ['名','Last Name'],  name: 'lastName' ,validators:[Validators.required]},
+    { key: ['姓','First Name'],  name: 'firstName' ,validators:[Validators.required]},
+    { key: ['手机','Phone'], name:'phone', validators:[Validators.required]},
+    { key: ['街道地址','Street Address'],  name: 'streetAddress',validators:[Validators.required] },
+    // { key: ['新增街道地址','Newly Increased Street Address'],  name: 'addr',validators:[Validators.required] },
+    { key: ['市','City'],  name: 'city' ,validators:[Validators.required]},
+    { key: ['州/省','State/Province'],  name: 'state', validators:[Validators.required] },
+    { key: ['国家','Country'],  name: 'country', validators:[Validators.required] },
+    { key: ['邮政/邮编','Post/Zip Code'],  name: 'postCode',validators:[Validators.required] },
+    
+
+
+    // { key:['地址标签','Tag'], name:'tag' , validators:[]},
+    { key:['编号','Id'], name:'id', validators:[Validators.required] },
+    // { key: ['银行卡名称','Bankcard Name'], name:'bankcardName', validators:[Validators.required] },
+    // { key: ['银行卡号','Bankcard Numbers'], name:'bankcardNumbers', validators:[Validators.required] },
+    // { key: ['持卡人','Cardholder'], name:'cardholder', validators:[Validators.required] },
+]
+
+// export const ACCOUNT_FIELDS: FormFields[] = [
+//     { key: 'Email Address',  name: '2244895365@qq.com',validators:[Validators.required,Validators.email] },
+//     { key: 'Mobile', name:'mobile', validators:[Validators.required]},
+    
+//     { key: 'Last Name',  name: 'lastName' ,validators:[Validators.required]},
+//     { key: 'First Name',  name: 'firstName' ,validators:[Validators.required]},
+//     { key: 'Street Address',  name: 'addr',validators:[Validators.required] },
+//     { key: 'City',  name: 'city' ,validators:[Validators.required]},
+//     { key: 'State/Province',  name: 'state', validators:[Validators.required] },
+//     { key: 'Country',  name: 'country', validators:[Validators.required] },
+//     { key: 'Post/Zip Code',  name: 'postCode',validators:[Validators.required] },
+    
+//     { key: 'Bankcard Name', name:'bankcardName', validators:[Validators.required] },
+//     { key: 'Bankcard Numbers', name:'bankcardNumbers', validators:[Validators.required] },
+//     { key: 'Cardholder', name:'cardholder', validators:[Validators.required] },
+// ]
+

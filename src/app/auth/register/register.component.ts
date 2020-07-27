@@ -17,32 +17,54 @@ export class RegisterComponent implements OnInit {
     private authService: AuthService,
   ) { }
 
-  // name = new FormControl('',[
-  //   Validators.required,
-  //   Validators.pattern(/^\S+$/),
-  // ])
 
-  emailType : 1;
-  verifyEmail : true;
 
   registerForm = this.com.createFormGroup(REGISTER_FIELDS);
   fields = REGISTER_FIELDS;
+  error:string;
 
   ngOnInit(): void {
-    // console.log(this.registerForm);
-
-    this.com.httpPost('/api/user/verify-email',this.emailType);
+   
   }
 
   register(){
-    this.com.httpPost('/api/user/register',this.registerForm.value);
-    this.router.navigate(['/auth/login']);
-    // setTimeout(() => {
-    //   this.authService.AuthComeback(() => {
-    //     this.router.navigate(['/auth/login']);
-    //   });
-    // }, 2000);
-    
+
+    let val = this.registerForm.value;
+    console.log('val',val);
+    this.verifyEmail(val.email,()=>{
+      this.registerDataPost(val);
+    });
+
+ 
+  }
+
+  registerDataPost(val){
+    this.com.httpPost('/api/user/register',val).subscribe(res=>{
+      if(typeof(res)==='string'){
+        this.error = res;
+        // 
+      }else{
+        alert('注册成功!');
+        this.router.navigate(['/auth/login']);
+      }     
+    });
+  }
+
+  verifyEmail(email,callBack){
+    this.com.httpPost('/api/user/verify-email',{email,emailType:0,verifyEmail:true}).subscribe(res=>{
+     
+      if(typeof(res)==='string'){
+        this.error = res;
+      }else{
+        /**
+         * isSending: boolean
+         *  registered: boolean
+         * senderEmail: string
+         */
+       this.error =  res.registered ?  'email is registerd,please use another one':callBack();
+        
+      }    
+    })
   }
 
 

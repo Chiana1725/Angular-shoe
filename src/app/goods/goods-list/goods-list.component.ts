@@ -32,20 +32,13 @@ export class GoodsListComponent implements OnInit {
   ngOnInit(): void {
 
     let api = '/api/product/all-products';
-    this.route.paramMap.subscribe((p:any)=>{
-
-      console.log(p);
-
-      let params = p.params;
-      if(params && params.brandId){
-        let brandId = params.brandId;      
+    this.route.paramMap.subscribe((p:any)=>{     
+        let brandId = p.get('brandId');
         this.com.httpGet(api, {brandId}).subscribe(res=>{
           this.goodsList = res;
-          console.log(this.goodsList);
+          console.log('goods',this.goodsList);
         })
-      }else{
-        this.com.httpGet('')
-      }
+    
     })
 
   }

@@ -36,9 +36,10 @@
                               <ul class='color-list'>
                                   <!-- <li *ngFor="let item of lists,let i = index"> -->
                                     <li >
-                                      <a class='cphand' >
-                                          <img routerLinkActive="active" (click) ="switchGood(i)" [src]="getImgPath(item.images)" alt="{{item.subject}}" title="{{item.subject}}" width="43" height="50" />
-                                        </a>
+                                      <!-- <a class='sizebox cphand' > -->
+                                        <!-- [src]="getImgPath(item.images)" 需要修正-->
+                                          <img routerLinkActive="active" class="imgbox" (click)="switchGood(i)" src="../../../assets/images/1_50x43.png" alt="{{item.subject}}" title="{{item.subject}}" width="43" height="50" />
+                                        <!-- </a> -->
                                       <!-- <div>{{currenGoods.id}}</div> -->
                                   </li>
                               </ul>

@@ -1,16 +1,19 @@
 <app-header></app-header>
 <!-- <app-navrouting></app-navrouting> -->
 
-<!-- <app-page></app-page> -->
-<app-pagenate></app-pagenate>
+<app-page *ngIf="goodsList?.products?.length" [total]="goodsList.total"></app-page> 
+<!-- <app-pagenate *ngIf="goodsList?.products?.length"></app-pagenate> -->
 
 
 <!-- 商品组件 -->
 <section class="product-list">
 <app-goods-lists [detail]="goodsList"></app-goods-lists>
-<div>暂无商品</div>
+<div *ngIf="!goodsList?.products?.length" class="nothing">
+    <img src="assets/images/logo.png" width="100">
+    <p class="msg">暂无商品</p>  
+</div>
 </section>
 
 <!-- [page]="goodsList.current_page" [last]="goodsList.last_page" [total]="goodsList.total" *ngIf="goodsList?.current_page" -->
-<app-page ></app-page> 
+<app-page *ngIf="goodsList?.products?.length"  [total]="goodsList.total"></app-page> 
 <app-footer></app-footer>

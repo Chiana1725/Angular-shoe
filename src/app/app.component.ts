@@ -54,7 +54,7 @@ export class AppComponent {
 
   /*切换语言----i18n*/
   changeLanguage(lang: string) {
-    // console.log(lang);
+    console.log(lang);
     this.translateService.use(lang);
     this.settingBtn(lang);
   }

@@ -1,5 +1,5 @@
 import { LoginPostData } from './../../shared/model';
-import { Subject,Observable } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { AuthService } from './../../core/services/auth.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private com: ComService,
     private authService: AuthService,
-    public translateService: TranslateService ,//---i18n
+    public translateService: TranslateService,//---i18n
     private orderSer: OrderService,
   ) { }
 
@@ -40,11 +40,11 @@ export class LoginComponent implements OnInit {
   // loginForm: FormGroup = this.com.createFormGroup(LOGIN_FIELDS);
 
   hidePwd = true;
-  user = new FormControl('',[
+  user = new FormControl('', [
     Validators.required,
     Validators.pattern(/^\S+$/)
   ]);
-  pwd = new FormControl('',[
+  pwd = new FormControl('', [
     Validators.required,
     Validators.pattern(/^\S{6,32}$/)
   ]);
@@ -55,59 +55,70 @@ export class LoginComponent implements OnInit {
   });
 
   ngOnInit(): void {
-      /* --- set i18n begin -------i18n*/
-      this.translateService.addLangs(['en']);
-      this.translateService.setDefaultLang('en');
-      const browserLang = this.translateService.getBrowserLang();
-      this.translateService.use(browserLang.match(/en/) ? browserLang : 'en');
-      /* --- set i18n end -------i18n*/
+    /* --- set i18n begin -------i18n*/
+    this.translateService.addLangs(['en']);
+    this.translateService.setDefaultLang('en');
+    const browserLang = this.translateService.getBrowserLang();
+    this.translateService.use(browserLang.match(/en/) ? browserLang : 'en');
+    /* --- set i18n end -------i18n*/
   }
 
-  toggle(){
+  toggle() {
     this.out = !this.out;
     //总是给当前控件，赋与他当前状态相反的值
   }
 
 
-  login():void{
-    // console.log(this.loginForm.value)
-    // this.com.httpPost('/api/auth/login',this.loginForm.value)
-    this.authService.login({
-      user: this.user.value,
-      pwd: this.pwd.value,
-    }).subscribe(
-      (data) => {
-        // this.router.navigate([this.authService.RedirectURL]):'/goods/index';
-        // let redirect = this.authService.RedirectURL ? this.router.parseUrl(this.authService.redirectUrl):'/user/account';
-        // this.router.navigateByUrl(redirect);
-        this.authService.GetLatestUserInfo()&&this.orderSer.GetLastMyAddrInfo().subscribe(
-          (uinfo) => {
-            let redirect = this.authService.RedirectURL ? this.router.parseUrl(this.authService.redirectUrl):'/user/account';
-            this.router.navigateByUrl(redirect);
-
-            // this.orderSer.GetLastMyAddrInfo().subscribe(
-            //   (info) => {
-            //     this.router.navigate(['/user/account']);
-            //   },
-            //   (err:Error) => {
-            //     this.router.navigate(['/auth/login']);
-            //     // alert(err.message);
-            //   }
-            // )
-
-
-          }
-        )
-      },
-      (err) => {
-        this.authService.setStorage;
+  login(): void {
+    this.com.httpPost('/api/auth/login', this.loginForm.value).subscribe(data => {
+      if (typeof (data) === 'object') {  
+          this.authService.SetUserInfo(data);     
+          this.authService.AuthComeback('/user/account');   
+      }else{
+        this.error = data;
       }
-    );
-    
-  
+    })
+    /* this.authService.login({
+       user: this.user.value,
+       pwd: this.pwd.value,
+     }).subscribe(
+       (data) => {
+         console.log('data',data);
+         // this.router.navigate([this.authService.RedirectURL]):'/goods/index';
+         // let redirect = this.authService.RedirectURL ? this.router.parseUrl(this.authService.redirectUrl):'/user/account';
+         // this.router.navigateByUrl(redirect);
+         this.authService.GetLatestUserInfo()&&this.orderSer.GetLastMyAddrInfo().subscribe(
+           (uinfo) => {
+             let redirect = this.authService.RedirectURL ? this.router.parseUrl(this.authService.redirectUrl):'/user/account';
+             this.router.navigateByUrl(redirect);
  
+             // this.orderSer.GetLastMyAddrInfo().subscribe(
+             //   (info) => {
+             //     this.router.navigate(['/user/account']);
+             //   },
+             //   (err:Error) => {
+             //     this.router.navigate(['/auth/login']);
+             //     // alert(err.message);
+             //   }
+             // )
+ 
+ 
+           },
+           error=>{
+             console.log('error',error);
+             alert(error.message);
+           }
+         )
+       },
+       (err) => {
+         this.authService.setStorage;
+       }
+     );*/
 
-    
+
+
+
+
   }
 
 
@@ -132,10 +143,10 @@ export class LoginComponent implements OnInit {
     this.searchText$.next(packageName);
   }
 
-  selected (e){
-    // console.log(e);
+  selected(e) {
+    console.log(e);
   }
 
-  
+
 
 }

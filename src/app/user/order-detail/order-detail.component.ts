@@ -1,6 +1,6 @@
 import { style } from '@angular/animations';
 import { ComService } from 'src/app/core/com.service';
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ɵɵresolveBody } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';//---i18n
 import { myAddr, lists, orders } from './../../shared/lists';
@@ -66,17 +66,15 @@ export class NgbdModalContent {
     console.log("coco");
     console.log(this.id+"是这个id吗");
     let id = this.route.snapshot.paramMap.get("id");
-    
-    
     // modalRef.compoentInst
   }
  
 
   private activeLink: string = 'default-active-link';
 
-toggle(){
-this.openpay();
-}
+  toggle(){
+    this.openpay();
+  }
  
 }
 
@@ -149,11 +147,7 @@ export class OrderDetailComponent implements OnInit {
       console.log(this.orderslist.goods)
       this.Orderslist = this.orderslist.goods;
     })
-
-
-
   }
-
 
   select() {
     this.selected = !this.selected;
@@ -162,40 +156,25 @@ export class OrderDetailComponent implements OnInit {
 
 
   openclause() {
-
     this.com.isShowDeclare =  true;
     this.selected = true;
-    // const modalRef = this.modalService.open(NgbdModalContent);
-    // modalRef.componentInstance.name = 'World';
-    
-
-
-    // if (this.selected ) {
-    //   let post = { id: this.payId }
-    //   this.com.httpGet('/api/order/pay-order', { id: this.payId }, "body", "text").subscribe((res: string) => {
-    //     document.open();
-    //     document.write(res);
-    //     document.close();
-    //   }, (err) => {
-    //     console.error(err);
-    //   });
-    // } else {
-    //   const modalRef = this.modalService.open(NgbdModalContent);
-    //   modalRef.componentInstance.name = 'World';
-    //   this.selected = true;
-    // }
+    document.getElementsByTagName("body")[0].style.overflow = "hidden";
   }
 
   openpay(){
-    // let post = { id: this.payId }
       this.com.httpGet('/api/order/pay-order', { id: this.payId },
-       "body", "text").subscribe((res: string) => {
+      "body", "text").subscribe((res: string) => {
         document.open();
         document.write(res);
         document.close();
       }, (err) => {
         console.error(err);
-      });
+      });  
+  }
+
+
+  goback(){
+    
   }
 
 }
