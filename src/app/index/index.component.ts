@@ -29,6 +29,10 @@ export class IndexComponent implements OnInit {
 
   }
 
+  imgs=[
+    'assets/images/shuffling1.png',
+    'assets/images/shuffling2.png',
+  ]
 
   //请求热门数据
   getHotData() {

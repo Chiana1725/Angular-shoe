@@ -24,6 +24,10 @@ const routes: Routes = [
     // canLoad: [ AuthGuard ],
     loadChildren:() => import('./goods/goods.module').then(m => m.GoodsModule )
   },
+  {
+    path:'protocals',
+    loadChildren:()=>import('./protocals/protocals.module').then(m=>m.ProtocalsModule)
+  },
   { path:'', pathMatch: 'full', redirectTo:'/index'},
   { path:'**', component: PageNotFoundComponent }
 ];

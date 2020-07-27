@@ -1,0 +1,13 @@
+.bread-box{
+    height:5rem;
+}
+.main{
+    padding-top: 1.5rem;
+    font-size:1.25rem;
+}
+.sub{
+    font-size:0.7rem;
+    left:0;
+    padding-top:2rem;
+}
+.sub li{outline: none;}

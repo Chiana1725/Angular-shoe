@@ -1,13 +1,10 @@
 import { ErrHandleService } from './services/err-handle.service';
-import { OrderService } from './services/order.service';
-import { group } from '@angular/animations';
 import { Injectable } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { map, catchError, retry } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { Router, Params } from '@angular/router';
-import { rejects } from 'assert';
 
 
 import { lists } from './../shared/lists';
@@ -15,13 +12,21 @@ import { lists } from './../shared/lists';
   providedIn: 'root'
 })
 export class ComService {
-
   public shoeslist = lists;//静态数据 提供于商品跳转
   public domain: string = 'http://192.168.2.154:6031/';
-
   //同意支付弹窗控制
   isShowDeclare: boolean = false;
   purcharsID: any;
+
+  //错误提示弹框
+  popup: { title?: string, content: string, image?: string, confirm?: Function, hideCancel?: boolean } = null;
+  //语言标志
+  langIndex = 1;
+  public lang;
+
+  //面包屑导航
+  navArr:{name:string,url:string}[] =[];
+
 
   constructor(
     private router: Router,
@@ -29,11 +34,6 @@ export class ComService {
     private errServ: ErrHandleService,
   ) { }
 
-
-  popup: { title?: string, content: string, image?: string, confirm?: Function, hideCancel?: boolean } = null;
-  langIndex = 1;
-  // public langIndex;
-  public lang;
   changeTo() {
     this.langIndex = 'EN' === window.localStorage['lang'] ? 1 : 0;
     window.localStorage['lang'] = this.lang = ['EN'][this.langIndex];

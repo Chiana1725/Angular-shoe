@@ -1,0 +1,6 @@
+<div id="navBreadCrumb">
+  <a [routerLink]="[ '/index' ]">Home</a> 
+  <a *ngFor="let nav of navArr?.slice(0,navArr.length-1)" [routerLink]="nav.url">&gt;{{nav.name}}</a>
+  <span *ngIf="navArr?.length">&gt;{{navArr[navArr.length-1].name}}</span>
+</div>
+

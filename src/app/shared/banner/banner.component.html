@@ -1,0 +1,19 @@
+<div class="imgs" (mouseover)="stopMove()" (mouseout)="goMove()">
+         <img src="{{img}}" alt="" class="img"  
+         *ngFor="let img of imgs;let i=index"
+         (mySwipe)="Change($event)"
+         [@imgMove]="ImgState(i)">
+
+         <!--div代替 - -->
+         <!-- <div *ngFor="let img of imgs;let i=index" class="img"  (mySwipe)="Change($event)"
+         [@imgMove]="ImgState(i)">{{img.slice(img.length-5)}}</div> -->
+     </div>
+     
+
+     <!-- <div class="btn" (click)="Prev()">Prev</div>
+     <div class="btn" (click)="Next()">Next</div> -->
+     <ol>
+         <li *ngFor="let img of inputImgs;let i=index" [ngClass]="current%2===i?'active':''" (click)="clickDot(i)"></li>
+     </ol>    
+     
+     
