@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ComService } from 'src/app/core/com.service';
 
 @Component({
   selector: 'app-bread-nav',
@@ -6,8 +7,10 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./bread-nav.component.css']
 })
 export class BreadNavComponent implements OnInit {
-  @Input() navArr;
-  constructor() { }
+ 
+  constructor(
+    public com :ComService
+  ) { }
 
   ngOnInit() {
    

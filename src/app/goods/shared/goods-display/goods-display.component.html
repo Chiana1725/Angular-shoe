@@ -1,9 +1,12 @@
 <li>
-    <div class="slide"><a  data-lightbox="lightbox-images">
+    <div class="slide"><a  data-lightbox="lightbox-images" (click)="open()">
         <!-- <img src={{detail}} (click)="open()"  itemprop="image" -->
-        <img src={{lists}} (click)="open()"  itemprop="image"
+        <!-- <img src={{lists}} (click)="open()"  itemprop="image" 
             class="pd_img firstimage width_100" alt="Fjallraven Kanken Mini Backpack Pink"
-            title="Fjallraven Kanken Mini Backpack Pink" />
+            title="Fjallraven Kanken Mini Backpack Pink" />-->
+            <app-image [src]="goods?.src" [alt]="goods?.subject" [title]="goods?.subject"></app-image>
         </a>
     </div>
 </li>
+
+<!-- <goods-img-display-pop [src]="goods?.src"></goods-img-display-pop> -->

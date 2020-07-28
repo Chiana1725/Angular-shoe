@@ -2,7 +2,7 @@
   <div class="subNav currentDt" (click)="toggle0()"  *ngIf="isShown" i18n>{{'detail.description' | translate}}</div>
   <ng-container *ngIf="show0">
   <div class="navContent "  style="display: block;" @myInsertRemoveTrigger >
-    <p>{{currenGoods.detail}}&nbsp;</p>
+    <p>{{currenGoods?.detail}}&nbsp;</p>
     <ul class="attributes">
       <li><strong i18n>{{'detail.sex' | translate}}:&nbsp;</strong>Kids</li>
       <li><strong i18n>{{'detail.brand' | translate}}:&nbsp;</strong>29&nbsp;x 20 x 13&nbsp;cm</li>

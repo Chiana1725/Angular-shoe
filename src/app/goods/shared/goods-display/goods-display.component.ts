@@ -1,8 +1,9 @@
-import { Component, OnInit, Input  } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges  } from '@angular/core';
 import { lists, close } from './../../../shared/lists'; 
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ShopService } from './../../../core/services/shop.service';
-@Component({
+import { ImgDisplayPopComponent } from '../img-display-pop/img-display-pop.component';
+/*@Component({
   selector: 'ngbd-modal-content',
   template: `
     <img style="float:right; margin:10px" (click)="activeModal.close('Close click')" src={{close.close}}>
@@ -16,7 +17,7 @@ export class NgbdModalContent {
   @Input() close = close ;
   constructor(public activeModal: NgbActiveModal) {}
 }
-
+*/
 
 @Component({
   selector: 'app-goods-display',
@@ -28,18 +29,22 @@ export class GoodsDisplayComponent implements OnInit {
   // @Input() lists: any;
   lists=lists[0].image;
 
+  //商品信息
+  @Input() goods ;
+
   constructor(
     private modalService: NgbModal,
     private shopSer: ShopService,
     ) { }
 
   ngOnInit(): void {
-    
+   
   }
 
+
   open() {
-    const modalRef = this.modalService.open(NgbdModalContent);
-    modalRef.componentInstance.name = 'World';
+    const modalRef = this.modalService.open(ImgDisplayPopComponent);
+    modalRef.componentInstance.src = this.goods.src;
   }
 
 }

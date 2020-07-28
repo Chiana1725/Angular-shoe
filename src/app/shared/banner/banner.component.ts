@@ -57,7 +57,7 @@ import { Component,  Input,
         this.imgs = this.imgs.concat(this.inputImgs);
         this.imgs =  this.imgs.concat(this.inputImgs);
         // this.copies = this.copies.concat(this.imgs);
-        console.log('copy,img',this.imgs,this.inputImgs)
+        // console.log('copy,img',this.imgs,this.inputImgs)
       }
       stopMove(){
           clearInterval(this.t);

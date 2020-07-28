@@ -1,29 +1,13 @@
     <div class="hidden-xs" style="width: 100%; margin: auto;">
-        <div class="toolbar">
-            <div class="pager hidden-xs">
-                <p class="amount">Items <strong>{{(curPage-1)*5+1}}</strong> to <strong>{{curPage*5}}</strong> of <strong></strong>{{tableList?.length}} total</p>
-                <div class="pages"><strong>Page:</strong>
-                    <ol>
-                        <a class="butjian" type="button"  *ngIf="page!==0" [routerLink]="['../',page]" > << </a>
-                        <a class="change" type="text"  *ngFor="let item of pages" [routerLink]="['../',item]">{{item}}</a>
-                        <a class="butjian" type="button"  [routerLink]="['../',nextShow]" > >> </a>
-
-
-                        <!-- <a [routerLink]="['../',1]" class="w-auto  rounded-circle" *ngIf="page!==1"> << </a>
-                        <a *ngIf="page!==1" [routerLink]="['../',page-1]"   class=" rounded-circle prev text-center  bg-white shadow-default "> < </a> 
-                        <a class="text-center shadow-default  rounded-circle "   [routerLink]="['../',p]" routerLinkActive=" bg-base text-white"
-                        *ngFor="let p of pages">{{p}}</a>
-                        <a [routerLink]="['../',page+1]"   class="next rounded-circle text-center bg-white shadow-default "
-                        *ngIf="page!==last"> > </a>
-                        <a [routerLink]="['../',last]" class="w-auto "  *ngIf="last!=page"> >> </a> -->
- 
-
-                    </ol>
-                </div>
-            </div>
+      <div class="toolbar">
+        <div class="pager hidden-xs">
+          <p class="amount">Items <strong>{{(currentPage-1)*5+1}}</strong> to <strong>{{currentPage*5>total?total:currentPage*5}}</strong> of
+            <strong>{{total}}</strong> total</p>
+          <div class="pages"><strong>Page:</strong>
+            <a class="prev" *ngIf="currentPage!==1" [routerLink]="['../',currentPage-1]"> &lt;&lt; </a>
+            <a class="change" *ngFor="let item of _pages" [routerLink]="['../',item]" routerLinkActive="acitve">{{item}}</a>
+            <a class="next" *ngIf="currentPage!==_pages.length" [routerLink]="['../',currentPage+1]"> &gt;&gt; </a>
+          </div>
         </div>
+      </div>
     </div>
-
-
-
-
