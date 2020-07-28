@@ -1,8 +1,9 @@
 
 
 <app-header></app-header>
+<app-bread-nav ></app-bread-nav>
 <!-- <app-navrouting></app-navrouting> -->
-<div class="main-container" *ngFor="let item of lists,let i = index">
+<div class="main-container"   >
   <div class="container">
     <div class="product-view">
       <div class="in-product-detail">
@@ -13,7 +14,7 @@
                 <ul class="slides">
                   <!-- <img src="{{detail.image}}" -->
                   <!-- 图片详情介绍组件 -->
-                  <app-goods-display ></app-goods-display>
+                  <app-goods-display [goods]="currenGoods"></app-goods-display>
                   <!-- <app-goods-display [detail]="detailData.image"></app-goods-display> -->
                 </ul>
               </div>
@@ -34,13 +35,12 @@
                       <dd>
                           <div class="input-box">
                               <ul class='color-list'>
-                                  <!-- <li *ngFor="let item of lists,let i = index"> -->
-                                    <li >
-                                      <!-- <a class='sizebox cphand' > -->
-                                        <!-- [src]="getImgPath(item.images)" 需要修正-->
-                                          <img routerLinkActive="active" class="imgbox" (click)="switchGood(i)" src="../../../assets/images/1_50x43.png" alt="{{item.subject}}" title="{{item.subject}}" width="43" height="50" />
-                                        <!-- </a> -->
-                                      <!-- <div>{{currenGoods.id}}</div> -->
+                                  <li *ngFor="let item of lists,let i = index">
+                                  
+                                      <a class='sizebox cphand'  [routerLink]="['/goods/detail/',item.id]">
+                                        <app-image [src]="item.src" [alt]="item.subject" [title]="item.subject" width="43" height="50">  </app-image>
+                                          <!-- <img routerLinkActive="active" class="imgbox"  src="../../../assets/images/1_50x43.png" alt="{{item.subject}}" title="{{item.subject}}" width="43" height="50" /> -->
+                                      </a>
                                   </li>
                               </ul>
                           </div>
@@ -86,7 +86,7 @@
           </div>
           <ul class=" row">
             <!-- You May Also Like 列表组件  -->
-            <app-goods-detaillist></app-goods-detaillist>
+            <!-- <app-goods-detaillist></app-goods-detaillist> -->
 
           </ul>
         </section>

@@ -4,7 +4,8 @@
             <div class="item">
                   <a [routerLink]="[ '/goods/detail', shoeslists.id]" > 
                         <!-- <img [src]= "func(path)"  -->
-                        <img [src]="images||'assets/images/2_178x155.png'" alt="" title=" " width="348" height="400" class="img-responsive" />
+                        <!-- <img [src]="images||" alt="" title=" " width="348" height="400" class="img-responsive" /> -->
+                        <app-image [src]="shoeslists.src" [errorImage]="'assets/images/2_178x155.png'" className="fixed-size"></app-image>
                   </a>
             </div>
             <h2 class="name"><a  [routerLink]="[ '/goods/detail', shoeslists.id]">{{ shoeslists.name}}</a></h2>

@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';//---i18n
 import { ComService } from 'src/app/core/com.service';
 import { ShopService, ProductBrandsInfo } from './../../core/services/shop.service';
 import { OrderService } from './../../core/services/order.service';
+import { allProductBrands } from '../lists';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -43,7 +44,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
 
     this.userInfo = this.authServise.GetUserInfo();
-    console.log(this.userInfo);
+    // console.log(this.userInfo);
 
     // this.productBrandsInfo = this.shopSer.GetLastProductBrandsInfo();
     // console.log( this.productBrandsInfo)
@@ -53,11 +54,17 @@ export class HeaderComponent implements OnInit {
     this.translateService.use(browserLang.match(/en/) ? browserLang : 'en');
 
     let brands = sessionStorage.getItem('brands');
+    // console.log('brands',brands)
     if(brands){
-      this.banddata = JSON.parse(brands);
+      try{
+        this.banddata = JSON.parse(brands);
+      }catch(e){
+
+      }
+      
     }else{
-      this.com.httpGet('/api/product/all-product-brands').subscribe((res) => {
-        console.log(res);
+      this.com.httpGet('/api/product/all-product-brands',null,'response','json',allProductBrands).subscribe((res) => {   
+        // console.log('res',res);    
         this.bandlists = res;
         this.banddata = this.bandlists.data;
         sessionStorage.setItem('brands',JSON.stringify(this.banddata));
@@ -74,10 +81,13 @@ export class HeaderComponent implements OnInit {
     console.log(JSON.parse(this.productlist));
     this.cartNum = JSON.parse(this.productlist);
     // console.log(this.cartNum.length + "购物车数据");
-    this.cartNumlen = this.cartNum.length;
-    if (this.cartNum.length == null){
-      this.cartNumlen = 0
+    if(this.cartNum){
+      this.cartNumlen = this.cartNum.length;
+      if (this.cartNum.length == null){
+        this.cartNumlen = 0
+      }
     }
+   
 
   }
 

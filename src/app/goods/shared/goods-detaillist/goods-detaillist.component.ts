@@ -26,8 +26,8 @@ export class GoodsDetaillistComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.productlistInfo = this.shopservice.GetProductlistInfo(),
-    console.log(this.productlistInfo.products);
+    this.productlistInfo = this.shopservice.GetProductlistInfo()
+    // console.log(this.productlistInfo.products);
 
   }
 

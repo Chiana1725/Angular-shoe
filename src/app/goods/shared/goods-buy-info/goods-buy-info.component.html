@@ -1,6 +1,6 @@
-<h1  class="productGeneral head" i18n>{{ currenGoods.productName}}</h1>
-<h2 id="productPrices" class="productGeneral pricr-box clearfix"><span class="normalprice" i18n>{{'detail.price' | translate}}:{{ currenGoods.price}}</span>
-    <span class="productSpecialPrice"  i18n>{{'detail.specialPrice' | translate}}:{{ currenGoods.price-currenGoods.price*currenGoods.discount*0.01 | number:"0.1-2"}}</span><span class="productPriceDiscount" i18n><br />{{'detail.save' | translate}}:&nbsp;{{ currenGoods.discount}}</span>
+<h1  class="productGeneral head" i18n>{{ currenGoods?.productName}}</h1>
+<h2 id="productPrices" class="productGeneral pricr-box clearfix"><span class="normalprice" i18n>{{'detail.price' | translate}}:{{ currenGoods?.price}}</span>
+    <span class="productSpecialPrice"  i18n>{{'detail.specialPrice' | translate}}:{{ currenGoods?.price-currenGoods?.price*currenGoods?.discount*0.01 | number:"0.1-2"}}</span><span class="productPriceDiscount" i18n><br />{{'detail.save' | translate}}:&nbsp;{{ currenGoods?.discount}}</span>
 </h2>
 
 <!-- colorproducts 循环图片-->

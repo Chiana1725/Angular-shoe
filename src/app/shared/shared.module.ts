@@ -20,6 +20,7 @@ import { DeclareComponent } from './declare/declare.component';
 import { PagenateComponent } from './pagenate/pagenate.component';
 import { BannerComponent } from './banner/banner.component';
 import { BreadNavComponent } from './bread-nav/bread-nav.component';
+import { ImageComponent } from './image/image.component';
 
 
 
@@ -43,7 +44,8 @@ export function createTranslateHttpLoader(http: HttpClient) {
     DeclareComponent,
     PagenateComponent,
     BannerComponent,
-    BreadNavComponent
+    BreadNavComponent,
+    ImageComponent
   ],
   imports: [
     CommonModule, RouterModule, ReactiveFormsModule, FormsModule,
@@ -69,7 +71,8 @@ export function createTranslateHttpLoader(http: HttpClient) {
     DeclareComponent, 
     PagenateComponent,
     BannerComponent,
-    BreadNavComponent
+    BreadNavComponent,
+    ImageComponent
   ],
 })
 export class SharedModule { }

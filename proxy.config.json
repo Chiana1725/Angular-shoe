@@ -1,9 +1,17 @@
 {"/api/": {
-    "target": "http://192.168.2.154:6031/",
+    "target": "http://103.112.209.76:8011",
     "changeOrigin": true,
     "secure": false,
     "pathRewrite": {
-      "/api/": "http://192.168.2.154:6031/api/"
+      "/api/": "http://103.112.209.76:8011/api/"
+    }
+  },
+  "assets/": {
+    "target": "http://103.112.209.76:8011",
+    "changeOrigin": true,
+    "secure": false,
+    "pathRewrite": {
+      "assets/": "http://103.112.209.76:8011/assets/"
     }
   }
  

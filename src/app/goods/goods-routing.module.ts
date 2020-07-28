@@ -6,13 +6,10 @@ import { SearchComponent } from './../shared/search/search.component';
 
 const routes: Routes = [
   { path: 'detail/:pid', component: GoodsDetailComponent, data:{animation:'detail'} },
-  { path: 'list/:brandId', component: GoodsListComponent, data:{animation:'list'} },
-  { path: 'list/:brandId/:pageId', component: GoodsListComponent, data:{animation:'list'} },
-  // { path: 'list/:id', component: GoodsListComponent },
-  // { path: 'list/:page', component: GoodsListComponent },
-  // { path: ':list', redirectTo:':state/list/1' },
-  // { path: 'all/list', redirectTo:'all/list/1' },
-  // { path: '', redirectTo:'all/list/1'},
+  
+  { path: 'list/:brandId/:page', component: GoodsListComponent, data:{animation:'list'} },
+  { path: 'list/:brandId', redirectTo:'list/:brandId/1'},
+
   { path: 'search', component: SearchComponent }
 ];
 

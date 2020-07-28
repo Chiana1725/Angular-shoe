@@ -8,6 +8,7 @@ import { ComService } from 'src/app/core/com.service';
 import { OrderService } from './../../core/services/order.service';
 import { ProductdetailURL } from './../../shared/model';
 import { AuthService } from './../../core/services/auth.service';
+import { goodsDetail } from 'src/app/shared/lists';
 
 @Component({
   selector: 'app-goods-detail',
@@ -29,10 +30,6 @@ export class GoodsDetailComponent implements OnInit {
   currenGoods;
 
   public domain: string ='';//通过服务传静态
-  private productId:number;
-  languageBtn;//---i18n
-  language;//---i18n
-
 
   isLoggedIn = false;
 
@@ -41,75 +38,40 @@ export class GoodsDetailComponent implements OnInit {
   public buttonName:any = 'Show';
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
-    public translateService: TranslateService, //---i18n
     public com: ComService, 
-    private http: HttpClient,
     public shopSer: ShopService,
     public orderSer: OrderService,
     public authSer: AuthService,
   ) {
-    this.domain= this.com.domain;
    }
-
+   
 
   ngOnInit(): void {
-    
-      this.route.params.subscribe(
-        (params:Params)=>this.productId=params["pid"]);
+ 
 
-       /* --- set i18n begin -------i18n*/
-       this.translateService.addLangs(['en']);
-       this.translateService.setDefaultLang('en');
-       const browserLang = this.translateService.getBrowserLang();
-       this.translateService.use(browserLang.match(/en/) ? browserLang : 'en');
-       /* --- set i18n end -------i18n*/
+    this.com.setLang();
 
-      let pid = this.route.snapshot.paramMap.get("pid");
-
-      //模仿直接获取路由
-      this.route.params.subscribe(
-        (value:any) => {
-        this.requestContent(value.pid);
-        console.log(value.pid+"我是页码");
-      }
-      );
-
-
+      //请求商品详情
+      this.route.paramMap.subscribe((p)=>{
+       let pid =  p.get('pid');
+       if(pid){
+        this.getDetail(pid);
+       }
+      })
     }
 
-    requestContent(pid){
-
-      // if(this.isLoggedIn = false){
-      //   this.router.navigate(['/auth/login']);
-      // }else if(this.isLoggedIn = true){
-      //   var api = 'api/product/product-units?pid='+pid;
-      //   this.com.get(api).then((response:any)=>{
-      //     console.log(response);
-      //     this.ProductdetailURL = response;
-      //     console.log(ProductdetailURL);
-      //     console.log(this.ProductdetailURL.data);//有问题
-      //     this.lists = this.ProductdetailURL.data;   
-      //     this.currenGoods = this.lists[0];
-      //      this.switchGood(0);
-      //     },
-      //   )
-      // }
-      // console.log("哈哈哈"
-
-      //未登录跳转登录
+    getDetail(pid){
       var api = 'api/product/product-units?pid='+pid;
-      this.com.get(api).then((response:any)=>{
-        console.log(response);
-        this.ProductdetailURL = response;
-        console.log(ProductdetailURL);
-        console.log(this.ProductdetailURL.data);//有问题
-        this.lists = this.ProductdetailURL.data;   
-        this.currenGoods = this.lists[0];
-         this.switchGood(0);
-        },
-      )
-
+      this.com.httpGet(api,null,'response','json',goodsDetail).subscribe(res=>{
+        this.lists = res.data;
+        
+        //处理数据
+        if( this.lists &&  this.lists.length){
+          this.switchGood(0);
+          this.com.imgShow(this.lists);
+        }
+      })
+      
     }
 
 
@@ -123,12 +85,10 @@ export class GoodsDetailComponent implements OnInit {
 
     switchGood(index:number){
       this.currenGoodsInfo = this.lists[index];
-      console.log(this.currenGoodsInfo);
       this.currenGoods = this.currenGoodsInfo;
       let sizes = JSON.parse(this.currenGoods.specs).sizes;
-      this.size = sizes.size.split(',');
-      console.log(this.size);
-
+      this.size = sizes.size.split(',');       
+      this.com.navArr=[{name:this.currenGoods.brandId,url:'/goods/list/'+this.currenGoods.brandId},{name:this.currenGoods.productName,url:this.route.url.toString()}]
     }
 
   

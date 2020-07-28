@@ -40,28 +40,7 @@ export class GoodsListsComponent implements OnInit {
 
 
   ngOnInit(): void {
-    /* --- set i18n begin -------i18n*/
-    this.translateService.addLangs(['en']);
-    this.translateService.setDefaultLang('en');
-    const browserLang = this.translateService.getBrowserLang();
-    this.translateService.use(browserLang.match(/en/) ? browserLang : 'en');
-    /* --- set i18n end -------i18n*/
-
-
-
-
-
-    /*------动态传值------
-    this.detail = this.shopSer.GetProductlistInfo();
-    console.log(this.detail.products);
-    console.log(this.detail.products[0]);
-    console.log(this.detail.products[0].images);*/
-    // console.log(JSON.parse(this.detail.products[0].images));
-    // const products = JSON.parse(this.detail.products[0].images);
-    // console.log(products.img1);
-   /* let  image = products;
-    console.log(image)
-    ------动态传值------*/
+   this.com.setLang();
   }
   func(path){
     return JSON.parse(path).img1;

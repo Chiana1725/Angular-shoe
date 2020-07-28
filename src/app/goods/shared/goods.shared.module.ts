@@ -16,12 +16,13 @@ import { ClauseComponent } from './clause/clause.component';
 import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { ImgDisplayPopComponent } from './img-display-pop/img-display-pop.component';
 export function createTranslateHttpLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 @NgModule({
-  declarations: [GoodsDisplayComponent, GoodsPayComponent, GoodsDescriptionComponent, GoodsBuyInfoComponent, GoodsDetaillistComponent, OpenCloseComponent, InsertRemoveComponent, ClauseComponent,],
+  declarations: [GoodsDisplayComponent, GoodsPayComponent, GoodsDescriptionComponent, GoodsBuyInfoComponent, GoodsDetaillistComponent, OpenCloseComponent, InsertRemoveComponent, ClauseComponent, ImgDisplayPopComponent,],
   imports: [
     CommonModule,
     SharedModule,

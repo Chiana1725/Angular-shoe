@@ -8,6 +8,11 @@ import { Router, Params } from '@angular/router';
 
 
 import { lists } from './../shared/lists';
+import { TranslateService } from '@ngx-translate/core';
+
+const IMG_HOST = 'http://103.112.209.76:8011/';
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -32,8 +37,28 @@ export class ComService {
     private router: Router,
     private http: HttpClient,
     private errServ: ErrHandleService,
+    public translateService: TranslateService, //---i18n
   ) { }
 
+  //设置网页显示的语言
+  setLang(){
+    this.translateService.addLangs(['en']);
+    this.translateService.setDefaultLang('en');
+    const browserLang = this.translateService.getBrowserLang();
+    this.translateService.use(browserLang.match(/en/) ? browserLang : 'en');
+  }
+ //处理商品图片
+ 
+ imgShow(data){
+  data.forEach(ele => {
+    try{
+      let images = JSON.parse(ele.images);
+      ele.src = IMG_HOST + images.img1;
+    }catch(e){
+
+    }     
+  });
+ }
   changeTo() {
     this.langIndex = 'EN' === window.localStorage['lang'] ? 1 : 0;
     window.localStorage['lang'] = this.lang = ['EN'][this.langIndex];
@@ -52,7 +77,7 @@ export class ComService {
   }
 
   doHttpState(res:any,url){
-    console.log('res OF ' ,url,res);
+    console.log('res of ' ,url,res);
     let state = res.status;
     let data = res.body;
     let ret :any =state;
@@ -67,8 +92,7 @@ export class ComService {
           localStorage.setItem('auth_token', res.headers.get('Authorization') ?? '');
         }
         if(code){
-          //返回的接口数据带code
-         
+          //返回的接口数据带code         
           ret = data.data;
           if(code===1){
             ret = data.data;
@@ -86,15 +110,12 @@ export class ComService {
         break;
       //请求接口授权失败
       case 401:
-        ret = res.error.msg;
-        // this.router.navigate(['404',{code:state,msg:msg}])
+        ret = res.statusText;
         break;
       //请求服务器配置有问题
-      default:
-        this.router.navigate(['404',{code:state,msg}])
+      default:ret = res.statusText;
         break;
     }
-    // console.log('ret',ret);
     return ret;
   }
 
@@ -118,37 +139,22 @@ export class ComService {
     }
     return data;
   }
+ httpGet(
+   url:string, 
+   params?: HttpParams | { [param: string]: string | string[]; },
+  observe: 'body' | 'response' = 'body',
+  responseType: 'json' | 'text' = 'json',result?){
+    let options :any = { params, observe, responseType} ;
+   return this.http.get(url,options)
+   .pipe(
+     catchError(this.handleError(result)),
+     map((res)=>{
+       return this.doHttpState(res,url);
+     })
+   )
+ }
 
-
-
-  // httpGet(url:string){
-  //  return  this.http.get(url,{observe:'body'})
-  //   .pipe(
-  //     catchError(this.handleError<any>(null)),
-  //     map((res:any)=>{
-  //       return this.doHttpRes(res);
-  //     })
-  //   )
-  // }
-
-
-  // httpGet(url: string, mock: any = null, params?: any,): Observable<HttpResponse<any>> {
-  //   const option = {};
-  //   if (params) {
-  //     option['params'] = params;
-  //   }
-
-  //   return this.http.get<any>(url, option).pipe(
-  //     catchError(this.errServ.handleError('httpGet', null, mock)),
-  //     retry(3),
-  //     /*  map((res:any)=>{
-  //        return this.doHttpRes(res);
-  //      }) */
-
-  //   );
-  // }
-
-  httpGet<T>(
+  /*httpGet<T>(
     url: string,
     params?: HttpParams | { [param: string]: string | string[]; },
     observe: 'body' | 'response' = 'body',
@@ -171,7 +177,8 @@ export class ComService {
     }
 
     return null;
-  }
+  }*/
+
 
   // httpGet(url: string, params?: any){
   //   const option = {};
@@ -217,7 +224,8 @@ httpPost(url: string, data: any) {
       console.log('handleError',error)
       // let res = error.error;
       // res.data = result || null;
-
+      error.body = result;
+      error.status = 200 ;
       return of(error as T);
     };
   }
