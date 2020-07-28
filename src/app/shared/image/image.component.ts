@@ -25,7 +25,7 @@ export class ImageComponent implements OnInit {
   }
 
   errorShow(){
-    this.src = this.errorImage || 'assets/images/1_50x43.png/';
+    this.src = this.errorImage ;
   }
 
 }
