@@ -9,7 +9,7 @@
                         <div class="qty-changer">
                             <div class="qty_act reduce_qty text-none"><a target="_parent" (click)="minus()">-</a></div>
                             <input type="text" name="products_id[69]" value="{{num}}" class="input-text qtyInput" size="4"
-                            disabled="disabled"  maxlength="12" />
+                            (input)="countChange($event)" maxlength="12" />
                             <div class="qty_act add_qty text-none"><a  target="_parent" (click)="add()">+</a></div>
                         </div>
                     </td>

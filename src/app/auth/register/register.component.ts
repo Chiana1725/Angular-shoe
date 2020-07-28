@@ -41,10 +41,9 @@ export class RegisterComponent implements OnInit {
   registerDataPost(val){
     this.com.httpPost('/api/user/register',val).subscribe(res=>{
       if(typeof(res)==='string'){
-        this.error = res;
-        // 
+        this.error = res; 
       }else{
-        alert('注册成功!');
+        alert('Registered Successfully!');
         this.router.navigate(['/auth/login']);
       }     
     });

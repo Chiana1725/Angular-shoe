@@ -14,9 +14,9 @@ const routes: Routes = [
   // { path:'orderform', component:OrderFormComponent },
   { path:'orderform/detail/:id', component:OrderFormComponent },
   { path:'orderform/:state/:page', component:OrderFormComponent },
-  { path:'orderform/:state', redirectTo: 'orderform/:state/1' },
+  { path:'orderform/:state', redirectTo: 'orderform/:state/0' },
   { path:'orderform/:state/:page', redirectTo: 'orderform/:state/:page' }, 
-  { path: 'orderform', redirectTo: 'orderform/-1/1' },
+  { path: 'orderform', redirectTo: 'orderform/-1/0' },
 
   { path:'orderdetail/:id', component:OrderDetailComponent, data:{animation:'orderdetail'}},
 

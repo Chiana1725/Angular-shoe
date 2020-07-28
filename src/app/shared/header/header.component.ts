@@ -1,3 +1,4 @@
+import { Response } from '@angular/http';
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthService, UserInfo, } from './../../core/services/auth.service';
 import { Router } from '@angular/router';
@@ -127,8 +128,12 @@ export class HeaderComponent implements OnInit {
   logout(): void {
     // this.isLoggedIn = false;
     this.authServise.logout().subscribe(
-      () => {
+      (res) => {
+        console.log(res+"退出")
         this.router.navigate(['/auth/login']);
+      },
+      (res) => {     
+        console.log(res+"xxxxxxxxxxxxxxx");
       }
     )
   }

@@ -38,12 +38,20 @@ export class UpdatePwdComponent implements OnInit {
 
   reset(){
     // this.com.httpPost('/api/user/verify-email',this.resetForm.value);
-    this.com.httpPost('/api/auth/update-pwd',this.resetForm.value);
-    setTimeout(() => {
-      this.authService.AuthComeback(() => {
-        this.router.navigate(['/auth/login']);
-      });
-    }, 2000);
+    this.com.httpPost('/api/auth/update-pwd',this.resetForm.value).subscribe(res =>{
+      if(typeof(res)==='string'){
+        console.log(res)
+      }else{
+        alert('Modify Successfully');
+        this.router.navigate(['auth/login'])
+      }
+    });
+    // setTimeout(() => {
+    //   this.authService.AuthComeback((res) => {
+    //     console.log(res);
+    //     this.router.navigate(['/auth/login']);
+    //   });
+    // }, 2000);
   }
 
 }
