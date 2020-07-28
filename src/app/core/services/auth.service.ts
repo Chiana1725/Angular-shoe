@@ -160,7 +160,7 @@ export class AuthService {
         }
         return resp.body ?? {} as LogoutResponse;
       }),
-      // catchError(err => of([console.log('这是一个错误')]))
+      catchError(err => of([console.log('这是一个错误')]))
     )
   }
 

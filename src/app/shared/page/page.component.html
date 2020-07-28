@@ -4,7 +4,7 @@
                 <p class="amount">Items <strong>{{(curPage-1)*5+1}}</strong> to <strong>{{curPage*5}}</strong> of <strong></strong>{{tableList?.length}} total</p>
                 <div class="pages"><strong>Page:</strong>
                     <ol>
-                        <a class="butjian" type="button"  *ngIf="page!==1" [routerLink]="['../',page]" > << </a>
+                        <a class="butjian" type="button"  *ngIf="page!==0" [routerLink]="['../',page]" > << </a>
                         <a class="change" type="text"  *ngFor="let item of pages" [routerLink]="['../',item]">{{item}}</a>
                         <a class="butjian" type="button"  [routerLink]="['../',nextShow]" > >> </a>
 

@@ -35,10 +35,10 @@
                           <div class="input-box">
                               <ul class='color-list'>
                                   <!-- <li *ngFor="let item of lists,let i = index"> -->
-                                    <li >
+                                    <li routerLinkActive="active"  class="cphand" style="width: 43px;height: 50px; border: 1px solid red;" >
                                       <!-- <a class='sizebox cphand' > -->
                                         <!-- [src]="getImgPath(item.images)" 需要修正-->
-                                          <img routerLinkActive="active" class="imgbox" (click)="switchGood(i)" src="../../../assets/images/1_50x43.png" alt="{{item.subject}}" title="{{item.subject}}" width="43" height="50" />
+                                          <img class="imgbox" (click)="switchGood(i)" src="../../../assets/images/1_50x43.png" alt="{{item.subject}}" title="{{item.subject}}" width="43" height="50" />
                                         <!-- </a> -->
                                       <!-- <div>{{currenGoods.id}}</div> -->
                                   </li>
@@ -54,9 +54,9 @@
                       <dd>
                           <div class="input-box">
                               <ul class='color-list  '>
-                                  <li *ngFor="let item of size ; let i=index"  >
+                                  <li *ngFor="let item of size ; let i=index" routerLinkActive="active0"  >
                                     <!-- <a class='sizebox cphand' (click)="getSize(i)" routerLinkActive="active">{{item}}</a> -->
-                                      <input readonly="readonly"  class='sizebox cphand' (click)="getSize(i)" routerLinkActive="active" value="{{item}}">
+                                      <input readonly="readonly"  class='sizebox cphand' [ngClass]="{ 'active': i === activeIndex}" (click)="getSize(i)"  value="{{item}}" >
                                   </li>
                               </ul>
                           </div>

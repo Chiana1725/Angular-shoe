@@ -20,7 +20,7 @@ export class PageComponent implements OnInit {
   detail: ProductlistInfo;//动态数据源
   tableList;
   tablePageList = [];  //分页后前台显示数据
-  pageNo = 1; //当前页码
+  pageNo = 0; //当前页码
 
   // preShow = false; //上一页
   // nextShow = true; //下一页
@@ -30,7 +30,7 @@ export class PageComponent implements OnInit {
   pageSize = 5; //单页显示数
   totalCount = 0; //总页数
   pageSizes = [5, 10, 15];
-  curPage = 1; //当前页
+  curPage = 0; //当前页
   // pages = [1, 2, 3];
   //假数据
 

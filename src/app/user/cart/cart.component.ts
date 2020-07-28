@@ -122,6 +122,9 @@ export class CartComponent implements OnInit {
     }else if (this.cartlist == 0){
       this.isHide = true;
       this.isShown = false;
+    }else{
+      this.isHide = false;
+      this.isShown = true;
     }
 
     /*-------地址-------*/
@@ -232,13 +235,19 @@ export class CartComponent implements OnInit {
 
 
     this.orderService.CreateOrder(post).subscribe(
-      () => {
-        console.log()
-        this.router.navigate(['/user/orderform/0/1']);
+      (res) => {
+        JSON.stringify(res);
+        console.log(JSON.stringify(res)+"订单号")
+        let idText = JSON.stringify(res);
+        console.log(JSON.parse(idText));
+        let idorder = JSON.parse(idText);
+        let id =  idorder.orderId
+        this.router.navigate(['/user/orderdetail/'+id]);
       }
     )
     this.cartSer.clearCart();
 
+    
    
   }
 
@@ -264,7 +273,7 @@ export class CartComponent implements OnInit {
       for (let i = 0; i < this.cartlist.length; i++) {
         // this.cartlist[i].count = this.changenum;
         sum += this.cartlist[i].price * this.cartlist[i].count * (1 - this.cartlist[i].discount);
-        console.log(sum);
+        // console.log(sum);
       }
       return sum;
     }

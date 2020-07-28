@@ -45,7 +45,7 @@
                 <td>
                   <p class="a-center">{{goods.size}}</p>
                 </td>
-                <td id="tdQty" class="a-right">
+                <td id="tdQty" class="a-right"> 
                   <span class="shoppingcart_qty_product">
                     <input type="text" name="cart_quantity" (input)="countChange($event,i)" value="{{goods.count}}" size="4"><br></span>
                   <!-- <span class="shoppingcart_update_product">
@@ -57,7 +57,7 @@
                   </span> -->
                 </td>
                 <td class="a-right"><span class="cart-price"><p class="price a-center">{{goods.price}} </p></span></td>
-                <td class="cartRemoveItemDisplay">
+                <td class="cartRemoveItemDisplay cphand">
                   <a target="_parent" (click)="delGoods(i)"><img src="assets/images/icons/delete.png"></a>
                   <div>{{goods.price*goods.count | currency}}</div>
                 </td>
@@ -74,7 +74,7 @@
           </table>
 
 
-          <table *ngIf="isHide">
+          <table *ngIf="isHide" class="noneCart">
             您的购物车为空!
           </table>
 

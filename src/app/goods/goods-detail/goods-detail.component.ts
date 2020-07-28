@@ -32,6 +32,7 @@ export class GoodsDetailComponent implements OnInit {
   private productId:number;
   languageBtn;//---i18n
   language;//---i18n
+  activeIndex = 0;
 
 
   isLoggedIn = false;
@@ -134,12 +135,14 @@ export class GoodsDetailComponent implements OnInit {
   
   
     getSize(i){
-      console.log(this.currenGoods+"之前的");
-      console.log(i);
-      console.log(this.size[i]);
+      // console.log(this.currenGoods+"之前的");
+      // console.log(i);
+      // console.log(this.size[i]);
       let changesize = this.size[i];
       this.currenGoods['size'] = changesize;
-      console.log(this.currenGoods);
+      // console.log(this.currenGoods);
+      this.activeIndex = i;
+      
     }
 
 

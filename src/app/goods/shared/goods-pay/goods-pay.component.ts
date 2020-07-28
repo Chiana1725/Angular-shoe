@@ -100,4 +100,9 @@ export class GoodsPayComponent implements OnInit {
     })
   }
 
+  countChange(e, ) {
+    this.num = +e.target.value;
+  
+  }
+
 }
