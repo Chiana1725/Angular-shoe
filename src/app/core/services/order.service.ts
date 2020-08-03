@@ -7,7 +7,7 @@ import * as MyOrder from '../../shared/model';
 import * as PostOrder from '../../shared/model';
 import * as PayOrder from '../../shared/model';
 import * as MyAddr from './../../shared/model';//无用
-import { PayOrderResponse } from './../../shared/model';
+import { PayOrderResponse, CusProcOrderResponse } from './../../shared/model';
 
 /*获取所有订单*/
 export interface MyorderInfo extends MyOrder.MyOrderResponse {
@@ -21,12 +21,15 @@ export interface MyAddrInfo extends MyAddr.MyAddrResponse {
 
 export interface PayInfo extends PayOrderResponse { };
 
+export interface CusProcOrderInfo extends CusProcOrderResponse {};
+
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
 
   private payInfo = {} as PayInfo;
+  private cusProcOrderInfo = {} as CusProcOrderInfo;
 
   private myorderInfo = {orders:[ {} ]} as MyorderInfo;
   private myaddrInfo = {data:[ {} ]} as MyAddrInfo;
@@ -52,6 +55,12 @@ export class OrderService {
     if (payInfoText != null){
       this.payInfo = JSON.parse(payInfoText);
     }
+
+    /*用户修改订单*/
+    const cusProcOrderInfoText = localStorage.getItem('cus_url');
+    if (cusProcOrderInfoText != null){
+      this.cusProcOrderInfo = JSON.parse(cusProcOrderInfoText);
+    }
    }
 
 
@@ -71,28 +80,14 @@ export class OrderService {
 
 
   CreatePay(req): Observable<PayOrderResponse>{
-    // console.log(JSON.stringify(req));
     return this.HttpClient.post<any>(PayOrder.PayOrderURL,req,{observe:'response'}).pipe(
       map((resp)=>{
-        // console.log(resp);
-        // console.log(JSON.stringify(resp.body));//需要的数据（正确）
-        // console.log(resp.body);//需要的数据（正确）
         const fanhui = resp.body;
-        // console.log(fanhui.url);
         localStorage.setItem('pay_url',JSON.stringify(resp.body));
-
-        // console.log(JSON.parse(fanhui.data));
-        // const fanhuishuju = JSON.parse(fanhui.data);
-        // console.log(fanhuishuju.ord_mercID);
-        // console.log(fanhuishuju.ord_mercref);
-        // console.log(fanhuishuju.ord_totalamt);
-        // console.log(fanhuishuju.ord_gstamt);
-        // console.log(fanhuishuju.ord_date);
         this.payInfo = resp.body;
         if(resp.status !== 200){
           throw new Error ('');
         }
-        // this.SetPayInfo(resp.body ?? {} as PayInfo);
         this.payInfo =resp.body ?? {} as PayInfo;
       return resp.body ?? {} as PayOrderResponse;
       

@@ -12,7 +12,8 @@ import { Router, Params } from '@angular/router';
 import { lists } from './../shared/lists';
 import { TranslateService } from '@ngx-translate/core';
 
-const IMG_HOST = 'http://103.112.209.76:8011/';
+// const IMG_HOST = 'http://103.112.209.76:8011/';
+// const IMG_HOST = '/api/static/';
 
 
 @Injectable({
@@ -55,7 +56,7 @@ export class ComService {
   data.forEach(ele => {
     try{
       let images = JSON.parse(ele.images);
-      ele.src = IMG_HOST + images.img1;
+      ele.src = images.img1;
     }catch(e){
 
     }     
@@ -182,18 +183,18 @@ export class ComService {
   }*/
 
 
-  // httpGet(url: string, params?: any){
-  //   const option = {};
+  httpGet1(url: string, params?: any){
+    const option = {};
 
-  //   if (params) {
-  //     option['params'] = params;
-  //   }
+    if (params) {
+      option['params'] = params;
+    }
 
-  //   return this.http.get<any>(url,option).pipe(
-  //     retry(3),
-  //     catchError(this.handleError)
-  //   )
-  // }
+    return this.http.get<any>(url,option).pipe(
+      retry(3),
+      catchError(this.handleError)
+    )
+  }
 
 httpPost(url: string, data: any) {
     return this.http.post(url, data, { observe: 'response' })

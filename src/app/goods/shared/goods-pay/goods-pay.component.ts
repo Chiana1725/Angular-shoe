@@ -11,8 +11,11 @@ import { CartService } from './../../../core/services/cart.service';
 })
 export class GoodsPayComponent implements OnInit {
   @Input() currenGoods: any ;
-
-  num = 0;
+  @Input() size ;
+  myAddr;
+  myaddr: any; //动态数据--地址
+  freight;
+  num = 1;
   id;
   name;
   goodsCart: any;
@@ -23,6 +26,9 @@ export class GoodsPayComponent implements OnInit {
   productName;
   price;
   subject;
+  jd;
+  zk;
+  js;
   constructor(
     private route: ActivatedRoute,
     public com: ComService, 
@@ -34,6 +40,10 @@ export class GoodsPayComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.myAddr = window.localStorage.getItem('my_addr');
+    console.log(JSON.parse(this.myAddr).data[0]);
+    this.myaddr = JSON.parse(this.myAddr).data[0];
+  
     
   }
   changecount(e){
@@ -44,7 +54,7 @@ export class GoodsPayComponent implements OnInit {
     this.num++;
   }
   minus(){
-    if (this.num>0){
+    if (this.num>1){
       this.num--;
     }
   }
@@ -59,7 +69,7 @@ export class GoodsPayComponent implements OnInit {
     goods["image"] = this.currenGoods.images;
     goods["name"] = this.currenGoods.productName;
     goods["price"] = this.currenGoods.price;
-    goods["size"] = this.currenGoods.size;
+    goods["size"] =   this.currenGoods.size;
     goods["stockId"] = "999";//之后改
     goods["subject"] = this.currenGoods.subject;
     goods["discount"] = this.currenGoods.discount;
@@ -75,7 +85,8 @@ export class GoodsPayComponent implements OnInit {
       this.id = value.pid;
       this.orderSer.GetLastMyAddrInfo().subscribe(
         (info) => {
-          this.router.navigate(['/user/cart']);
+          // this.router.navigate(['/user/cart']);
+          alert("已加入购物车")
         },
         (err:Error) => {
           // alert(err.message);
@@ -83,10 +94,6 @@ export class GoodsPayComponent implements OnInit {
         }
       )
     });
-
-
-
-
   }
   requestContent(pid){
     var api = 'api/product/product-units?pid='+pid;
@@ -98,6 +105,73 @@ export class GoodsPayComponent implements OnInit {
       console.log(this.currenGoods);
       localStorage.setItem("cart_product",JSON.stringify(this.currenGoods));
     })
+  }
+
+  addOrder(){
+
+    let goods = {};
+    goods["count"] = this.num;
+    goods["id"] = this.currenGoods.id;
+    goods["image"] = this.currenGoods.images;
+    goods["name"] = this.currenGoods.productName;
+    goods["price"] = this.currenGoods.price;
+    goods["size"] =   this.currenGoods.size;
+    goods["stockId"] = "999";//之后改
+    goods["subject"] = this.currenGoods.subject;
+    goods["discount"] = this.currenGoods.discount;
+
+
+    let  postfee = {
+      addr: this.myaddr.streetAddress,
+      city: this.myaddr.city,
+      country: this.myaddr.country,
+      goods:[ goods ],
+      postCode: this.myaddr.postCode,
+      state: this.myaddr.state,
+    }
+    this.cartSer.postCalcshipfee(postfee).subscribe(
+      (res) => {
+        // console.log(JSON.stringify(res) +"运费");
+        let Freight = JSON.stringify(res);
+        console.log(JSON.parse(Freight));
+        let freights = JSON.parse(Freight);
+
+        this.freight = freights.amount;
+        console.log(this.freight);
+      }
+    )
+
+
+     this.zk = 1-this.currenGoods.discount;
+    //  console.log(this.zk);
+    // this.jd = Number(this.zk).toFixed(2);
+    let jss = this.currenGoods.price.toFixed(2)*this.num*this.zk+this.freight;
+    console.log(jss);
+    let post = {
+      addr: this.myaddr.streetAddress,
+      amount: jss,// 100
+      city: this.myaddr.city,
+      country: this.myaddr.country,
+      coupons: "222222222",//优惠券
+      goods:[ goods ],
+      phone: this.myaddr.phone,
+      postCode: this.myaddr.postCode,
+      receiver: this.myaddr.firstName + this.myaddr.lastName,
+      state: this.myaddr.state,
+    }
+
+
+    this.orderSer.CreateOrder(post).subscribe(
+      (res) => {
+        JSON.stringify(res);
+        console.log(JSON.stringify(res)+"订单号")
+        let idText = JSON.stringify(res);
+        // console.log(JSON.parse(idText));
+        let idorder = JSON.parse(idText);
+        let id =  idorder.orderId
+        this.router.navigate(['/user/orderdetail/'+id]);
+      }
+    )
   }
 
   countChange(e, ) {

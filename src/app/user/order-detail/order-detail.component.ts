@@ -34,7 +34,7 @@ import { debugPort } from 'process';
         <li class="sp">Click to Pay and agree service Agreement:</li>
       </ul>
     </div>
-    <button type="submit" class="tanchuanButton " (click)="toggle()"  >Agree and pay</button>
+    <button type="submit" class="tanchuanButton " (click)="toggle()"  >declare</button>
     <button type="submit" class="tanchuanButton " (click)="activeModal.close('Close click')"  >Cancel</button>
     
   </div> 
@@ -71,14 +71,10 @@ export class NgbdModalContent {
  
 
   private activeLink: string = 'default-active-link';
-
   toggle(){
     this.openpay();
   }
- 
 }
-
-
 
 @Component({
   selector: 'app-order-detail',
@@ -87,22 +83,16 @@ export class NgbdModalContent {
 })
 export class OrderDetailComponent implements OnInit {
 
- 
-
   languageBtn;//---i18n
   language;//---i18n
-
   newsDetailData = null;
   newsUrl = null;
-
   myaddr: any; //动态数据
   addrDate;
   orderslist;
   Orderslist;
-
   payId;
   selected = false;
-
   payUrlInfo;
   payDataInfo;
   uri;
@@ -137,13 +127,14 @@ export class OrderDetailComponent implements OnInit {
 
     //  this.showNewsDetailData();
     let id = this.route.snapshot.paramMap.get("id");
-    this.com.httpGet('api/order/detail', { id }).subscribe((res) => {
+    this.com.httpGet1('api/order/detail', { id }).subscribe((res) => {
       console.log(JSON.stringify(res));
       let detailData = JSON.stringify(res);
       console.log(JSON.parse(detailData));
       console.log(id);
       this.payId = id;
       this.orderslist = res;
+      console.log(this.orderslist);
       console.log(this.orderslist.goods)
       this.Orderslist = this.orderslist.goods;
     })
@@ -172,9 +163,8 @@ export class OrderDetailComponent implements OnInit {
       });  
   }
 
-
   goback(){
-    
+    history.go(-1);
   }
 
 }

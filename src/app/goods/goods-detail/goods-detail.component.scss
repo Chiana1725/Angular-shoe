@@ -1,20 +1,28 @@
 .masking {
     cursor: pointer; 
-    // display: block; 
     height: 980px; 
     left: 0; 
-    // opacity: 0!important; 
     position: absolute; 
     bottom: 0; 
     width: 100%;
     background: rgba(0, 0, 0, 0.763);
 }
 
-.sizebox {width: 39px; height: 39px; line-height: 39px; text-align: center;display: block; outline:none; }
-.active { border: red 1px solid; width: 39px; height: 39px; line-height: 39px; text-align: center;display: block;}
-// .sizebox:focus{border: red 1px solid; width: 39px; height: 39px; line-height: 39px; text-align: center;display: block;}
-/* .sizebox::after {border: red 1px solid}
-.click::after {border: red 1px solid} */
-.click::selection {border: red 1px solid}
+.sizebox {
+    width: 39px; 
+    height: 39px; 
+    line-height: 39px; 
+    text-align: center;
+    display: block;
+    outline:none;
 
+}
+.sizeboxImg {
+    width: 37px; 
+    height: 32px;
+    position: relative;
+    top:-3px;
+}
+.active {border: red 1px solid; width: 39px; height: 39px; line-height: 38.5px; text-align: center;display: block;}
+.redboder {border: red 1px solid;}
 .imgbox {width: 40px; height: 45px; }

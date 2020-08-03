@@ -20,26 +20,21 @@ export class OrderFormComponent implements OnInit {
   orderslist;
   //绑定模型用的变量
   news = [];
-
   navrouter = ['Order Form'];
-
   myorderInfo: any;
   Orderslist;
   arr;
   shoesGoods;
   shoesgoods;
-
   currentPage;
-
   res;
 
-
-  // shoesoder = orders.orders;
-  // arr = orders.orders.length;
+  btn1;
+  btn2;
+  btn3;
 
   showhave: boolean = true;
   shownone: boolean = false;
-
   state: number;//当前状态码
   status = '2';
 
@@ -53,54 +48,13 @@ export class OrderFormComponent implements OnInit {
 
     navroutingService.missionAnnounced$.subscribe(
       navrouter => {
-
       }
     )
   }
 
   orderformForm: FormGroup;
-
   ngOnInit(): void {
-
     this.routestate();
-
-
-
-
-   /* // this.arr = this.myorderInfo.orders;
-
-    // console.log(this.arr)
-    // if(this.arr==0){
-    //   console.log("无数据")
-    //   this.shownone = true;
-    // }else if (this.arr>0){
-    //   this.showhave = true;
-    //   console.log("有数据")
-    // }
-
-
-    this.myorderInfo = this.orderService.GetMyorderInfo();
-    console.log(this.myorderInfo);
-    this.shoesGoods = this.myorderInfo.orders;
-    console.log(this.shoesGoods);
-    for (let i = 0; i < this.shoesGoods.length; i++) {
-      this.shoesGoods[i].goods = JSON.parse(this.shoesGoods[i].goods);
-      console.log(this.shoesgoods);
-    }
-
-
-    //改变状态将导航到不同数据
-    this.route.paramMap.subscribe(params => {
-      let state = +params.get('state') || 10;
-      let post = { state: state };
-    })
-
-    // this.routestate;
-    this.orderService.getAllOrders();
-    this.route.paramMap.subscribe(params => {
-      this.currentPage = Number(params.get)
-    })
-    */
   }
 
   openOrder(): void {
@@ -124,15 +78,59 @@ export class OrderFormComponent implements OnInit {
     this.route.params.subscribe(p=>{
       let state = p.state;
       let page = p.page;
-      this.com.httpGet('/api/order/my-orders', { state, sort:"true", len:"5", page:page, }).subscribe((res) => {
+      this.com.httpGet1('/api/order/my-orders', { state, sort:"true", len:"5", page:page, }).subscribe((res) => {
         this.res = res;
+        // console.log(res);
         this.myorderInfo = this.res;
-        //模拟total
         this.myorderInfo.total = this.res.orders.length;
-        console.log('2',this.myorderInfo);
+        // console.log(this.myorderInfo);
         this.shoesGoods = this.myorderInfo.orders;
+
         for (let i = 0; i < this.shoesGoods.length; i++) {
           this.shoesGoods[i].goods = JSON.parse(this.shoesGoods[i].goods);
+          console.log(this.shoesGoods[i].state);
+
+          if(this.shoesGoods[i].state == 32){
+            this.btn1 = "待支付";
+            this.btn2 = "立即付款";
+            this.btn3 = "取消订单";
+          }else if(this.shoesGoods[i].state == 1){
+            this.btn1 = "已发货";
+            this.btn2 = "确认收货";
+            this.btn3 = "查看物流";
+          }else if(this.shoesGoods[i].state == 3){
+            this.btn2 = "交易关闭";
+          }else if(this.shoesGoods[i].state == 7){
+            // this.btn1 = "交易成功";
+            this.btn2 = "交易关闭";
+            // this.btn3 = "查看物流";
+          }else if(this.shoesGoods[i].state == 9){
+            this.btn1 = "已发货";
+            this.btn2 = "申请退款";
+            this.btn3 = "查看物流";
+          }else if(this.shoesGoods[i].state == 11){
+            this.btn1 = "已确认收货";
+            this.btn2 = "申请退款";
+            this.btn3 = "查看物流";
+          }else if(this.shoesGoods[i].state == 15){
+            this.btn1 = "未发货";
+            this.btn2 = "已退款";
+            this.btn3 = "查看物流";
+          }else if(this.shoesGoods[i].state == 17){//有毛病
+            this.btn1 = "已退款";
+            this.btn2 = "输入快递单号";
+            this.btn3 = "查看物流";
+          }else if(this.shoesGoods[i].state == 19){//有毛病
+            this.btn1 = "已退款";
+            // this.btn2 = "对方确认收货";
+            this.btn3 = "查看物流";
+          }else if(this.shoesGoods[i].state == 23){//有毛病
+            this.btn1 = "已退款";
+            // this.btn2 = "对方已确认收货";
+            this.btn3 = "查看物流";
+          }
+
+
         }
       },
         (err: Error) => {
@@ -148,18 +146,10 @@ export class OrderFormComponent implements OnInit {
       item.goods = JSON.parse(item.goods);
       console.log(item.goods);
     }
-    // this.orders = e;
-
   }
 
 
   pageOrder(e) {
-    // let params = new HttpParams;
-    // params = params.append("len","5").append("state","-1").append("page","1");
-    // this.com.httpGet('/api/order/my-orders' + params).subscribe((res) => {
-    //   console.log(res);
-    // })
-
   }
 
 

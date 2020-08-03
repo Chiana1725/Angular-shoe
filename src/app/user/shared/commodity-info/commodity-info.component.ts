@@ -8,10 +8,11 @@ import { TranslateService } from '@ngx-translate/core';//---i18n
 })
 export class CommodityInfoComponent implements OnInit {
   @Input() Orderslist: any;
-
+  
   languageBtn;//---i18n
   language;//---i18n
-
+  imgBox;
+  imgbox;
   constructor(
     public translateService: TranslateService //---i18n
   ) { }
@@ -23,6 +24,22 @@ export class CommodityInfoComponent implements OnInit {
        const browserLang = this.translateService.getBrowserLang();
        this.translateService.use(browserLang.match(/en/) ? browserLang : 'en');
        /* --- set i18n end -------i18n*/
+
+       console.log(JSON.stringify(this.Orderslist)+"什么贵");
+       let listsTxt = JSON.stringify(this.Orderslist);
+       console.log(JSON.parse(listsTxt));
+       this.imgBox = JSON.parse(listsTxt).image;
+       console.log(this.imgBox);
+
+      //  for (let i = 0; i < this.imgBox.length; i++) {
+      //   this.imgBox[i].image = JSON.parse(this.imgBox[i].image);
+      //   console.log(this.imgBox[i].image);
+      //   this.imgbox = this.imgBox[i].image;
+      //   console.log(this.imgbox.img1);
+      //   this.Orderslist.push(this.imgbox.img1)
+      //   console.log(this.Orderslist);
+      //  }
+
   }
 
 }

@@ -19,12 +19,14 @@ import { CartComponent } from './cart/cart.component';
 import { UpdatePwdComponent } from './update-pwd/update-pwd.component';
 import { SideTabComponent } from './shared/side-tab/side-tab.component';
 import { UpdataAddrComponent } from './updata-addr/updata-addr.component';
+import { TotalComponent } from './shared/total/total.component';
+import { WindowComponent } from './shared/window/window.component';
 export function createTranslateHttpLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
   // return new TranslateHttpLoader ( http, './assets/i18n/', '.ts');
 }
 @NgModule({
-  declarations: [AccountComponent, OrderFormComponent, OrderDetailComponent, CommodityInfoComponent, LogisticsDetailsComponent, AuditComponent, CartComponent, UpdatePwdComponent, SideTabComponent, UpdataAddrComponent],
+  declarations: [AccountComponent, OrderFormComponent, OrderDetailComponent, CommodityInfoComponent, LogisticsDetailsComponent, AuditComponent, CartComponent, UpdatePwdComponent, SideTabComponent, UpdataAddrComponent, TotalComponent, WindowComponent],
   imports: [
     CommonModule,
     UserRoutingModule,

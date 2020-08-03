@@ -3,22 +3,22 @@
     <div id="" class="container_foor">
        <div class="row clearfix">
          <div class="footer_nav clearfix">
-           <div class="col-sm-4 col-xs-12 footerlist">
+           <div class="col-sm-6 col-xs-12 footerlist">
               <h4 i18n>{{'footer.information' | translate}}</h4>
               <div class="bd"><ul>
-                 <li class="first" i18n><a >{{'footer.cou' | translate}}</a></li>
-                 <li i18n><a >{{'footer.sar' | translate}}</a></li>
-                 <li class="last" i18n><a >{{'footer.pn' | translate}}</a></li>
+                 <li class="first" i18n><a [routerLink]="[ '/protocals/terms' ]">{{'footer.cou' | translate}}</a></li>
+                 <li i18n><a [routerLink]="[ '/protocals/ship' ]">{{'footer.sar' | translate}}</a></li>
+                 <li class="last" i18n><a [routerLink]="[ '/protocals/privacy' ]">{{'footer.pn' | translate}}</a></li>
               </ul></div>
            </div>
-           <div class="col-sm-4 col-xs-12 footerlist">
+           <div class="col-sm-6 col-xs-12 footerlist">
               <h4 i18n>{{'footer.customer' | translate}}</h4>
               <div class="bd"><ul>
-                 <li class="first" i18n><a >{{'footer.au' | translate}}</a></li>
-                 <li i18n><a >{{'footer.cu' | translate}}</a></li>
+                 <li class="first" i18n><a [routerLink]="[ '/protocals/about' ]">{{'footer.au' | translate}}</a></li>
+                 <li i18n><a [routerLink]="[ '/protocals/contact' ]">{{'footer.cu' | translate}}</a></li>
               </ul></div>
            </div>
-           <div class="email_followus col-sm-4 col-xs-12 footerlist">
+           <!-- <div class="email_followus col-sm-4 col-xs-12 footerlist">
               <h4 i18n>{{'footer.newsletter' | translate}}</h4>
               <p i18n>{{'footer.eyeatston' | translate}}</p>
               <div class="email_bd">
@@ -34,7 +34,7 @@
                   </ul>
                 </form>
               </div>
-           </div>
+           </div> -->
          </div>
        </div>
        <div id="siteinfoLegal" class="legalCopyright">

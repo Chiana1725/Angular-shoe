@@ -18,7 +18,7 @@ export class ImageComponent implements OnInit {
   @Input() width:number | string;
   //无法显示图片时的替换图片
   @Input() errorImage :string;
-
+  activeIndex = 0;
   constructor() { }
 
   ngOnInit(): void {

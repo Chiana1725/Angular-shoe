@@ -3,10 +3,8 @@
 
 
         <tr class="first a-center text-left">
-            <th with="15%"> 
-                <p i18n>{{'account.itemNo' | translate}}</p>
-            </th>
-            <th  width="35%" >
+          
+            <th  width="50%" >
                 <p i18n>{{'account.details' | translate}}</p>
             </th>
             <th  width="15%">
@@ -22,11 +20,11 @@
           
           <!-- 循环商品 -->
           <tr class="first a-center text-left" *ngFor = "let Orderslist of Orderslist">
-            <th with="15%">
+            <!-- <th with="15%">
                 <p>{{Orderslist.id}}</p>
-            </th>
-            <th  width="35%" >
-                <img class="f-left" src="../../../assets/images/1_50x43.png" alt="">
+            </th> -->
+            <th  width="50%" >
+                <img class="f-left" src="{{Orderslist.img1}}" alt="">
                 <div class="f-left" style="width: 70%;"><p>{{Orderslist.name}}</p><p i18n>{{'account.table6' | translate}}：{{Orderslist.size}}</p><p i18n>{{'account.color' | translate}}：{{Orderslist.subject}}</p></div>
             </th>
             <th  width="15%">
@@ -41,7 +39,7 @@
           </tr> 
 
 
-          <tr class="first a-center text-left">
+          <!-- <tr class="first a-center text-left">
             <th with="15%">
             </th>
             <th  width="35%" >
@@ -52,11 +50,11 @@
             <th  width="15%">
             </th>
             <th  width="20%">
-                <p i18n>{{'account.freight' | translate}}： <span class="littlenormalprice tablespan">$11.0</span>{{'account.total' | translate}}</p>
-                <p i18n>{{'account.discount' | translate}}：0</p>
-                <p i18n>{{'account.total' | translate}}：<span class="colorRed">$462.0</span></p>
+                <p i18n>{{'account.freight' | translate}}： <span class="littlenormalprice tablespan">{{Orderslist.amount}}</span>{{'account.total' | translate}}</p>
+                <p i18n>{{'account.discount' | translate}}：{{Orderslist.amount}}</p>
+                <p i18n>{{'account.total' | translate}}：<span class="colorRed">{{Orderslist.amount}}</span></p>
             </th>
-          </tr> 
+          </tr>  -->
 
 
     </table>

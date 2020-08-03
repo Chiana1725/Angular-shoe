@@ -1,22 +1,8 @@
-<!-- <a routerLink="/news" [queryParams]="{ newsUrl : n.url }" >
-<div>{{n.title}}</div> -->
-
+<!-- <app-window></app-window> -->
 
 <app-header></app-header>
 
-<!-- <app-navrouting *ngFor="let nav of navrouter" ></app-navrouting> -->
-<!-- <p>account works!</p> -->
 <div class="row">
-  <!-- <div class="col-wide opc col-sm-2 col-md-2 col-xs-2 ml50">
-    <div style="width: 80%">
-      <button class="blackbtn" routerLink="/user/account" i18n>{{'account.account' | translate}}</button>
-      <button class="blackbtn" routerLink="/user/orderform/-1" routerLinkActive="leftactive" (click)="openOrder()"
-        i18n>{{'account.orderform' | translate}}</button>
-      <button class="blackbtn" routerLink="/user/updatepwd" i18n>{{'account.reset' | translate}}</button>
-    </div>
-
-  </div> -->
-
 
   <app-side-tab></app-side-tab>
   <br class="clearBoth">
@@ -25,9 +11,6 @@
    
     <h1 i18n>{{'account.myorder' | translate}}</h1>
     <hr>
-
-    <!-- <app-page [total]="myorderInfo.total"></app-page> -->
-
 
     <ul class="ordertitle" >
       <li class="redLine" [routerLink]="['/user/orderform/-1']"  [routerLinkActive]="['active']"  i18n>{{'account.allorders' | translate}}</li>
@@ -51,16 +34,7 @@
       </tr>
     </table>
 
-
-   <!-- <div  *ngif="shoesoders?.data?.length" > -->
-    <!-- 商品循环 -->
-    <!-- <h1>Expression</h1>
-    <div>{{stategoods | json}}</div> -->
-
-
-
-    <form name="quickcheckout" method="post" *ngFor="let shoesoders of myorderInfo.orders;let i=index"  >
-      <!-- <ol class="col-narrow " *ngIf="showhave" >/ -->
+    <form name="quickcheckout" method="post" *ngFor="let shoesoders of myorderInfo?.orders;let i=index"  >
         <ol class="col-narrow "  >
         <li id="opc-order_review" class="section active ">
           <div class="step-title ">    
@@ -68,10 +42,10 @@
               {{'account.orderno' | translate}} {{shoesoders.id}}
             </span>
             <span class="icon" i18n>
-              {{'account.ordertime' | translate}} {{shoesoders.createdAt | date}}
+              {{'account.ordertime' | translate}} {{shoesoders.createdAt | date: 'yyyy-MM-dd HH:mm:ss'}}
             </span>
             <span class="icon"  i18n>
-              {{'account.dealstime' | translate}} {{shoesoders.updatedAt | date}}
+              {{'account.dealstime' | translate}} {{shoesoders.updatedAt | date: 'yyyy-MM-dd HH:mm:ss'}}
             </span>
             <span [routerLink]="['/user/orderdetail',shoesoders.id]" class="icon_right cphand" i18n>{{'account.more' | translate}} >></span>
           </div>
@@ -86,11 +60,13 @@
                     </div></td>
                   <td width="13%">{{shoesgood.price}}</td>
                   <td width="13%">{{shoesgood.count}}</td>
-                  <td width="13%">{{shoesgood.price}}</td>
-                  <td width="17%" [attr.rowspan]="shoesoders.goods.length" *ngIf="i===0">
-                      <p>未付款</p>
-                      <!-- <p>等待发货</p>
-                      <p>申请退款</p> -->
+                  <td width="13%" class="redcolor">{{shoesgood.price}}</td>
+                  <td width="17%" [attr.rowspan]="shoesoders.goods.length" *ngIf="i===0"  >
+                    <div class="stateBox">
+                      <div class="state">{{btn1}}</div>
+                      <div class="state BBtn cphand">{{btn2}}</div>
+                      <div class="state">{{btn3}}</div>
+                    </div>
                   </td>
               </tr>            
           </table>     
@@ -100,10 +76,6 @@
 
     <div *ngIf="shownone">亲，您还没有下单呢！</div>
 
-   <!-- </div> -->
-
-   
-
 
   </div>
 
@@ -111,9 +83,6 @@
 </div>
 <br class="clearBoth">
 
-<app-page [total]="myorderInfo.total"></app-page>
-<!-- <app-pagenate ></app-pagenate> -->
-
-
+<app-page [total]="myorderInfo?.total"></app-page>
 
 <app-footer ></app-footer>

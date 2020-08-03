@@ -47,6 +47,7 @@
         "size": "Size",
         "number": "Number",
         "addCart": "Add To Shopping Cart",
+        "addOrder": "Add To Order",
         "description": "Description",
         "sex": "Sex",
         "brand": "BRAND",
@@ -64,7 +65,7 @@
     },
     "cart": {
         "yourcart": "Your Shopping Cart Contents",
-        "total": "Sub-Total",
+        "total": "Total",
         "subtotal": "Total",
         "discount": "Shipping Fee",
         "shippingAddress": "Shipping Address",
@@ -75,7 +76,7 @@
         "postCode": "Post/Zip Code",
         "country": "Country",
         "cabutton": "CHANGE ADDRESS",
-        "freight": "DHL Rate",
+        "freight": "Sub-Total",
         "payway": "Payment Method",
         "orderreview": "Order Review"
     },

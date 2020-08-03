@@ -11,3 +11,7 @@
     padding-top:2rem;
 }
 .sub li{outline: none;}
+a{
+    text-decoration: none;  
+    color: #000; 
+}

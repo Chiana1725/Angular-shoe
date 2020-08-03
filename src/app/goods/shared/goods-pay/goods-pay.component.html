@@ -7,10 +7,10 @@
                 <tr>
                     <td class="attrib-grid-cell">
                         <div class="qty-changer">
-                            <div class="qty_act reduce_qty text-none"><a target="_parent" (click)="minus()">-</a></div>
+                            <div class="qty_act reduce_qty text-none" (click)="minus()"><a target="_parent" >-</a></div>
                             <input type="text" name="products_id[69]" value="{{num}}" class="input-text qtyInput" size="4"
                             (input)="countChange($event)" maxlength="12" />
-                            <div class="qty_act add_qty text-none"><a  target="_parent" (click)="add()">+</a></div>
+                            <div class="qty_act add_qty text-none" (click)="add()"><a  target="_parent" >+</a></div>
                         </div>
                     </td>
                 </tr>
@@ -22,5 +22,7 @@
     <!-- add to button start-->
     <button title="Add to Cart" class="button btn-incart" type="submit"  (click)="addCart()"><span i18n>{{'detail.addCart' | translate}}</span></button>
     <!--eof Add to Cart Box-->
+    <button title="Add to Order" class="button btn-incart" type="submit"  (click)="addOrder()"><span i18n>{{'detail.addOrder' | translate}}</span></button>
+
 </div>
                                                                                                                           

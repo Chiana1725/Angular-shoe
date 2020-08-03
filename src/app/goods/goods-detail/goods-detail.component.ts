@@ -25,16 +25,16 @@ export class GoodsDetailComponent implements OnInit {
   imglists=[];//商品颜色图片
   colorlists;//颜色
   gendar;//性别
-  size;//尺码
+  size  ;//尺码
   currenGoodsInfo = {};
   currenGoods;
-
+  products;
   public domain: string ='';//通过服务传静态
   private productId:number;
   languageBtn;//---i18n
   language;//---i18n
   activeIndex = 0;
-
+  activeIndex1=0;
 
   isLoggedIn = false;
 
@@ -53,7 +53,7 @@ export class GoodsDetailComponent implements OnInit {
 
   ngOnInit(): void {
  
-
+   
     this.com.setLang();
 
       //请求商品详情
@@ -62,6 +62,18 @@ export class GoodsDetailComponent implements OnInit {
        if(pid){
         this.getDetail(pid);
        }
+      })
+      this.getHotData();
+
+    }
+
+    getHotData() {
+      this.com.httpGet('/api/product/all-products', { len: "10" },'response').subscribe(res => {
+        let products = res.products;
+        if(products){
+          this.com.imgShow(products);
+        }
+        this.products = res;
       })
     }
 
@@ -74,6 +86,7 @@ export class GoodsDetailComponent implements OnInit {
         if( this.lists &&  this.lists.length){
           this.switchGood(0);
           this.com.imgShow(this.lists);
+          // this.activeIndex1 = 0;
         }
       })
       
@@ -92,8 +105,11 @@ export class GoodsDetailComponent implements OnInit {
       this.currenGoodsInfo = this.lists[index];
       this.currenGoods = this.currenGoodsInfo;
       let sizes = JSON.parse(this.currenGoods.specs).sizes;
-      this.size = sizes.size.split(',');       
+      console.log(sizes+"头晕");
+      this.size = sizes.size.split(',');  
+      console.log(this.size+"想睡觉");    
       this.com.navArr=[{name:this.currenGoods.brandId,url:'/goods/list/'+this.currenGoods.brandId},{name:this.currenGoods.productName,url:this.route.url.toString()}]
+      this.activeIndex1 = index;
     }
 
   
@@ -102,7 +118,8 @@ export class GoodsDetailComponent implements OnInit {
       // console.log(this.currenGoods+"之前的");
       // console.log(i);
       // console.log(this.size[i]);
-      let changesize = this.size[i];
+    
+      let changesize =  this.size[i] ;
       this.currenGoods['size'] = changesize;
       // console.log(this.currenGoods);
       this.activeIndex = i;

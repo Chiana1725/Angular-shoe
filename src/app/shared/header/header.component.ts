@@ -13,9 +13,11 @@ import { allProductBrands } from '../lists';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-
+  @Input() contrastdata;
   languageBtn;//---i18n
   language;//---i18n
+
+  isShown:boolean;
 
   bandlists;
   banddata;
@@ -43,6 +45,8 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
+   console.log(this.contrastdata+"666666666666")
 
     this.userInfo = this.authServise.GetUserInfo();
     // console.log(this.userInfo);
@@ -76,19 +80,26 @@ export class HeaderComponent implements OnInit {
    
 
     const goodInfoText = window.localStorage.getItem('cart_lists');
-    console.log(goodInfoText + "购物车数据");
+    console.log(goodInfoText +"删除第二步");
     this.productlist = goodInfoText;
     console.log(this.productlist);
     console.log(JSON.parse(this.productlist));
     this.cartNum = JSON.parse(this.productlist);
+    // console.log(this.cartNum.length);
     // console.log(this.cartNum.length + "购物车数据");
     if(this.cartNum){
       this.cartNumlen = this.cartNum.length;
-      if (this.cartNum.length == null){
+      if (this.cartNumlen === null){
         this.cartNumlen = 0
       }
     }
    
+
+    if (this.cartNumlen == null){
+      this.isShown = false;
+    }else if(this.cartNumlen >= 0){
+      this.isShown = true;
+    }
 
   }
 

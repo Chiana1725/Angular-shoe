@@ -103,3 +103,40 @@
     background-color: #F3F3F3;
     cursor: pointer;
 }
+
+.stateBox {
+    width: 100%;
+    height: 100%;
+    align-items:center; /*定义body的元素垂直居中*/
+    vertical-align: middle;
+    text-align: center; 
+    margin: auto;
+    margin-left: 10%;
+}
+.state{
+    width: 80%;
+    height: 80%;
+    line-height: 40px;
+}
+.Btn{
+    color: black;
+    font-weight: bold;
+}
+.BBtn{
+    background: black;
+    color: white;
+    font-size: 16px;
+}
+.WBtn{
+    background: white;
+    color: black;
+    font-size: 16px;
+}
+.RBtn{
+    background: white;
+    color: #F06966;
+    font-size: 16px;
+}
+.redcolor{
+    color: #F06966; 
+}

@@ -1,5 +1,3 @@
-
-
 <app-declare [payId]="payId"></app-declare>
 
 <!-- <div [innerHTML]="newsDetailData"></div> -->
@@ -24,8 +22,8 @@
         <h1 i18n>{{'account.more' | translate}}</h1>
         <hr>
         <p i18n>{{'account.orderno' | translate}}： {{orderslist.id}}</p>
-        <p i18n>{{'account.ordertime' | translate}}： {{orderslist.createdAt | date}}</p>
-        <p i18n>{{'account.dealstime' | translate}}： {{orderslist.updatedAt | date}}</p>
+        <p i18n>{{'account.ordertime' | translate}}： {{orderslist.createdAt | date: 'yyyy-MM-dd HH:mm:ss'}}</p>
+        <p i18n>{{'account.dealstime' | translate}}： {{orderslist.updatedAt | date: 'yyyy-MM-dd HH:mm:ss'}}</p>
 
         <br> <br>
         <h1 i18n>{{'account.table1' | translate}}</h1>
@@ -33,7 +31,7 @@
             <ol class="col-narrow "  action="https://kiplepay.com/wcgatewayinit.php">
                 <!-- 引用组件****商品信息-->
                 <app-commodity-info [Orderslist]="Orderslist"  ></app-commodity-info>
-
+                <app-total [orderslist]="orderslist" ></app-total>
             </ol>
         </form>
 
@@ -82,7 +80,7 @@
                      </div>
                      <div class="mt-5">
                         <input [checked]="selected" (click)="select()" type="radio" name="shipping" checked="true" id="ship-table-table" class="radio">
-                        <label for="ship-table-table" class="checkboxLabel" i18n> {{'readagree.r1' | translate}} <a>{{'readagree.AV' | translate}} </a> {{'readagree.r2' | translate}}  <a>{{'readagree.COU' | translate}} </a> {{'readagree.r3' | translate}} </label>
+                        <label for="ship-table-table" class="checkboxLabel" i18n> {{'readagree.r1' | translate}} <a [routerLink]="[ '/protocals/about' ]">{{'readagree.AV' | translate}} </a> {{'readagree.r2' | translate}}  <a [routerLink]="[ '/protocals/terms' ]">{{'readagree.COU' | translate}} </a> {{'readagree.r3' | translate}} </label>
                       </div>
                       <!-- <button class="blackbtn" i18n>{{'orderDetail.spbutton' | translate}}</button> -->
                       <button type="submit" class="buttonRow forward ">
@@ -98,14 +96,12 @@
         </table>
  
 
-
         <br><br>
         <h1 i18n> {{'orderDetail.mailway' | translate}} </h1>
         <table width="100%" id="shopping-cart-table" class="table data-table cart-table">
             <tr class="first a-left">
                 <!-- 付款状态 -->
                 <th rowspan="1" width="20%" i18n> {{'orderDetail.express' | translate}}</th>
-
                 <th rowspan="1" width="40%" i18n> {{'orderDetail.waybill' | translate}}：2020052215168981111</th>
                 <th rowspan="1" width="40%" i18n> {{'orderDetail.logistics' | translate}}：LIN0202005221516898000</th>
             </tr>
@@ -128,7 +124,6 @@
 
         <app-logistics-details></app-logistics-details>
 
-
         <br><br>
         <h1 i18n>{{'account.return' | translate}}</h1>
         <table width="100%" id="shopping-cart-table" class="table cart-table">
@@ -148,7 +143,6 @@
             </tr>
         </table>
 
-
         <table width="100%" id="shopping-cart-table" class="">
             <p i18n>{{'account.certificate' | translate}}：</p>
             <tr>
@@ -164,12 +158,7 @@
         <!-- //退货退款的 审核状态 -->
         <app-audit></app-audit>
 
-
-    <!-- 付款状态： 退款退货 -->
-
-
-
-
+        <!-- 付款状态： 退款退货 -->
 
         <br><br>
         <h1 i18n>{{'account.returnLog' | translate}} </h1>

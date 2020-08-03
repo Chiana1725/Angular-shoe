@@ -2,7 +2,7 @@
 
 <app-header></app-header>
 <app-bread-nav ></app-bread-nav>
-<!-- <app-navrouting></app-navrouting> -->
+<!-- <app-navrouting></app-navrouting> --> 
 <div class="main-container"   >
   <div class="container">
     <div class="product-view">
@@ -35,18 +35,18 @@
                       <dd>
                           <div class="input-box">
                               <ul class='color-list'>
-                                  <li *ngFor="let item of lists,let i = index">
-                                  
-                                      <a class='sizebox cphand'  [routerLink]="['/goods/detail/',item.id]">
-                                        <app-image [src]="item.src" [alt]="item.subject" [title]="item.subject" width="43" height="50">  </app-image>
-                                          <!-- <img routerLinkActive="active" class="imgbox"  src="../../../assets/images/1_50x43.png" alt="{{item.subject}}" title="{{item.subject}}" width="43" height="50" /> -->
-                                      </a>
+                                  <li *ngFor="let item of lists,let i = index" routerLinkActive="active0">
+                                      <div class='sizebox cphand ' (click)="switchGood(i)" [ngClass]="{ 'redboder': i === 0}" >
+                                        <app-image class="sizeboxImg"   [src]="item.src"  [alt]="item.subject" routerLinkActive="active"   [title]="item.subject" >  </app-image>
+                                      </div>
+                    
                                   </li>
                               </ul>
                           </div>
                       </dd>
                   </dl>
                 </div>
+
                 <!-- 尺码 -->
                 <div class="product-colors" id="product-color-wrapper">
                   <dl>
@@ -63,7 +63,6 @@
                       </dd>
                   </dl>
               </div>
-
 
                 <!-- 商品支付信息组件 -->        
                 <app-goods-pay [currenGoods]="currenGoods" ></app-goods-pay>

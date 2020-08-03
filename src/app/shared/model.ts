@@ -110,6 +110,11 @@ export const PayOrderURL = 'api/order/pay-order';
 export interface PayOrder {id: number};
 export interface PayOrderResponse { contentType: string, data: string, method: string, url: string };
 
+
+export const CusProcOrderURL = '/api/order/cus-proc-order';
+export interface CusProcOrder {id:string, state:number};
+export interface CusProcOrderResponse {code:number, msg:string};
+
 //product
 
 
@@ -510,8 +515,8 @@ export const LOGIN_FIELDS: FormFields[] = [
 
 
 export const REGISTER_FIELDS: FormFields[] = [
-    { key: ['姓','First Name'],  name: 'firstName' ,validators:[Validators.required]},
-    { key: ['名','Last Name'],  name: 'lastName' ,validators:[Validators.required]},
+    { key: ['名','First Name'],  name: 'firstName' ,validators:[Validators.required]},
+    { key: ['姓','Last Name'],  name: 'lastName' ,validators:[Validators.required]},
     { key: ['街道地址','Street Address'],  name: 'addr',validators:[Validators.required] },
     { key: ['市','City'],  name: 'city' ,validators:[Validators.required]},
     { key: ['国家','Country'],  name: 'country', validators:[Validators.required] },//controllType:controllType.select,value:ZONE,
@@ -537,9 +542,8 @@ export const RESET_FIELDS: FormFields[] = [
 
 export const ACCOUNT_FIELDS: FormFields[] = [
     // { key: ['电子邮件地址','Email Address'],  name: 'email',validators:[Validators.required,Validators.email] }
-    
-    { key: ['名','Last Name'],  name: 'lastName' ,validators:[Validators.required]},
-    { key: ['姓','First Name'],  name: 'firstName' ,validators:[Validators.required]},
+    { key: ['名','First Name'],  name: 'firstName' ,validators:[Validators.required]},
+    { key: ['姓','Last Name'],  name: 'lastName' ,validators:[Validators.required]},
     { key: ['手机','Phone'], name:'phone', validators:[Validators.required]},
     { key: ['街道地址','Street Address'],  name: 'streetAddress',validators:[Validators.required] },
     // { key: ['新增街道地址','Newly Increased Street Address'],  name: 'addr',validators:[Validators.required] },

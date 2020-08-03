@@ -243,7 +243,7 @@ input,button,select,textarea {
 	font-size:inherit;
 	line-height:inherit
 }
-a {
+/* a {
 	color:#337ab7;
 	text-decoration:none
 }
@@ -254,7 +254,7 @@ a:hover,a:focus {
 a:focus {
 	outline:5px auto -webkit-focus-ring-color;
 	outline-offset:-2px
-}
+} */
 figure {
 	margin:0
 }

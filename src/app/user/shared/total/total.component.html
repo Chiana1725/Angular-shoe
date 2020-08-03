@@ -1,0 +1,20 @@
+
+<table width="100%" id="shopping-cart-table" class="table data-table cart-table " >
+    <tr class="first a-center text-left">
+    <th with="15%">
+    </th>
+    <th  width="35%" >
+       
+    </th>
+    <th  width="15%">
+    </th>
+    <th  width="15%">
+    </th>
+    <th  width="20%">
+        <p i18n>{{'cart.freight' | translate}}： <span class="colorRed">{{ subtotal() | currency }}</span></p>
+        <p i18n>{{'account.freight' | translate}}：<span class="colorRed">{{orderslist.shipCost | currency}}</span></p>
+        <p i18n>{{'account.total' | translate}}：<span class="colorRed">{{orderslist.amount | currency}}</span></p>
+    </th>
+  </tr> 
+</table>
+

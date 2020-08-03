@@ -1,11 +1,18 @@
-{"/api/": {
+{
+  "/api/": {
     "target": "http://103.112.209.76:8011",
     "changeOrigin": true,
     "secure": false,
     "pathRewrite": {
       "/api/": "http://103.112.209.76:8011/api/"
     }
+  },
+  "/asset/": {
+    "target": "http://103.112.209.76:8011",
+    "changeOrigin": true,
+    "secure": false,
+    "pathRewrite": {
+      "/asset/": "http://103.112.209.76:8011/api/static/asset/"
+    }
   }
- 
- 
 }

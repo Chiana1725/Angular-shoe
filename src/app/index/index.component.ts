@@ -1,3 +1,4 @@
+import { products } from './../shared/lists';
 import { ComService } from 'src/app/core/com.service';
 import { Observable } from 'rxjs';
 import { ShopService } from './../core/services/shop.service';
@@ -36,8 +37,11 @@ export class IndexComponent implements OnInit {
 
   //请求热门数据
   getHotData() {
-    this.com.httpGet('/api/product/all-products', { len: "10" }).subscribe(res => {
-
+    this.com.httpGet('/api/product/all-products', { len: "10" },'response').subscribe(res => {
+      let products = res.products;
+      if(products){
+        this.com.imgShow(products);
+      }
       this.products = res;
     })
   }
