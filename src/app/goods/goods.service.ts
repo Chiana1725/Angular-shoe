@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
-
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-
 import { lists } from './../shared/lists';
-
 
 @Injectable({
   providedIn: 'root'

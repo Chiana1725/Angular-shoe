@@ -29,6 +29,7 @@ export class OrderFormComponent implements OnInit {
   currentPage;
   res;
 
+  payId;
   btn1;
   btn2;
   btn3;
@@ -89,6 +90,8 @@ export class OrderFormComponent implements OnInit {
         for (let i = 0; i < this.shoesGoods.length; i++) {
           this.shoesGoods[i].goods = JSON.parse(this.shoesGoods[i].goods);
           console.log(this.shoesGoods[i].state);
+          console.log("我就试试"+ this.shoesGoods[i].id);
+          this.payId = this.shoesGoods[i].id;
 
           if(this.shoesGoods[i].state == 32){
             this.btn1 = "待支付";
@@ -139,6 +142,17 @@ export class OrderFormComponent implements OnInit {
     })
     
   }
+
+  Operate(){
+    this.com.httpGet('/api/order/pay-order', { id: this.payId}, "body", "text").subscribe((res: string) => {
+      document.open();
+      document.write(res);
+      document.close();
+    }, (err) => {
+      console.error(err);
+    });
+  }
+
 
 
   getPages(e){

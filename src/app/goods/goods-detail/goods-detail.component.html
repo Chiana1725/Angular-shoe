@@ -56,7 +56,7 @@
                               <ul class='color-list  '>
                                   <li *ngFor="let item of size ; let i=index" routerLinkActive="active0"  >
                                     <!-- <a class='sizebox cphand' (click)="getSize(i)" routerLinkActive="active">{{item}}</a> -->
-                                      <input readonly="readonly"  class='sizebox cphand' [ngClass]="{ 'active': i === activeIndex}" (click)="getSize(i)"  value="{{item}}" >
+                                      <input readonly="readonly"  class='sizebox cphand' [ngClass]="{ 'active': i === activeIndex1}" (click)="getSize(i)"  value="{{item}}" >
                                   </li>
                               </ul>
                           </div>

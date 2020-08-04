@@ -25,7 +25,7 @@ export class GoodsDetailComponent implements OnInit {
   imglists=[];//商品颜色图片
   colorlists;//颜色
   gendar;//性别
-  size  ;//尺码
+  size;//尺码
   currenGoodsInfo = {};
   currenGoods;
   products;
@@ -65,6 +65,9 @@ export class GoodsDetailComponent implements OnInit {
       })
       this.getHotData();
 
+      // console.log(this.size[0]+"我是尺码尺码尺码")
+      
+
     }
 
     getHotData() {
@@ -86,6 +89,7 @@ export class GoodsDetailComponent implements OnInit {
         if( this.lists &&  this.lists.length){
           this.switchGood(0);
           this.com.imgShow(this.lists);
+          // this.size[0];//尺码默认
           // this.activeIndex1 = 0;
         }
       })
@@ -105,11 +109,14 @@ export class GoodsDetailComponent implements OnInit {
       this.currenGoodsInfo = this.lists[index];
       this.currenGoods = this.currenGoodsInfo;
       let sizes = JSON.parse(this.currenGoods.specs).sizes;
-      console.log(sizes+"头晕");
       this.size = sizes.size.split(',');  
-      console.log(this.size+"想睡觉");    
       this.com.navArr=[{name:this.currenGoods.brandId,url:'/goods/list/'+this.currenGoods.brandId},{name:this.currenGoods.productName,url:this.route.url.toString()}]
       this.activeIndex1 = index;
+      if(this.activeIndex1 = 0){
+        this.currenGoods.size = this.size[0];//默认尺码
+      }else{
+        this.currenGoods.size = this.size[index];//选中尺码
+      }
     }
 
   
@@ -122,8 +129,11 @@ export class GoodsDetailComponent implements OnInit {
       let changesize =  this.size[i] ;
       this.currenGoods['size'] = changesize;
       // console.log(this.currenGoods);
-      this.activeIndex = i;
-      
+      this.activeIndex1 = i;
+      if (i= 0){
+        changesize =  this.size[0] ;
+      }
+      console.log("0000000000000000000")
     }
 
 

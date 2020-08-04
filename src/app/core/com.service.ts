@@ -62,6 +62,8 @@ export class ComService {
     }     
   });
  }
+
+ 
   changeTo() {
     this.langIndex = 'EN' === window.localStorage['lang'] ? 1 : 0;
     window.localStorage['lang'] = this.lang = ['EN'][this.langIndex];

@@ -51,7 +51,6 @@ export class NgbdModalContent {
 
   @Input() name;
   @Input() id;
-
   @Input() details = lists;
   @Input() close = close;
   @Input() openpay: any;
@@ -97,6 +96,9 @@ export class OrderDetailComponent implements OnInit {
   payDataInfo;
   uri;
   declareForm = this.payDataInfo;
+
+  isUnpay:boolean = false;
+  yetUnpay:boolean = false;
   constructor(
     private router: Router,
     private modalService: NgbModal,
@@ -134,7 +136,14 @@ export class OrderDetailComponent implements OnInit {
       console.log(id);
       this.payId = id;
       this.orderslist = res;
-      console.log(this.orderslist);
+      console.log(this.orderslist.state+"状态码");
+
+      if(this.orderslist.state==32){
+        this.isUnpay = true;
+      }else{
+        this.yetUnpay = true;
+      }
+
       console.log(this.orderslist.goods)
       this.Orderslist = this.orderslist.goods;
     })

@@ -142,9 +142,7 @@ export class GoodsPayComponent implements OnInit {
     )
 
 
-     this.zk = 1-this.currenGoods.discount;
-    //  console.log(this.zk);
-    // this.jd = Number(this.zk).toFixed(2);
+    this.zk = 1-this.currenGoods.discount;
     let jss = this.currenGoods.price.toFixed(2)*this.num*this.zk+this.freight;
     console.log(jss);
     let post = {
@@ -159,8 +157,6 @@ export class GoodsPayComponent implements OnInit {
       receiver: this.myaddr.firstName + this.myaddr.lastName,
       state: this.myaddr.state,
     }
-
-
     this.orderSer.CreateOrder(post).subscribe(
       (res) => {
         JSON.stringify(res);
